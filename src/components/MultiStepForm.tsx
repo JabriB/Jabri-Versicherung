@@ -100,13 +100,13 @@ export default function MultiStepForm() {
   const progress = (currentStep / totalSteps) * 100;
 
   const validateEmail = (email: string): boolean => {
-    if (!email) return true;
+    if (!email) return false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const validatePhone = (phone: string): boolean => {
-    if (!phone) return true;
+    if (!phone) return false;
     const phoneRegex = /^[\d\s+()-]{8,}$/;
     return phoneRegex.test(phone);
   };
@@ -235,10 +235,11 @@ export default function MultiStepForm() {
     switch (currentStep) {
       case 1:
         const hasName = formData.firstName.trim() !== '' && formData.lastName.trim() !== '';
-        const hasContact = formData.email.trim() !== '' || formData.phone.trim() !== '';
-        const hasValidEmail = !formData.email || validateEmail(formData.email);
-        const hasValidPhone = !formData.phone || validatePhone(formData.phone);
-        return hasName && hasContact && hasValidEmail && hasValidPhone && !validationErrors.email && !validationErrors.phone;
+        const hasEmail = formData.email.trim() !== '';
+        const hasPhone = formData.phone.trim() !== '';
+        const hasValidEmail = validateEmail(formData.email);
+        const hasValidPhone = validatePhone(formData.phone);
+        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && !validationErrors.email && !validationErrors.phone;
       case 2:
         return formData.interests.length > 0;
       case 3:
@@ -324,11 +325,12 @@ export default function MultiStepForm() {
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.email} <span className="text-slate-500 text-xs">(required if no phone)</span>
+                    {t.form.step3.email} <span className="text-orange-400">*</span>
                   </label>
                   <input
                     id="email"
                     type="email"
+                    required
                     value={formData.email}
                     onChange={(e) => updateField('email', e.target.value)}
                     placeholder={t.form.step3.emailPlaceholder}
@@ -343,11 +345,12 @@ export default function MultiStepForm() {
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
                   <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.phone} <span className="text-slate-500 text-xs">(required if no email)</span>
+                    {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
                   <input
                     id="phone"
                     type="tel"
+                    required
                     value={formData.phone}
                     onChange={(e) => updateField('phone', e.target.value)}
                     placeholder={t.form.step3.phonePlaceholder}
