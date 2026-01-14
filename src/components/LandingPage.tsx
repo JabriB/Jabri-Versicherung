@@ -112,13 +112,16 @@ export default function LandingPage() {
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white p-2"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Mobile Menu Button & Language Selector */}
+            <div className="md:hidden flex items-center gap-2">
+              <LanguageSelector />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-white p-2"
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
@@ -160,9 +163,6 @@ export default function LandingPage() {
               >
                 {t.nav.location}
               </button>
-              <div className="px-4 py-2">
-                <LanguageSelector />
-              </div>
               <button
                 onClick={() => scrollToSection('form')}
                 className="w-full mt-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-semibold"
