@@ -21,6 +21,12 @@ interface FormData {
   message: string;
 }
 
+interface ValidationErrors {
+  email?: string;
+  phone?: string;
+  postalCode?: string;
+}
+
 const initialFormData: FormData = {
   firstName: '',
   lastName: '',
@@ -31,7 +37,7 @@ const initialFormData: FormData = {
   street: '',
   houseNumber: '',
   postalCode: '',
-  city: '',
+  city: 'Düren',
   interests: [],
   availability: [],
   message: ''
@@ -51,7 +57,7 @@ export default function MultiStepForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [openCategories, setOpenCategories] = useState<string[]>([]);
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
   const navigate = useNavigate();
 
   const interestCategories = [
@@ -90,11 +96,52 @@ export default function MultiStepForm() {
     }
   }, [isSubmitted, navigate]);
 
-  const totalSteps = 5;
+  const totalSteps = 3;
   const progress = (currentStep / totalSteps) * 100;
+
+  const validateEmail = (email: string): boolean => {
+    if (!email) return true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    if (!phone) return true;
+    const phoneRegex = /^[\d\s+()-]{8,}$/;
+    return phoneRegex.test(phone);
+  };
+
+  const validatePostalCode = (code: string): boolean => {
+    if (!code) return true;
+    return /^\d{4,5}$/.test(code);
+  };
 
   const updateField = (field: keyof FormData, value: string | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+
+    if (field === 'email' && typeof value === 'string') {
+      if (value && !validateEmail(value)) {
+        setValidationErrors(prev => ({ ...prev, email: 'Invalid email format' }));
+      } else {
+        setValidationErrors(prev => ({ ...prev, email: undefined }));
+      }
+    }
+
+    if (field === 'phone' && typeof value === 'string') {
+      if (value && !validatePhone(value)) {
+        setValidationErrors(prev => ({ ...prev, phone: 'Invalid phone format' }));
+      } else {
+        setValidationErrors(prev => ({ ...prev, phone: undefined }));
+      }
+    }
+
+    if (field === 'postalCode' && typeof value === 'string') {
+      if (value && !validatePostalCode(value)) {
+        setValidationErrors(prev => ({ ...prev, postalCode: 'Invalid postal code (4-5 digits)' }));
+      } else {
+        setValidationErrors(prev => ({ ...prev, postalCode: undefined }));
+      }
+    }
   };
 
   const toggleInterest = (interest: string) => {
@@ -113,14 +160,6 @@ export default function MultiStepForm() {
         ? prev.availability.filter(t => t !== time)
         : [...prev.availability, time]
     }));
-  };
-
-  const toggleCategory = (categoryName: string) => {
-    setOpenCategories(prev =>
-      prev.includes(categoryName)
-        ? prev.filter(c => c !== categoryName)
-        : [...prev, categoryName]
-    );
   };
 
   const nextStep = () => {
@@ -195,15 +234,15 @@ export default function MultiStepForm() {
   const isStepValid = () => {
     switch (currentStep) {
       case 1:
-        return formData.firstName.trim() !== '' && formData.lastName.trim() !== '';
+        const hasName = formData.firstName.trim() !== '' && formData.lastName.trim() !== '';
+        const hasContact = formData.email.trim() !== '' || formData.phone.trim() !== '';
+        const hasValidEmail = !formData.email || validateEmail(formData.email);
+        const hasValidPhone = !formData.phone || validatePhone(formData.phone);
+        return hasName && hasContact && hasValidEmail && hasValidPhone && !validationErrors.email && !validationErrors.phone;
       case 2:
         return formData.interests.length > 0;
       case 3:
-        return formData.email.trim() !== '' && formData.phone.trim() !== '';
-      case 4:
-        return true;
-      case 5:
-        return true;
+        return !validationErrors.postalCode;
       default:
         return false;
     }
@@ -255,11 +294,12 @@ export default function MultiStepForm() {
               <div className="space-y-4">
                 <div className="animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
                   <label htmlFor="firstName" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step1.firstName}
+                    {t.form.step1.firstName} <span className="text-orange-400">*</span>
                   </label>
                   <input
                     id="firstName"
                     type="text"
+                    required
                     value={formData.firstName}
                     onChange={(e) => updateField('firstName', e.target.value)}
                     placeholder={t.form.step1.firstNamePlaceholder}
@@ -269,16 +309,55 @@ export default function MultiStepForm() {
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
                   <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step1.lastName}
+                    {t.form.step1.lastName} <span className="text-orange-400">*</span>
                   </label>
                   <input
                     id="lastName"
                     type="text"
+                    required
                     value={formData.lastName}
                     onChange={(e) => updateField('lastName', e.target.value)}
                     placeholder={t.form.step1.lastNamePlaceholder}
                     className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
                   />
+                </div>
+
+                <div className="animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                    {t.form.step3.email} <span className="text-slate-500 text-xs">(required if no phone)</span>
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => updateField('email', e.target.value)}
+                    placeholder={t.form.step3.emailPlaceholder}
+                    className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01] ${
+                      validationErrors.email ? 'border-red-500' : 'border-slate-600'
+                    }`}
+                  />
+                  {validationErrors.email && (
+                    <p className="text-red-400 text-xs mt-1">{validationErrors.email}</p>
+                  )}
+                </div>
+
+                <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
+                    {t.form.step3.phone} <span className="text-slate-500 text-xs">(required if no email)</span>
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => updateField('phone', e.target.value)}
+                    placeholder={t.form.step3.phonePlaceholder}
+                    className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01] ${
+                      validationErrors.phone ? 'border-red-500' : 'border-slate-600'
+                    }`}
+                  />
+                  {validationErrors.phone && (
+                    <p className="text-red-400 text-xs mt-1">{validationErrors.phone}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -291,48 +370,32 @@ export default function MultiStepForm() {
                 <p className="text-slate-400">{t.form.step2.description}</p>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {interestCategories.map((category, catIndex) => (
                   <div key={category.name} className="space-y-2 animate-slide-up" style={{ animationDelay: `${catIndex * 0.1}s`, animationFillMode: 'backwards' }}>
-                    <button
-                      type="button"
-                      onClick={() => toggleCategory(category.name)}
-                      className="w-full px-4 py-4 rounded-xl border-2 border-slate-600 bg-slate-900/50 hover:border-orange-500/50 transition-all text-left transform hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/20"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-white font-semibold">{category.name}</span>
-                        <ChevronDown
-                          className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${
-                            openCategories.includes(category.name) ? 'rotate-180' : ''
+                    <h3 className="text-white font-semibold text-lg px-2">{category.name}</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {category.items.map((interest, itemIndex) => (
+                        <button
+                          key={interest}
+                          type="button"
+                          onClick={() => toggleInterest(interest)}
+                          className={`px-4 py-3 rounded-xl border-2 transition-all text-left transform hover:scale-[1.02] animate-slide-up ${
+                            formData.interests.includes(interest)
+                              ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
+                              : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10'
                           }`}
-                        />
-                      </div>
-                    </button>
-
-                    {openCategories.includes(category.name) && (
-                      <div className="pl-4 space-y-2">
-                        {category.items.map((interest, itemIndex) => (
-                          <button
-                            key={interest}
-                            type="button"
-                            onClick={() => toggleInterest(interest)}
-                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all text-left transform hover:scale-[1.02] animate-slide-up ${
-                              formData.interests.includes(interest)
-                                ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                                : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10'
-                            }`}
-                            style={{ animationDelay: `${itemIndex * 0.05}s`, animationFillMode: 'backwards' }}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span>{interest}</span>
-                              {formData.interests.includes(interest) && (
-                                <CheckCircle2 className="w-5 h-5 text-orange-400 animate-bounce-in" />
-                              )}
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                          style={{ animationDelay: `${itemIndex * 0.05}s`, animationFillMode: 'backwards' }}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm">{interest}</span>
+                            {formData.interests.includes(interest) && (
+                              <CheckCircle2 className="w-4 h-4 text-orange-400 animate-bounce-in flex-shrink-0 ml-2" />
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -342,232 +405,161 @@ export default function MultiStepForm() {
           {currentStep === 3 && (
             <div className="space-y-6 animate-slide-up">
               <div className="animate-fade-in">
-                <h2 className="text-3xl font-bold text-white mb-2">{t.form.step3.title}</h2>
-                <p className="text-slate-400">{t.form.step3.description}</p>
+                <h2 className="text-3xl font-bold text-white mb-2">{t.form.step5.title}</h2>
+                <p className="text-slate-400">Complete optional details for better service</p>
               </div>
 
               <div className="space-y-4">
-                <div className="animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.email}
+                <div className="animate-slide-up">
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t.form.step3.availability} <span className="text-slate-500 text-xs">(optional)</span>
                   </label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => updateField('email', e.target.value)}
-                    placeholder={t.form.step3.emailPlaceholder}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                  />
-                </div>
-
-                <div className="animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.phone}
-                  </label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => updateField('phone', e.target.value)}
-                    placeholder={t.form.step3.phonePlaceholder}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                  />
-                </div>
-
-                <div className="animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
-                  <label className="block text-sm font-medium text-slate-300 mb-3">
-                    {t.form.step3.availability}
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {availabilityOptions.map((time, index) => (
+                  <div className="grid grid-cols-2 gap-2">
+                    {availabilityOptions.map((time) => (
                       <button
                         key={time}
                         type="button"
                         onClick={() => toggleAvailability(time)}
-                        className={`px-4 py-3 rounded-xl border-2 transition-all transform hover:scale-105 ${
+                        className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                           formData.availability.includes(time)
-                            ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
+                            ? 'bg-orange-500/20 border-orange-500 text-white'
                             : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <span>{time}</span>
-                          {formData.availability.includes(time) && (
-                            <CheckCircle2 className="w-5 h-5 text-orange-400 animate-bounce-in" />
-                          )}
-                        </div>
+                        {time}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.birthDate}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="animate-slide-up">
+                    <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
+                      {t.form.step3.birthDate} <span className="text-slate-500 text-xs">(optional)</span>
+                    </label>
+                    <DatePicker
+                      id="birthDate"
+                      value={formData.birthDate}
+                      onChange={(value) => updateField('birthDate', value)}
+                      placeholder="mm/dd/yyyy"
+                    />
+                  </div>
+
+                  <div className="animate-slide-up">
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                      {t.form.step3.maritalStatus} <span className="text-slate-500 text-xs">(optional)</span>
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {maritalStatusOptions.map((status) => (
+                        <button
+                          key={status}
+                          type="button"
+                          onClick={() => updateField('maritalStatus', formData.maritalStatus === status ? '' : status)}
+                          className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                            formData.maritalStatus === status
+                              ? 'bg-orange-500/20 border-orange-500 text-white'
+                              : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
+                          }`}
+                        >
+                          {status}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 bg-slate-900/30 rounded-xl border border-slate-700/50">
+                  <h4 className="text-white font-medium text-sm">Address <span className="text-slate-500 text-xs">(optional)</span></h4>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="col-span-2">
+                      <input
+                        id="street"
+                        type="text"
+                        value={formData.street}
+                        onChange={(e) => updateField('street', e.target.value)}
+                        placeholder={t.form.step4.streetPlaceholder}
+                        className="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        id="houseNumber"
+                        type="text"
+                        value={formData.houseNumber}
+                        onChange={(e) => updateField('houseNumber', e.target.value)}
+                        placeholder={t.form.step4.houseNumberPlaceholder}
+                        className="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <input
+                        id="postalCode"
+                        type="text"
+                        value={formData.postalCode}
+                        onChange={(e) => updateField('postalCode', e.target.value)}
+                        placeholder={t.form.step4.postalCodePlaceholder}
+                        className={`w-full px-3 py-2 text-sm bg-slate-900/50 border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                          validationErrors.postalCode ? 'border-red-500' : 'border-slate-600'
+                        }`}
+                      />
+                      {validationErrors.postalCode && (
+                        <p className="text-red-400 text-xs mt-1">{validationErrors.postalCode}</p>
+                      )}
+                    </div>
+                    <div className="col-span-2">
+                      <input
+                        id="city"
+                        type="text"
+                        value={formData.city}
+                        onChange={(e) => updateField('city', e.target.value)}
+                        placeholder={t.form.step4.cityPlaceholder}
+                        className="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="animate-slide-up">
+                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                    {t.form.step5.message} <span className="text-slate-500 text-xs">(optional)</span>
                   </label>
-                  <DatePicker
-                    id="birthDate"
-                    value={formData.birthDate}
-                    onChange={(value) => updateField('birthDate', value)}
-                    placeholder="mm/dd/yyyy"
+                  <textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) => updateField('message', e.target.value)}
+                    placeholder={t.form.step5.messagePlaceholder}
+                    rows={3}
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
                   />
                 </div>
-
-                <div className="animate-slide-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
-                  <label className="block text-sm font-medium text-slate-300 mb-3">
-                    {t.form.step3.maritalStatus}
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {maritalStatusOptions.map((status) => (
-                      <button
-                        key={status}
-                        type="button"
-                        onClick={() => updateField('maritalStatus', formData.maritalStatus === status ? '' : status)}
-                        className={`px-4 py-3 rounded-xl border-2 transition-all transform hover:scale-105 ${
-                          formData.maritalStatus === status
-                            ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                            : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span>{status}</span>
-                          {formData.maritalStatus === status && (
-                            <CheckCircle2 className="w-5 h-5 text-orange-400 animate-bounce-in" />
-                          )}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {currentStep === 4 && (
-            <div className="space-y-6 animate-slide-up">
-              <div className="animate-fade-in">
-                <h2 className="text-3xl font-bold text-white mb-2">{t.form.step4.title}</h2>
-                <p className="text-slate-400">{t.form.step4.description}</p>
               </div>
 
-              <div className="space-y-4">
-                <div className="grid grid-cols-3 gap-3 animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
-                  <div className="col-span-2">
-                    <label htmlFor="street" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step4.street}
-                    </label>
-                    <input
-                      id="street"
-                      type="text"
-                      value={formData.street}
-                      onChange={(e) => updateField('street', e.target.value)}
-                      placeholder={t.form.step4.streetPlaceholder}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="houseNumber" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step4.houseNumber}
-                    </label>
-                    <input
-                      id="houseNumber"
-                      type="text"
-                      value={formData.houseNumber}
-                      onChange={(e) => updateField('houseNumber', e.target.value)}
-                      placeholder={t.form.step4.houseNumberPlaceholder}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-3 animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
-                  <div>
-                    <label htmlFor="postalCode" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step4.postalCode}
-                    </label>
-                    <input
-                      id="postalCode"
-                      type="text"
-                      value={formData.postalCode}
-                      onChange={(e) => updateField('postalCode', e.target.value)}
-                      placeholder={t.form.step4.postalCodePlaceholder}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <label htmlFor="city" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step4.city}
-                    </label>
-                    <input
-                      id="city"
-                      type="text"
-                      value={formData.city}
-                      onChange={(e) => updateField('city', e.target.value)}
-                      placeholder={t.form.step4.cityPlaceholder}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {currentStep === 5 && (
-            <div className="space-y-6 animate-slide-up">
-              <div className="animate-fade-in">
-                <h2 className="text-3xl font-bold text-white mb-2">{t.form.step5.title}</h2>
-                <p className="text-slate-400">{t.form.step5.description}</p>
-              </div>
-
-              <div className="animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
-                  {t.form.step5.message}
-                </label>
-                <textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={(e) => updateField('message', e.target.value)}
-                  placeholder={t.form.step5.messagePlaceholder}
-                  rows={5}
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 resize-none"
-                />
-              </div>
-
-              <div className="bg-slate-900/50 border border-slate-600 rounded-xl p-4 animate-slide-up hover:border-orange-500/30 transition-all" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
+              <div className="bg-slate-900/50 border border-slate-600 rounded-xl p-4 mt-4">
                 <h3 className="text-white font-semibold mb-3">{t.form.step5.yourDetails}</h3>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
+                  <div className="flex justify-between">
                     <span className="text-slate-400">{t.form.step5.name}</span>
                     <span className="text-white font-medium">{formData.firstName} {formData.lastName}</span>
                   </div>
-                  <div className="flex justify-between animate-fade-in" style={{ animationDelay: '0.35s', animationFillMode: 'backwards' }}>
-                    <span className="text-slate-400">{t.form.step3.email}</span>
-                    <span className="text-white font-medium">{formData.email}</span>
-                  </div>
-                  <div className="flex justify-between animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-                    <span className="text-slate-400">{t.form.step3.phone}</span>
-                    <span className="text-white font-medium">{formData.phone}</span>
-                  </div>
-                  {formData.availability.length > 0 && (
-                    <div className="flex justify-between animate-fade-in" style={{ animationDelay: '0.45s', animationFillMode: 'backwards' }}>
-                      <span className="text-slate-400">{t.form.step5.available}</span>
-                      <span className="text-white font-medium">{formData.availability.join(', ')}</span>
+                  {formData.email && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">{t.form.step3.email}</span>
+                      <span className="text-white font-medium">{formData.email}</span>
                     </div>
                   )}
-                  {formData.city && (
-                    <div className="flex justify-between animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
-                      <span className="text-slate-400">{t.form.step5.city}</span>
-                      <span className="text-white font-medium">{formData.city}</span>
+                  {formData.phone && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">{t.form.step3.phone}</span>
+                      <span className="text-white font-medium">{formData.phone}</span>
                     </div>
                   )}
-                  <div className="pt-2 border-t border-slate-700 animate-fade-in" style={{ animationDelay: '0.55s', animationFillMode: 'backwards' }}>
+                  <div className="pt-2 border-t border-slate-700">
                     <span className="text-slate-400">{t.form.step5.interests}</span>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {formData.interests.map((interest, index) => (
-                        <span key={interest} className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded-lg text-xs animate-scale-in hover:scale-110 transition-transform" style={{ animationDelay: `${0.6 + index * 0.05}s`, animationFillMode: 'backwards' }}>
+                      {formData.interests.map((interest) => (
+                        <span key={interest} className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded-lg text-xs">
                           {interest}
                         </span>
                       ))}
