@@ -819,7 +819,7 @@ export default function LandingPage() {
             <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden h-[600px] hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
               <img
                 src="/image.png"
-                alt="Standort ARAG Versicherung Düren-Aachen Brhan Jabri"
+                alt="Standort Versicherung Düren-Aachen Brhan Jabri"
                 width="800"
                 height="600"
                 loading="lazy"
