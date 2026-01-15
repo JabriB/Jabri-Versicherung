@@ -299,12 +299,12 @@ export default function LandingPage() {
                   <img
                     src="/tower.webp"
                     alt={t.about.name}
-                    width="400"
-                    height="600"
+                    width="825"
+                    height="1600"
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
-                    srcSet="/tower.webp 1x, /tower.webp 2x"
+                    srcSet="/tower-sm.webp 400w, /tower-md.webp 600w, /tower.webp 825w"
                     sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 400px"
                     className="w-full h-auto rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
                   />
