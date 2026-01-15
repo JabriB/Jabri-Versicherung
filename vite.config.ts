@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   base: '/',
@@ -13,11 +12,14 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) {
+            if (id.includes('react') && !id.includes('react-router')) {
               return 'react-vendor';
             }
             if (id.includes('react-router')) {
               return 'router';
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons';
             }
             return 'vendor';
           }
@@ -32,5 +34,23 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     target: 'es2020',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
+      },
+      format: {
+        comments: false,
+      },
+    },
+    cssMinify: true,
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 1000,
   },
 });

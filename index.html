@@ -39,13 +39,36 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-    <link rel="preload" as="image" href="/tower.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/tower-sm.webp" fetchpriority="high" imagesrcset="/tower-sm.webp 400w, /tower-md.webp 600w, /tower.webp 825w" imagesizes="(max-width: 768px) 90vw, (max-width: 1024px) 450px, 400px" />
     <link rel="preload" as="image" href="/jabri-versicherung-logo.svg" fetchpriority="high" />
-    <link rel="preload" as="style" href="/src/index.css" />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" /></noscript>
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
 
     <style>
       * {
@@ -75,6 +98,55 @@
 
       #root {
         min-height: 100vh;
+      }
+
+      .fixed { position: fixed; }
+      .top-0 { top: 0; }
+      .w-full { width: 100%; }
+      .z-50 { z-index: 50; }
+      .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+      .from-orange-600 { --tw-gradient-from: #ea580c; --tw-gradient-to: rgba(234, 88, 12, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+      .to-orange-500 { --tw-gradient-to: #f97316; }
+      .text-white { color: #fff; }
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .gap-2 { gap: 0.5rem; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+      .text-xs { font-size: 0.75rem; line-height: 1rem; }
+      .font-semibold { font-weight: 600; }
+      .backdrop-blur-md { backdrop-filter: blur(12px); }
+      .bg-slate-900\/80 { background-color: rgba(15, 23, 42, 0.8); }
+      .border-b { border-bottom-width: 1px; }
+      .border-slate-700\/50 { border-color: rgba(51, 65, 85, 0.5); }
+      .min-h-screen { min-height: 100vh; }
+      .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+      .from-slate-950 { --tw-gradient-from: #020617; --tw-gradient-to: rgba(2, 6, 23, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+      .via-slate-900 { --tw-gradient-to: rgba(15, 23, 42, 0); --tw-gradient-stops: var(--tw-gradient-from), #0f172a, var(--tw-gradient-to); }
+      .to-slate-950 { --tw-gradient-to: #020617; }
+      .pt-40 { padding-top: 10rem; }
+      .pb-10 { padding-bottom: 2.5rem; }
+      .text-5xl { font-size: 3rem; line-height: 1; }
+      .font-bold { font-weight: 700; }
+      .mb-6 { margin-bottom: 1.5rem; }
+      .leading-tight { line-height: 1.25; }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+      .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+      .opacity-0 { opacity: 0; }
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-200 { animation-delay: 0.2s; }
+      .delay-300 { animation-delay: 0.3s; }
+      .delay-400 { animation-delay: 0.4s; }
+      @media (min-width: 640px) {
+        .sm\:text-6xl { font-size: 3.75rem; line-height: 1; }
+        .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .sm\:text-base { font-size: 1rem; line-height: 1.5rem; }
+      }
+      @media (min-width: 1024px) {
+        .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
       }
     </style>
 
