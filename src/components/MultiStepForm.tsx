@@ -283,12 +283,12 @@ export default function MultiStepForm() {
         const hasPhone = formData.phone.trim() !== '';
         const hasValidEmail = validateEmail(formData.email);
         const hasValidPhone = validatePhone(formData.phone);
-        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && !validationErrors.email && !validationErrors.phone;
+        const ageValidation = validateAge(formData.birthDate);
+        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && ageValidation.isValid && !validationErrors.email && !validationErrors.phone && !validationErrors.birthDate;
       case 2:
         return formData.interests.length > 0;
       case 3:
-        const ageValidation = validateAge(formData.birthDate);
-        return ageValidation.isValid && !validationErrors.postalCode && !validationErrors.birthDate;
+        return !validationErrors.postalCode;
       default:
         return false;
     }
@@ -407,6 +407,22 @@ export default function MultiStepForm() {
                     <p className="text-red-400 text-xs mt-1">{validationErrors.phone}</p>
                   )}
                 </div>
+
+                <div className="animate-slide-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
+                  <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
+                    {t.form.step3.birthDate} <span className="text-orange-400">*</span>
+                  </label>
+                  <DatePicker
+                    id="birthDate"
+                    value={formData.birthDate}
+                    onChange={(value) => updateField('birthDate', value)}
+                    placeholder="mm/dd/yyyy"
+                    className={validationErrors.birthDate ? 'border-red-500' : ''}
+                  />
+                  {validationErrors.birthDate && (
+                    <p className="text-red-400 text-xs mt-1">{validationErrors.birthDate}</p>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -480,43 +496,25 @@ export default function MultiStepForm() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="animate-slide-up">
-                    <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step3.birthDate} <span className="text-orange-400">*</span>
-                    </label>
-                    <DatePicker
-                      id="birthDate"
-                      value={formData.birthDate}
-                      onChange={(value) => updateField('birthDate', value)}
-                      placeholder="mm/dd/yyyy"
-                      className={validationErrors.birthDate ? 'border-red-500' : ''}
-                    />
-                    {validationErrors.birthDate && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.birthDate}</p>
-                    )}
-                  </div>
-
-                  <div className="animate-slide-up">
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step3.maritalStatus} <span className="text-slate-500 text-xs">(optional)</span>
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {maritalStatusOptions.map((status) => (
-                        <button
-                          key={status}
-                          type="button"
-                          onClick={() => updateField('maritalStatus', formData.maritalStatus === status ? '' : status)}
-                          className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
-                            formData.maritalStatus === status
-                              ? 'bg-orange-500/20 border-orange-500 text-white'
-                              : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
-                          }`}
-                        >
-                          {status}
-                        </button>
-                      ))}
-                    </div>
+                <div className="animate-slide-up">
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t.form.step3.maritalStatus} <span className="text-slate-500 text-xs">(optional)</span>
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {maritalStatusOptions.map((status) => (
+                      <button
+                        key={status}
+                        type="button"
+                        onClick={() => updateField('maritalStatus', formData.maritalStatus === status ? '' : status)}
+                        className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                          formData.maritalStatus === status
+                            ? 'bg-orange-500/20 border-orange-500 text-white'
+                            : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
+                        }`}
+                      >
+                        {status}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
