@@ -301,11 +301,11 @@ export default function MultiStepForm() {
           <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-in">
             <CheckCircle2 className="w-10 h-10 text-green-400" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-3 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>{t.form.success.title}</h2>
-          <p className="text-slate-300 mb-2 animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+          <h2 className="text-2xl font-bold text-white mb-3 animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>{t.form.success.title}</h2>
+          <p className="text-slate-300 mb-2 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
             {t.form.success.message}
           </p>
-          <p className="text-slate-400 text-sm animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}>
+          <p className="text-slate-400 text-sm animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
             {t.form.success.redirect}
           </p>
         </div>
