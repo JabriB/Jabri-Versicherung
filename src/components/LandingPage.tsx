@@ -82,6 +82,7 @@ export default function LandingPage() {
                   height="40"
                   loading="eager"
                   decoding="async"
+                  fetchPriority="high"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -303,6 +304,8 @@ export default function LandingPage() {
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
+                    srcSet="/tower.webp 1x, /tower.webp 2x"
+                    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 400px"
                     className="w-full h-auto rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -835,6 +838,8 @@ export default function LandingPage() {
                 height="600"
                 loading="lazy"
                 decoding="async"
+                srcSet="/image.png 1x, /image.png 2x"
+                sizes="(max-width: 1024px) 100vw, 800px"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
             </div>
@@ -983,6 +988,8 @@ export default function LandingPage() {
                     height="32"
                     loading="lazy"
                     decoding="async"
+                    srcSet="/jabri-versicherung-_logo.png 1x, /jabri-versicherung-_logo.png 2x"
+                    sizes="32px"
                     className="w-full h-full object-contain"
                   />
                 </div>
