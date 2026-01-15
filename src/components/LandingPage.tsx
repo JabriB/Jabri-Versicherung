@@ -840,8 +840,8 @@ export default function LandingPage() {
                 height="600"
                 loading="lazy"
                 decoding="async"
-                srcSet="/map.webp 1x, /map.webp 2x"
-                sizes="(max-width: 1024px) 100vw, 800px"
+                srcSet="/map.webp"
+                sizes="(max-width: 1024px) 100vw, 500px"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
             </div>
