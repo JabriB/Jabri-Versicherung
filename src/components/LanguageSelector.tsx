@@ -13,7 +13,7 @@ export default function LanguageSelector() {
 
   return (
     <div className="relative group">
-      <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 transition text-white">
+      <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 transition text-white" aria-label="Sprache wählen" aria-expanded="false">
         <Globe size={18} />
         <span className="text-sm hidden sm:inline">
           {languages.find(l => l.code === language)?.flag}
