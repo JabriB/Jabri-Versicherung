@@ -832,13 +832,13 @@ export default function LandingPage() {
             {/* Map */}
             <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden h-[600px] hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
               <img
-                src="/image.png"
+                src="/map.webp"
                 alt="Standort Versicherung Düren-Aachen Brhan Jabri"
                 width="800"
                 height="600"
                 loading="lazy"
                 decoding="async"
-                srcSet="/image.png 1x, /image.png 2x"
+                srcSet="/map.webp 1x, /map.webp 2x"
                 sizes="(max-width: 1024px) 100vw, 800px"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
