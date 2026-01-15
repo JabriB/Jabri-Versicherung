@@ -25,6 +25,7 @@ interface ValidationErrors {
   email?: string;
   phone?: string;
   postalCode?: string;
+  birthDate?: string;
 }
 
 const initialFormData: FormData = {
@@ -116,6 +117,40 @@ export default function MultiStepForm() {
     return /^\d{4,5}$/.test(code);
   };
 
+  const validateAge = (birthDate: string): { isValid: boolean; message?: string } => {
+    if (!birthDate) {
+      return { isValid: false, message: 'Birth date is required' };
+    }
+
+    const parts = birthDate.split('/');
+    if (parts.length !== 3) {
+      return { isValid: false, message: 'Invalid date format' };
+    }
+
+    const month = parseInt(parts[0], 10);
+    const day = parseInt(parts[1], 10);
+    const year = parseInt(parts[2], 10);
+
+    if (isNaN(month) || isNaN(day) || isNaN(year)) {
+      return { isValid: false, message: 'Invalid date' };
+    }
+
+    const birthDateObj = new Date(year, month - 1, day);
+    const today = new Date();
+    let age = today.getFullYear() - birthDateObj.getFullYear();
+    const monthDiff = today.getMonth() - birthDateObj.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+      age--;
+    }
+
+    if (age < 18) {
+      return { isValid: false, message: 'You must be at least 18 years old' };
+    }
+
+    return { isValid: true };
+  };
+
   const updateField = (field: keyof FormData, value: string | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
 
@@ -140,6 +175,15 @@ export default function MultiStepForm() {
         setValidationErrors(prev => ({ ...prev, postalCode: 'Invalid postal code (4-5 digits)' }));
       } else {
         setValidationErrors(prev => ({ ...prev, postalCode: undefined }));
+      }
+    }
+
+    if (field === 'birthDate' && typeof value === 'string') {
+      const ageValidation = validateAge(value);
+      if (!ageValidation.isValid) {
+        setValidationErrors(prev => ({ ...prev, birthDate: ageValidation.message }));
+      } else {
+        setValidationErrors(prev => ({ ...prev, birthDate: undefined }));
       }
     }
   };
@@ -243,7 +287,8 @@ export default function MultiStepForm() {
       case 2:
         return formData.interests.length > 0;
       case 3:
-        return !validationErrors.postalCode;
+        const ageValidation = validateAge(formData.birthDate);
+        return ageValidation.isValid && !validationErrors.postalCode && !validationErrors.birthDate;
       default:
         return false;
     }
@@ -438,14 +483,18 @@ export default function MultiStepForm() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="animate-slide-up">
                     <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step3.birthDate} <span className="text-slate-500 text-xs">(optional)</span>
+                      {t.form.step3.birthDate} <span className="text-orange-400">*</span>
                     </label>
                     <DatePicker
                       id="birthDate"
                       value={formData.birthDate}
                       onChange={(value) => updateField('birthDate', value)}
                       placeholder="mm/dd/yyyy"
+                      className={validationErrors.birthDate ? 'border-red-500' : ''}
                     />
+                    {validationErrors.birthDate && (
+                      <p className="text-red-400 text-xs mt-1">{validationErrors.birthDate}</p>
+                    )}
                   </div>
 
                   <div className="animate-slide-up">

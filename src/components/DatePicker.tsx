@@ -5,9 +5,10 @@ interface DatePickerProps {
   onChange: (value: string) => void;
   placeholder?: string;
   id?: string;
+  className?: string;
 }
 
-export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy', id }: DatePickerProps) {
+export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy', id, className = '' }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [displayDate, setDisplayDate] = useState(new Date());
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,6 +28,16 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
 
   const formatDisplayValue = (dateStr: string) => {
     if (!dateStr) return '';
+    // Handle both formats: "mm/dd/yyyy" and "yyyy-mm-dd"
+    const parts = dateStr.includes('/') ? dateStr.split('/') : null;
+    if (parts && parts.length === 3) {
+      // Already in mm/dd/yyyy format
+      const month = parts[0].padStart(2, '0');
+      const day = parts[1].padStart(2, '0');
+      const year = parts[2];
+      return `${month}/${day}/${year}`;
+    }
+    // Fallback to Date parsing
     const date = new Date(dateStr);
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -35,10 +46,10 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
   };
 
   const handleDateSelect = (date: Date) => {
+    const month = String(date.getMonth() + 1);
+    const day = String(date.getDate());
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    onChange(`${year}-${month}-${day}`);
+    onChange(`${month}/${day}/${year}`);
     setIsOpen(false);
   };
 
@@ -140,7 +151,9 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
         onClick={() => setIsOpen(!isOpen)}
         readOnly
         placeholder={placeholder}
-        className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition cursor-pointer"
+        className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition cursor-pointer ${
+          className || 'border-slate-600'
+        }`}
       />
 
       {isOpen && (
