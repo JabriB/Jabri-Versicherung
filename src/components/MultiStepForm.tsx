@@ -224,8 +224,6 @@ export default function MultiStepForm() {
     setIsSubmitting(true);
 
     try {
-      console.log('Sending data to webhook:', formData);
-      // https://n8n.srv1116248.hstgr.cloud/webhook/master
       const response = await fetch('https://n8n.srv1116248.hstgr.cloud/webhook/master', {
         method: 'POST',
         headers: {
@@ -234,42 +232,17 @@ export default function MultiStepForm() {
         body: JSON.stringify(formData),
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response status text:', response.statusText);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
-      const responseText = await response.text();
-      console.log('Response body (raw text):', responseText);
-
-      let responseData;
-      try {
-        responseData = JSON.parse(responseText);
-        console.log('Response body (parsed JSON):', responseData);
-      } catch (parseError) {
-        console.log('Response is not JSON, keeping as text');
-      }
-
       if (!response.ok) {
-        const errorMsg = `Webhook returned status ${response.status}: ${response.statusText}`;
-        console.error(errorMsg);
-        console.error('Full response:', {
-          status: response.status,
-          statusText: response.statusText,
-          body: responseText
-        });
-        throw new Error(errorMsg);
+        throw new Error(`Submission failed with status ${response.status}`);
       }
 
-      console.log('Submission successful!');
       setIsSubmitted(true);
     } catch (error) {
-      console.error('Submission error details:', error);
-
       const errorMessage = error instanceof Error
         ? `Error: ${error.message}`
         : 'There was an unknown error during submission.';
 
-      alert(`${errorMessage}\n\nPlease open the browser console (F12) for more details.`);
+      alert(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
