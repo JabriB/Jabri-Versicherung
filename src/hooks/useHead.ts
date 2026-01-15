@@ -31,12 +31,11 @@ export function useHead(config: HeadConfig) {
     };
 
     updateOrCreateMeta('description', config.description);
-    updateOrCreateMeta('og:title', config.ogTitle || config.title, true);
-    updateOrCreateMeta('og:description', config.ogDescription || config.description, true);
-    updateOrCreateMeta('og:url', config.ogUrl || window.location.href, true);
-    updateOrCreateMeta('og:image', config.ogImage || 'https://jabriversicherung.de/jabri-versicherung-logo.svg', true);
-    updateOrCreateMeta('twitter:title', config.ogTitle || config.title);
-    updateOrCreateMeta('twitter:description', config.ogDescription || config.description);
+
+    if (config.ogTitle) updateOrCreateMeta('og:title', config.ogTitle, true);
+    if (config.ogDescription) updateOrCreateMeta('og:description', config.ogDescription, true);
+    if (config.ogUrl) updateOrCreateMeta('og:url', config.ogUrl, true);
+    if (config.ogImage) updateOrCreateMeta('og:image', config.ogImage, true);
 
     if (config.canonical) {
       let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
