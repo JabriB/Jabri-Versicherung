@@ -299,14 +299,14 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl animate-pulse" />
                 <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
                   <img
-                    src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=400&h=800&fit=crop"
+                    src="/tower.webp"
                     alt={t.about.name}
-                    width="400"
-                    height="800"
+                    width="825"
+                    height="1600"
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
-                    srcSet="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=300&h=600&fit=crop 300w, https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=400&h=800&fit=crop 400w"
+                    srcSet="/tower-sm.webp 400w, /tower-md.webp 600w, /tower.webp 825w"
                     sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 400px"
                     className="w-full h-auto rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
                   />
