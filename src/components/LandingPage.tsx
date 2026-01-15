@@ -304,6 +304,7 @@ export default function LandingPage() {
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
+                    srcSet="/tower.webp 1x, /tower.webp 2x"
                     sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 400px"
                     className="w-full h-auto rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
                   />
