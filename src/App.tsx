@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import LandingPage from './components/LandingPage';
-import MultiStepForm from './components/MultiStepForm';
-import Impressum from './components/Impressum';
-import Datenschutz from './components/Datenschutz';
-import AGB from './components/AGB';
-import Sitemap from './components/Sitemap';
-import FAQ from './components/FAQ';
 import CookieConsent from './components/CookieConsent';
+
+const MultiStepForm = lazy(() => import('./components/MultiStepForm'));
+const Impressum = lazy(() => import('./components/Impressum'));
+const Datenschutz = lazy(() => import('./components/Datenschutz'));
+const AGB = lazy(() => import('./components/AGB'));
+const Sitemap = lazy(() => import('./components/Sitemap'));
+const FAQ = lazy(() => import('./components/FAQ'));
 
 function App() {
   return (
@@ -15,12 +17,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/formular" element={<MultiStepForm />} />
-          <Route path="/impressum" element={<Impressum />} />
-          <Route path="/datenschutz" element={<Datenschutz />} />
-          <Route path="/agb" element={<AGB />} />
-          <Route path="/sitemap" element={<Sitemap />} />
-          <Route path="/faq" element={<FAQ />} />
+          <Route path="/formular" element={<Suspense fallback={null}><MultiStepForm /></Suspense>} />
+          <Route path="/impressum" element={<Suspense fallback={null}><Impressum /></Suspense>} />
+          <Route path="/datenschutz" element={<Suspense fallback={null}><Datenschutz /></Suspense>} />
+          <Route path="/agb" element={<Suspense fallback={null}><AGB /></Suspense>} />
+          <Route path="/sitemap" element={<Suspense fallback={null}><Sitemap /></Suspense>} />
+          <Route path="/faq" element={<Suspense fallback={null}><FAQ /></Suspense>} />
         </Routes>
         <CookieConsent />
       </Router>
