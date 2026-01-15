@@ -1,6 +1,17 @@
+import { useHead } from '../hooks/useHead';
 import LegalLayout from './LegalLayout';
 
 export default function Datenschutz() {
+  useHead({
+    title: 'Datenschutzerklärung | Jabri Versicherung',
+    description: 'Datenschutzerklärung von Jabri Versicherung. Erfahren Sie wie wir Ihre persönlichen Daten schützen.',
+    canonical: 'https://jabriversicherung.de/datenschutz',
+    ogTitle: 'Datenschutzerklärung | Jabri Versicherung',
+    ogDescription: 'Datenschutzerklärung von Jabri Versicherung.',
+    ogUrl: 'https://jabriversicherung.de/datenschutz',
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+  });
+
   return (
     <LegalLayout title="Datenschutzerklärung">
       <div className="text-slate-300 space-y-6">

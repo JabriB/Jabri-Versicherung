@@ -2,10 +2,21 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ChevronDown, Phone, Mail, Home, HelpCircle } from 'lucide-react';
+import { useHead } from '../hooks/useHead';
 
 export default function FAQ() {
   const { language } = useLanguage();
   const [openItems, setOpenItems] = useState<string[]>([]);
+
+  useHead({
+    title: 'FAQ - Häufig gestellte Fragen | Jabri Versicherung',
+    description: 'Antworten auf häufig gestellte Fragen zu Versicherungen, Beratung und unseren Services in Düren.',
+    canonical: 'https://jabriversicherung.de/faq',
+    ogTitle: 'FAQ - Häufig gestellte Fragen | Jabri Versicherung',
+    ogDescription: 'Antworten auf häufig gestellte Fragen zu Versicherungen und unseren Services.',
+    ogUrl: 'https://jabriversicherung.de/faq',
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+  });
 
   const toggleItem = (id: string) => {
     setOpenItems(prev =>

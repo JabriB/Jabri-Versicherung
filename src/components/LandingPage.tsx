@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
 import LanguageSelector from './LanguageSelector';
+import { useHead } from '../hooks/useHead';
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,6 +14,16 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = getTranslation(language);
+
+  useHead({
+    title: 'Versicherungsberatung Düren | Versicherungen | Brhan Jabri',
+    description: 'Professionelle Versicherungsberatung von Brhan Jabri - Versicherungsvertreter in Düren. Rechtsschutz, Haftpflicht, Hausrat, Wohngebäude und mehr. Mehrsprachige Beratung für Ihre Absicherung.',
+    canonical: 'https://jabriversicherung.de/',
+    ogTitle: 'Versicherungsberatung Düren | Versicherungen | Brhan Jabri',
+    ogDescription: 'Professionelle Versicherungsberatung in Düren. Rechtsschutz, Haftpflicht, Hausrat und mehr. Mehrsprachige Beratung in Deutsch, Englisch, Arabisch und Türkisch.',
+    ogUrl: 'https://jabriversicherung.de/',
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+  });
 
   const togglePanel = (panelId: string) => {
     setOpenPanels(prev =>

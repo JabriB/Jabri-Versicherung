@@ -1,6 +1,17 @@
+import { useHead } from '../hooks/useHead';
 import LegalLayout from './LegalLayout';
 
 export default function Impressum() {
+  useHead({
+    title: 'Impressum | Jabri Versicherung',
+    description: 'Impressum und rechtliche Informationen von Jabri Versicherung in Düren.',
+    canonical: 'https://jabriversicherung.de/impressum',
+    ogTitle: 'Impressum | Jabri Versicherung',
+    ogDescription: 'Impressum und rechtliche Informationen von Jabri Versicherung.',
+    ogUrl: 'https://jabriversicherung.de/impressum',
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+  });
+
   return (
     <LegalLayout title="Impressum">
       <div className="text-slate-300 space-y-6">

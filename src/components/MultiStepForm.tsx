@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
+import { useHead } from '../hooks/useHead';
 
 interface FormData {
   firstName: string;
@@ -60,6 +61,16 @@ export default function MultiStepForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
   const navigate = useNavigate();
+
+  useHead({
+    title: 'Versicherungsformular | Jabri Versicherung',
+    description: 'Füllen Sie unser Versicherungsformular aus, um personalisierte Beratung zu erhalten. Schnell, einfach und sicher.',
+    canonical: 'https://jabriversicherung.de/formular',
+    ogTitle: 'Versicherungsformular | Jabri Versicherung',
+    ogDescription: 'Füllen Sie unser Versicherungsformular aus, um personalisierte Beratung zu erhalten.',
+    ogUrl: 'https://jabriversicherung.de/formular',
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+  });
 
   const interestCategories = [
     {

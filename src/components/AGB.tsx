@@ -1,6 +1,17 @@
+import { useHead } from '../hooks/useHead';
 import LegalLayout from './LegalLayout';
 
 export default function AGB() {
+  useHead({
+    title: 'AGB - Allgemeine Geschäftsbedingungen | Jabri Versicherung',
+    description: 'Allgemeine Geschäftsbedingungen (AGB) von Jabri Versicherung in Düren.',
+    canonical: 'https://jabriversicherung.de/agb',
+    ogTitle: 'AGB - Allgemeine Geschäftsbedingungen | Jabri Versicherung',
+    ogDescription: 'Allgemeine Geschäftsbedingungen von Jabri Versicherung.',
+    ogUrl: 'https://jabriversicherung.de/agb',
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+  });
+
   return (
     <LegalLayout title="Allgemeine Geschäftsbedingungen (AGB)">
       <div className="text-slate-300 space-y-6">
