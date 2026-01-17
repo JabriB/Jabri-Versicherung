@@ -157,7 +157,7 @@ export default function CookieConsent() {
               <div className="flex flex-col sm:flex-row gap-3 mt-6">
                 <button
                   onClick={handleSaveSettings}
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-xl font-semibold hover:from-orange-700 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-orange-500/50"
                 >
                   {t.cookies.settings.saveSettings}
                 </button>
@@ -194,7 +194,7 @@ export default function CookieConsent() {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={() => handleAccept('all')}
-                      className="px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-xl font-semibold hover:from-orange-700 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+                      className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-orange-500/50 hover:scale-105"
                     >
                       {t.cookies.acceptAll}
                     </button>

@@ -280,7 +280,7 @@ export default function MultiStepForm() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-slate-800/90 border border-slate-700 rounded-3xl p-8 text-center animate-scale-in">
           <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-in">
             <CheckCircle2 className="w-10 h-10 text-green-400" />
@@ -298,7 +298,7 @@ export default function MultiStepForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8 animate-fade-in">
           <div className="flex items-center justify-between mb-3">
@@ -307,7 +307,7 @@ export default function MultiStepForm() {
           </div>
           <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-orange-500 to-orange-400 transition-all duration-500 ease-out shadow-lg shadow-orange-500/50"
+              className="h-full bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-500 ease-out shadow-lg shadow-orange-500/50"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -621,7 +621,7 @@ export default function MultiStepForm() {
                 type="button"
                 onClick={nextStep}
                 disabled={!isStepValid()}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/50 animate-slide-up"
+                className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/50 animate-slide-up"
               >
                 {t.form.buttons.next}
                 <ChevronRight className="w-5 h-5" />
