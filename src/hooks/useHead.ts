@@ -8,6 +8,7 @@ interface HeadConfig {
   ogDescription?: string;
   ogUrl?: string;
   ogImage?: string;
+  robots?: string;
 }
 
 export function useHead(config: HeadConfig) {
@@ -37,6 +38,10 @@ export function useHead(config: HeadConfig) {
     updateOrCreateMeta('og:image', config.ogImage || 'https://jabriversicherung.de/jabri-versicherung-logo.svg', true);
     updateOrCreateMeta('twitter:title', config.ogTitle || config.title);
     updateOrCreateMeta('twitter:description', config.ogDescription || config.description);
+
+    if (config.robots) {
+      updateOrCreateMeta('robots', config.robots);
+    }
 
     if (config.canonical) {
       let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;

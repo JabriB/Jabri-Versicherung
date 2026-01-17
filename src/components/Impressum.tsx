@@ -9,7 +9,8 @@ export default function Impressum() {
     ogTitle: 'Impressum | Jabri Versicherung',
     ogDescription: 'Impressum und rechtliche Informationen von Jabri Versicherung.',
     ogUrl: 'https://jabriversicherung.de/impressum',
-    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg',
+    robots: 'noindex, follow'
   });
 
   return (

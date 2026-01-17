@@ -9,7 +9,8 @@ export default function AGB() {
     ogTitle: 'AGB - Allgemeine Geschäftsbedingungen | Jabri Versicherung',
     ogDescription: 'Allgemeine Geschäftsbedingungen von Jabri Versicherung.',
     ogUrl: 'https://jabriversicherung.de/agb',
-    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg',
+    robots: 'noindex, follow'
   });
 
   return (

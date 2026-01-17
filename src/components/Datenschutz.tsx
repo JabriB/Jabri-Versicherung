@@ -9,7 +9,8 @@ export default function Datenschutz() {
     ogTitle: 'Datenschutzerklärung | Jabri Versicherung',
     ogDescription: 'Datenschutzerklärung von Jabri Versicherung.',
     ogUrl: 'https://jabriversicherung.de/datenschutz',
-    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
+    ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg',
+    robots: 'noindex, follow'
   });
 
   return (
