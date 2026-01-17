@@ -965,7 +965,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up opacity-0 delay-200">
             <button
               onClick={() => scrollToSection('form')}
-              className="px-8 py-3 bg-white text-orange-600 hover:bg-orange-50 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl group"
+              className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/50 animate-pulse-glow group"
             >
               <span className="flex items-center gap-2">
                 {t.cta.requestButton}
