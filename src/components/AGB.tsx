@@ -19,17 +19,17 @@ export default function AGB() {
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 1 Geltungsbereich</h2>
           <p>
-            Diese Allgemeinen Geschäftsbedingungen gelten für alle Beratungsleistungen und Versicherungsvermittlungen durch [Ihr Firmenname] (nachfolgend "Versicherungsmakler" genannt).
+            Diese Allgemeinen Geschäftsbedingungen gelten für alle Beratungsleistungen und Versicherungsvermittlungen durch [Ihr Firmenname] (nachfolgend "Versicherungsvertreter" genannt).
           </p>
           <p className="mt-2">
-            Abweichende oder ergänzende Allgemeine Geschäftsbedingungen des Auftraggebers werden nur dann Vertragsbestandteil, wenn der Versicherungsmakler ihrer Geltung ausdrücklich schriftlich zugestimmt hat.
+            Abweichende oder ergänzende Allgemeine Geschäftsbedingungen des Auftraggebers werden nur dann Vertragsbestandteil, wenn der Versicherungsvertreter ihrer Geltung ausdrücklich schriftlich zugestimmt hat.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 2 Vertragsgegenstand und Leistungsumfang</h2>
           <p>
-            Der Versicherungsmakler bietet folgende Leistungen an:
+            Der Versicherungsvertreter bietet folgende Leistungen an:
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>Beratung zu Versicherungsprodukten</li>
@@ -46,14 +46,14 @@ export default function AGB() {
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 3 Zustandekommen des Vertrages</h2>
           <p>
-            Der Vertrag kommt durch die Auftragserteilung des Kunden und die Annahme durch den Versicherungsmakler zustande. Die Annahme kann ausdrücklich oder durch Auftragsausführung erfolgen.
+            Der Vertrag kommt durch die Auftragserteilung des Kunden und die Annahme durch den Versicherungsvertreter zustande. Die Annahme kann ausdrücklich oder durch Auftragsausführung erfolgen.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-white mb-4">§ 4 Pflichten des Versicherungsmaklers</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">§ 4 Pflichten des Versicherungsvertreters</h2>
           <p>
-            Der Versicherungsmakler verpflichtet sich:
+            Der Versicherungsvertreter verpflichtet sich:
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>zur gewissenhaften und sorgfältigen Beratung nach den Bedürfnissen des Kunden</li>
@@ -80,7 +80,7 @@ export default function AGB() {
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 6 Vergütung</h2>
           <p>
-            Die Beratungsleistung ist für den Kunden grundsätzlich kostenfrei. Der Versicherungsmakler erhält seine Vergütung durch Courtagen der Versicherungsgesellschaften. Auf Wunsch informiert der Versicherungsmakler über die Höhe der erhaltenen Vergütung.
+            Die Beratungsleistung ist für den Kunden grundsätzlich kostenfrei. Der Versicherungsvertreter erhält seine Vergütung durch Courtagen der Versicherungsgesellschaften. Auf Wunsch informiert der Versicherungsvertreter über die Höhe der erhaltenen Vergütung.
           </p>
           <p className="mt-2">
             Für besondere Beratungsleistungen kann eine gesonderte Honorarvereinbarung getroffen werden. Diese bedarf der Schriftform.
@@ -90,27 +90,27 @@ export default function AGB() {
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 7 Haftung</h2>
           <p>
-            Der Versicherungsmakler haftet für Vorsatz und grobe Fahrlässigkeit. Bei einfacher Fahrlässigkeit haftet der Versicherungsmakler nur bei Verletzung wesentlicher Vertragspflichten. Die Haftung ist in diesem Fall auf den vertragstypischen, vorhersehbaren Schaden begrenzt.
+            Der Versicherungsvertreter haftet für Vorsatz und grobe Fahrlässigkeit. Bei einfacher Fahrlässigkeit haftet der Versicherungsvertreter nur bei Verletzung wesentlicher Vertragspflichten. Die Haftung ist in diesem Fall auf den vertragstypischen, vorhersehbaren Schaden begrenzt.
           </p>
           <p className="mt-2">
-            Der Versicherungsmakler unterhält eine Berufshaftpflichtversicherung gemäß den gesetzlichen Vorgaben. Die Deckungssumme beträgt mindestens 1.000.000 EUR je Versicherungsfall.
+            Der Versicherungsvertreter unterhält eine Berufshaftpflichtversicherung gemäß den gesetzlichen Vorgaben. Die Deckungssumme beträgt mindestens 1.000.000 EUR je Versicherungsfall.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 8 Vertragsdauer und Kündigung</h2>
           <p>
-            Der Maklervertrag wird auf unbestimmte Zeit geschlossen. Beide Parteien können den Vertrag jederzeit ohne Einhaltung einer Frist schriftlich kündigen.
+            Der Vertretersvertrag wird auf unbestimmte Zeit geschlossen. Beide Parteien können den Vertrag jederzeit ohne Einhaltung einer Frist schriftlich kündigen.
           </p>
           <p className="mt-2">
-            Bereits vermittelte Versicherungsverträge bleiben von einer Kündigung des Maklervertrages unberührt. Der Kunde kann jedoch jederzeit die Betreuung durch den Versicherungsmakler beenden.
+            Bereits vermittelte Versicherungsverträge bleiben von einer Kündigung des Vertretersvertrages unberührt. Der Kunde kann jedoch jederzeit die Betreuung durch den Versicherungsvertreter beenden.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 9 Datenschutz</h2>
           <p>
-            Der Versicherungsmakler verarbeitet personenbezogene Daten des Kunden ausschließlich zur Vertragserfüllung und unter Beachtung der geltenden Datenschutzbestimmungen. Weitere Informationen entnehmen Sie bitte unserer Datenschutzerklärung.
+            Der Versicherungsvertreter verarbeitet personenbezogene Daten des Kunden ausschließlich zur Vertragserfüllung und unter Beachtung der geltenden Datenschutzbestimmungen. Weitere Informationen entnehmen Sie bitte unserer Datenschutzerklärung.
           </p>
         </section>
 
