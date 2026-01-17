@@ -954,21 +954,33 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#ff6b35] to-[#f55a28] overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Sie haben Fragen zu Versicherungen?
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-orange-500/10 to-orange-600/10 border-y border-slate-700 overflow-hidden">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-white mb-4 animate-fade-in-up opacity-0">
+            {t.cta.title}
           </h2>
-          <p className="text-lg sm:text-xl text-white/95 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Ich berate Sie kostenlos und unverbindlich zu allen Versicherungsthemen.<br />
-            Mehrsprachig in Deutsch, Englisch, Arabisch und Türkisch.
+          <p className="text-lg text-slate-300 mb-8 animate-fade-in-up opacity-0 delay-100">
+            {t.cta.subtitle}
           </p>
-          <button
-            onClick={() => scrollToSection('form')}
-            className="px-8 py-3 bg-white text-[#ff6b35] hover:bg-gray-50 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-black/20 text-lg"
-          >
-            Jetzt kostenlose Beratung anfragen
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up opacity-0 delay-200">
+            <button
+              onClick={() => scrollToSection('form')}
+              className="px-8 py-3 bg-white text-orange-600 hover:bg-orange-50 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl group"
+            >
+              <span className="flex items-center gap-2">
+                {t.cta.requestButton}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+            <a
+              href="tel:+4915755588142"
+              className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-semibold border border-slate-600 transition-all duration-300 hover:border-orange-500 hover:scale-105 hover:shadow-lg group flex items-center gap-2"
+              dir="ltr"
+            >
+              <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              {t.emergency.phone}
+            </a>
+          </div>
         </div>
       </section>
 
