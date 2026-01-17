@@ -207,7 +207,7 @@ export const blogPosts: BlogPost[] = [
 
       <p>In der Regel innerhalb von 24-48 Stunden. Die meisten Versicherungen haben ein großes Anwaltsnetzwerk in Aachen.</p>
 
-      <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 30px; border-radius: 12px; margin: 40px 0; text-align: center;">
+      <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 30px; border-radius: 12px; margin: 40px 0; text-align: center;">
         <h3 style="color: white; margin-top: 0;">Sie sind unsicher, ob Rechtschutz für Sie passt?</h3>
 
         <p style="font-size: 1.1rem;">Ich helfe Ihnen 100% kostenlos:</p>
@@ -218,13 +218,13 @@ export const blogPosts: BlogPost[] = [
           <li style="margin-bottom: 10px;">✓ Optimale Deckung für Ihre Situation</li>
         </ul>
 
-        <a href="/kontakt" style="display: inline-block; padding: 15px 40px; background: white; color: #1e40af; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 20px; transition: transform 0.2s;">
+        <a href="/formular" style="display: inline-block; padding: 15px 40px; background: white; color: #f97316; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 20px; transition: transform 0.2s;">
           Jetzt kostenlose Beratung anfragen
         </a>
       </div>
     `,
     internalLinks: [
-      { text: 'Kostenlose Beratung', url: '/kontakt' },
+      { text: 'Kostenlose Beratung', url: '/formular' },
       { text: 'Zurück zur Startseite', url: '/' }
     ]
   },
@@ -322,20 +322,20 @@ export const blogPosts: BlogPost[] = [
         <li>Sie haben weniger als 3.000€ finanzielle Rücklagen</li>
       </ol>
 
-      <div style="background: #f0f4ff; padding: 25px; border-left: 4px solid #3b82f6; margin: 30px 0;">
-        <h3 style="margin-top: 0; color: #1e40af;">Kostenlose Bedarfsanalyse</h3>
+      <div style="background: #fff7ed; padding: 25px; border-left: 4px solid #f97316; margin: 30px 0;">
+        <h3 style="margin-top: 0; color: #ea580c;">Kostenlose Bedarfsanalyse</h3>
         <p>Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
         <ul>
           <li>15-minütiges Beratungsgespräch</li>
           <li>Individuelle Risikoanalyse</li>
           <li>Konkrete Empfehlung</li>
         </ul>
-        <a href="/kontakt" style="display: inline-block; padding: 12px 30px; background: #3b82f6; color: white; text-decoration: none; border-radius: 6px; margin-top: 10px;">Jetzt Termin vereinbaren</a>
+        <a href="/formular" style="display: inline-block; padding: 12px 30px; background: #f97316; color: white; text-decoration: none; border-radius: 6px; margin-top: 10px;">Jetzt Termin vereinbaren</a>
       </div>
     `,
     internalLinks: [
       { text: 'Rechtschutz Aachen Guide', url: '/blog/rechtschutz-aachen-guide' },
-      { text: 'Kostenlose Beratung', url: '/kontakt' }
+      { text: 'Kostenlose Beratung', url: '/formular' }
     ]
   }
 ];

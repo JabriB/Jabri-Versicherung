@@ -26,7 +26,7 @@ export default function BlogHome() {
           {blogPosts.map((post) => (
             <article
               key={post.id}
-              className="bg-slate-800/50 backdrop-blur rounded-xl overflow-hidden border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-[1.02]"
+              className="bg-slate-800/50 backdrop-blur rounded-xl overflow-hidden border border-slate-700 hover:border-orange-500 transition-all duration-300 hover:transform hover:scale-[1.02]"
             >
               <Link to={`/blog/${post.slug}`}>
                 <img
@@ -38,7 +38,7 @@ export default function BlogHome() {
 
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-500/30">
+                  <span className="px-3 py-1 bg-orange-500/20 text-orange-300 text-sm rounded-full border border-orange-500/30">
                     {post.category}
                   </span>
                   <span className="text-slate-400 text-sm">{post.readTime}</span>
@@ -47,7 +47,7 @@ export default function BlogHome() {
                 <h2 className="text-2xl font-bold text-white mb-3">
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="hover:text-blue-400 transition-colors"
+                    className="hover:text-orange-400 transition-colors"
                   >
                     {post.title}
                   </Link>
@@ -68,7 +68,7 @@ export default function BlogHome() {
 
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 transition-colors"
+                    className="text-orange-400 hover:text-orange-300 font-medium flex items-center gap-2 transition-colors"
                   >
                     Weiterlesen
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,17 +82,17 @@ export default function BlogHome() {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-8 border border-blue-500/30">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-8 border border-orange-400/30">
             <h3 className="text-2xl font-bold text-white mb-4">
               Sie haben Fragen zu Versicherungen?
             </h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-orange-50 mb-6 max-w-2xl mx-auto">
               Ich berate Sie kostenlos und unverbindlich zu allen Versicherungsthemen.
               Mehrsprachig in Deutsch, Englisch, Arabisch und Türkisch.
             </p>
             <Link
-              to="/kontakt"
-              className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              to="/formular"
+              className="inline-block bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors"
             >
               Jetzt kostenlose Beratung anfragen
             </Link>

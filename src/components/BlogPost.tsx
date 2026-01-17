@@ -60,16 +60,16 @@ export default function BlogPost() {
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <nav className="text-sm text-slate-400 mb-8 flex items-center gap-2">
-          <Link to="/" className="hover:text-blue-400 transition-colors">Home</Link>
+          <Link to="/" className="hover:text-orange-400 transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/blog" className="hover:text-blue-400 transition-colors">Blog</Link>
+          <Link to="/blog" className="hover:text-orange-400 transition-colors">Blog</Link>
           <span>/</span>
           <span className="text-slate-300">{post.title}</span>
         </nav>
 
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-500/30">
+            <span className="px-3 py-1 bg-orange-500/20 text-orange-300 text-sm rounded-full border border-orange-500/30">
               {post.category}
             </span>
           </div>
@@ -116,7 +116,7 @@ export default function BlogPost() {
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
             prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
             prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-4
-            prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300
+            prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-300
             prose-strong:text-white prose-strong:font-semibold
             prose-ul:text-slate-300 prose-ul:my-6
             prose-li:my-2
@@ -134,7 +134,7 @@ export default function BlogPost() {
                 <li key={idx}>
                   <Link
                     to={link.url}
-                    className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2"
+                    className="text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -151,10 +151,10 @@ export default function BlogPost() {
           {prevPost && (
             <Link
               to={`/blog/${prevPost.slug}`}
-              className="p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700 hover:border-blue-500 transition-all group"
+              className="p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700 hover:border-orange-500 transition-all group"
             >
               <div className="text-sm text-slate-400 mb-2">← Vorheriger Artikel</div>
-              <div className="text-white font-semibold group-hover:text-blue-400 transition-colors">
+              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors">
                 {prevPost.title}
               </div>
             </Link>
@@ -163,10 +163,10 @@ export default function BlogPost() {
           {nextPost && (
             <Link
               to={`/blog/${nextPost.slug}`}
-              className="p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700 hover:border-blue-500 transition-all group md:text-right"
+              className="p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700 hover:border-orange-500 transition-all group md:text-right"
             >
               <div className="text-sm text-slate-400 mb-2">Nächster Artikel →</div>
-              <div className="text-white font-semibold group-hover:text-blue-400 transition-colors">
+              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors">
                 {nextPost.title}
               </div>
             </Link>
