@@ -87,36 +87,36 @@ export default function BlogHome() {
         </div>
 
         <div className="mt-16 flex justify-center">
-          <div className="bg-gradient-to-br from-[#1a2332] to-[#0f1922] border border-orange-500/20 rounded-lg p-10 max-w-lg w-full hover:border-orange-500/40 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/20 group">
-            <h3 className="text-3xl font-bold text-[#ff6b35] mb-3 group-hover:scale-105 transition-transform duration-300">
+          <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-2xl p-10 max-w-lg w-full hover:border-orange-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/20 group backdrop-blur-xl">
+            <h3 className="text-3xl font-bold text-orange-400 mb-3 group-hover:text-orange-300 transition-colors duration-300">
               Kostenlose Bedarfsanalyse
             </h3>
-            <p className="text-gray-400 mb-6 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+            <p className="text-slate-400 mb-6 text-base leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
               Unsicher, welche Versicherung für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:
             </p>
 
             <ul className="space-y-3 mb-8">
-              <li className="flex items-center gap-3 text-gray-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                <span className="text-[#ff6b35] font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">15-minütiges Beratungsgespräch</span>
               </li>
-              <li className="flex items-center gap-3 text-gray-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
-                <span className="text-[#ff6b35] font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">Individuelle Risikoanalyse</span>
               </li>
-              <li className="flex items-center gap-3 text-gray-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-                <span className="text-[#ff6b35] font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
+                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">Konkrete Empfehlung</span>
               </li>
-              <li className="flex items-center gap-3 text-gray-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
-                <span className="text-[#ff6b35] font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
+                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">Mehrsprachige Beratung (DE, EN, AR, TR)</span>
               </li>
             </ul>
 
             <Link
               to="/formular"
-              className="block w-full bg-gradient-to-br from-[#ff6b35] to-[#f55a28] text-white font-semibold py-3 px-7 rounded-lg transition-all hover:shadow-lg hover:shadow-orange-500/40 hover:-translate-y-1 active:translate-y-0 text-center group/btn"
+              className="block w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 px-7 rounded-lg transition-all hover:shadow-xl hover:shadow-orange-500/50 hover:-translate-y-0.5 active:translate-y-0 text-center group/btn"
             >
               <span className="flex items-center justify-center gap-2">
                 Jetzt Termin vereinbaren
