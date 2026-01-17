@@ -207,10 +207,15 @@ export const blogPosts: BlogPost[] = [
 
       <p>In der Regel innerhalb von 24-48 Stunden. Die meisten Versicherungen haben ein großes Anwaltsnetzwerk in Aachen.</p>
 
-      <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 48px 40px; margin: 40px 0; border-radius: 16px; text-align: center; box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.3);">
-        <h3 style="margin-top: 0; color: white; font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">Sie haben Fragen zu Versicherungen?</h3>
-        <p style="color: white; margin-bottom: 28px; font-size: 1.05rem; line-height: 1.6;">Ich berate Sie kostenlos und unverbindlich zu allen Versicherungsthemen.<br>Mehrsprachig in Deutsch, Englisch, Arabisch und Türkisch.</p>
-        <a href="/formular" style="display: inline-block; padding: 14px 36px; background: white; color: #f97316; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); font-size: 1rem;">Jetzt kostenlose Beratung anfragen</a>
+      <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(51, 65, 85, 0.6) 100%); padding: 32px; border-left: 4px solid #f97316; margin: 40px 0; border-radius: 16px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(100, 116, 139, 0.3);">
+        <h3 style="margin-top: 0; color: #fb923c; font-size: 1.3rem; font-weight: 700;">Kostenlose Bedarfsanalyse</h3>
+        <p style="color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.6;">Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
+        <ul style="color: #e2e8f0; list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> 15-minütiges Beratungsgespräch</li>
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> Individuelle Risikoanalyse</li>
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> Konkrete Empfehlung</li>
+        </ul>
+        <a href="/formular" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; text-decoration: none; border-radius: 8px; margin-top: 18px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px -2px rgba(249, 115, 22, 0.4);">Jetzt Termin vereinbaren</a>
       </div>
     `,
     internalLinks: [
@@ -312,10 +317,15 @@ export const blogPosts: BlogPost[] = [
         <li>Sie haben weniger als 3.000€ finanzielle Rücklagen</li>
       </ol>
 
-      <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 48px 40px; margin: 40px 0; border-radius: 16px; text-align: center; box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.3);">
-        <h3 style="margin-top: 0; color: white; font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">Sie haben Fragen zu Versicherungen?</h3>
-        <p style="color: white; margin-bottom: 28px; font-size: 1.05rem; line-height: 1.6;">Ich berate Sie kostenlos und unverbindlich zu allen Versicherungsthemen.<br>Mehrsprachig in Deutsch, Englisch, Arabisch und Türkisch.</p>
-        <a href="/formular" style="display: inline-block; padding: 14px 36px; background: white; color: #f97316; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); font-size: 1rem;">Jetzt kostenlose Beratung anfragen</a>
+      <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(51, 65, 85, 0.6) 100%); padding: 32px; border-left: 4px solid #f97316; margin: 40px 0; border-radius: 16px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(100, 116, 139, 0.3);">
+        <h3 style="margin-top: 0; color: #fb923c; font-size: 1.3rem; font-weight: 700;">Kostenlose Bedarfsanalyse</h3>
+        <p style="color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.6;">Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
+        <ul style="color: #e2e8f0; list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> 15-minütiges Beratungsgespräch</li>
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> Individuelle Risikoanalyse</li>
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> Konkrete Empfehlung</li>
+        </ul>
+        <a href="/formular" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; text-decoration: none; border-radius: 8px; margin-top: 18px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px -2px rgba(249, 115, 22, 0.4);">Jetzt Termin vereinbaren</a>
       </div>
     `,
     internalLinks: [
