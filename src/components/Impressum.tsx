@@ -64,16 +64,6 @@ export default function Impressum() {
 
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">Und wenn Sie mal nicht zufrieden sein sollten?</h2>
-          <p className="mb-4">
-            Sollten Sie an meiner Leistung etwas auszusetzen haben, kontaktieren Sie bitte:
-          </p>
-          <p className="mb-4">
-            <strong className="text-white">ARAG SE</strong><br />
-            ARAG Platz 1<br />
-            40472 Düsseldorf<br />
-            Fax: 0211 963-2850<br />
-            E-Mail: <a href="mailto:service@ARAG.de" className="text-orange-400 hover:text-orange-300 underline">service@ARAG.de</a>
-          </p>
           <p>
             <strong className="text-white">Versicherungsombudsmann e.V.</strong><br />
             Postfach 08 06 32<br />
