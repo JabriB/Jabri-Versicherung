@@ -131,29 +131,29 @@ export const blogPosts: BlogPost[] = [
 
       <p>Rechtschutz kostet in Aachen durchschnittlich:</p>
 
-      <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+      <table style="border-collapse: collapse; width: 100%; margin: 30px 0; background: rgba(30, 41, 59, 0.6); border-radius: 12px; overflow: hidden; border: 1px solid rgba(100, 116, 139, 0.3);">
         <thead>
-          <tr style="border: 1px solid #ddd; background: #f5f5f5;">
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Deckungsart</th>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Preis/Monat</th>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Selbstbeteiligung</th>
+          <tr style="background: rgba(51, 65, 85, 0.8); border-bottom: 2px solid rgba(249, 115, 22, 0.3);">
+            <th style="padding: 16px; text-align: left; color: #ffffff; font-weight: 600; font-size: 0.95rem;">Deckungsart</th>
+            <th style="padding: 16px; text-align: left; color: #ffffff; font-weight: 600; font-size: 0.95rem;">Preis/Monat</th>
+            <th style="padding: 16px; text-align: left; color: #ffffff; font-weight: 600; font-size: 0.95rem;">Selbstbeteiligung</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border: 1px solid #ddd;">
-            <td style="border: 1px solid #ddd; padding: 10px;">Nur Privatrecht</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">8-12€</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">250€</td>
+          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
+            <td style="padding: 14px 16px; color: #e2e8f0;">Nur Privatrecht</td>
+            <td style="padding: 14px 16px; color: #e2e8f0;">8-12€</td>
+            <td style="padding: 14px 16px; color: #e2e8f0;">250€</td>
           </tr>
-          <tr style="border: 1px solid #ddd; background: #fafafa;">
-            <td style="border: 1px solid #ddd; padding: 10px;">Privatrecht + Mietrecht</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">15-20€</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">250€</td>
+          <tr style="background: rgba(51, 65, 85, 0.3); border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
+            <td style="padding: 14px 16px; color: #e2e8f0;">Privatrecht + Mietrecht</td>
+            <td style="padding: 14px 16px; color: #e2e8f0;">15-20€</td>
+            <td style="padding: 14px 16px; color: #e2e8f0;">250€</td>
           </tr>
-          <tr style="border: 1px solid #ddd;">
-            <td style="border: 1px solid #ddd; padding: 10px;">Alle 4 Deckungsarten</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">25-35€</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">250€-500€</td>
+          <tr>
+            <td style="padding: 14px 16px; color: #e2e8f0;">Alle 4 Deckungsarten</td>
+            <td style="padding: 14px 16px; color: #e2e8f0;">25-35€</td>
+            <td style="padding: 14px 16px; color: #e2e8f0;">250€-500€</td>
           </tr>
         </tbody>
       </table>
@@ -322,15 +322,15 @@ export const blogPosts: BlogPost[] = [
         <li>Sie haben weniger als 3.000€ finanzielle Rücklagen</li>
       </ol>
 
-      <div style="background: linear-gradient(135deg, #fff7ed 0%, #fef3e2 100%); padding: 30px; border-left: 4px solid #f97316; margin: 30px 0; border-radius: 8px; box-shadow: 0 4px 15px -2px rgba(249, 115, 22, 0.1);">
-        <h3 style="margin-top: 0; color: #ea580c; font-size: 1.2rem;">Kostenlose Bedarfsanalyse</h3>
-        <p style="color: #78350f; margin-bottom: 15px;">Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
-        <ul style="color: #78350f;">
-          <li style="margin-bottom: 8px;">✓ 15-minütiges Beratungsgespräch</li>
-          <li style="margin-bottom: 8px;">✓ Individuelle Risikoanalyse</li>
-          <li style="margin-bottom: 8px;">✓ Konkrete Empfehlung</li>
+      <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(51, 65, 85, 0.6) 100%); padding: 32px; border-left: 4px solid #f97316; margin: 40px 0; border-radius: 16px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(100, 116, 139, 0.3);">
+        <h3 style="margin-top: 0; color: #fb923c; font-size: 1.3rem; font-weight: 700;">Kostenlose Bedarfsanalyse</h3>
+        <p style="color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.6;">Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
+        <ul style="color: #e2e8f0; list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> 15-minütiges Beratungsgespräch</li>
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> Individuelle Risikoanalyse</li>
+          <li style="margin-bottom: 10px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: #fb923c;">✓</span> Konkrete Empfehlung</li>
         </ul>
-        <a href="/formular" style="display: inline-block; padding: 12px 30px; background: #f97316; color: white; text-decoration: none; border-radius: 6px; margin-top: 15px; font-weight: 600; transition: all 0.3s;">Jetzt Termin vereinbaren</a>
+        <a href="/formular" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; text-decoration: none; border-radius: 8px; margin-top: 18px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px -2px rgba(249, 115, 22, 0.4);">Jetzt Termin vereinbaren</a>
       </div>
     `,
     internalLinks: [
