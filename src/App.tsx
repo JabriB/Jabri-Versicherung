@@ -10,6 +10,8 @@ const Datenschutz = lazy(() => import('./components/Datenschutz'));
 const AGB = lazy(() => import('./components/AGB'));
 const Sitemap = lazy(() => import('./components/Sitemap'));
 const FAQ = lazy(() => import('./components/FAQ'));
+const BlogHome = lazy(() => import('./components/BlogHome'));
+const BlogPost = lazy(() => import('./components/BlogPost'));
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/formular" element={<Suspense fallback={null}><MultiStepForm /></Suspense>} />
+          <Route path="/blog" element={<Suspense fallback={null}><BlogHome /></Suspense>} />
+          <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
           <Route path="/impressum" element={<Suspense fallback={null}><Impressum /></Suspense>} />
           <Route path="/datenschutz" element={<Suspense fallback={null}><Datenschutz /></Suspense>} />
           <Route path="/agb" element={<Suspense fallback={null}><AGB /></Suspense>} />

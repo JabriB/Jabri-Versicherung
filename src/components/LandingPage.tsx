@@ -103,6 +103,9 @@ export default function LandingPage() {
               <button onClick={() => scrollToSection('produkte')} className="text-slate-300 hover:text-white transition text-sm">
                 {t.nav.products}
               </button>
+              <Link to="/blog" className="text-slate-300 hover:text-white transition text-sm">
+                Blog
+              </Link>
               <button onClick={() => scrollToSection('testimonials')} className="text-slate-300 hover:text-white transition text-sm">
                 {t.nav.testimonials}
               </button>
@@ -165,6 +168,13 @@ export default function LandingPage() {
               >
                 {t.nav.products}
               </button>
+              <Link
+                to="/blog"
+                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
               <button
                 onClick={() => scrollToSection('ablauf')}
                 className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
