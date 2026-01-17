@@ -207,18 +207,18 @@ export const blogPosts: BlogPost[] = [
 
       <p>In der Regel innerhalb von 24-48 Stunden. Die meisten Versicherungen haben ein großes Anwaltsnetzwerk in Aachen.</p>
 
-      <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 30px; border-radius: 12px; margin: 40px 0; text-align: center;">
-        <h3 style="color: white; margin-top: 0;">Sie sind unsicher, ob Rechtschutz für Sie passt?</h3>
+      <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 40px; border-radius: 16px; margin: 40px 0; text-align: center; box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.3);">
+        <h3 style="color: white; margin-top: 0; font-size: 1.5rem;">Sie sind unsicher, ob Rechtschutz für Sie passt?</h3>
 
-        <p style="font-size: 1.1rem;">Ich helfe Ihnen 100% kostenlos:</p>
+        <p style="font-size: 1.1rem; color: #fff8e7; margin-bottom: 20px;">Ich helfe Ihnen 100% kostenlos:</p>
 
         <ul style="list-style: none; padding: 0; text-align: left; display: inline-block; margin: 20px 0;">
-          <li style="margin-bottom: 10px;">✓ Kostenanalyse - Wie viel kostet optimale Deckung?</li>
-          <li style="margin-bottom: 10px;">✓ Bedarfsermittlung - Welche Deckung brauchen SIE?</li>
-          <li style="margin-bottom: 10px;">✓ Optimale Deckung für Ihre Situation</li>
+          <li style="margin-bottom: 12px; font-size: 1rem;">✓ Kostenanalyse - Wie viel kostet optimale Deckung?</li>
+          <li style="margin-bottom: 12px; font-size: 1rem;">✓ Bedarfsermittlung - Welche Deckung brauchen SIE?</li>
+          <li style="margin-bottom: 12px; font-size: 1rem;">✓ Optimale Deckung für Ihre Situation</li>
         </ul>
 
-        <a href="/formular" style="display: inline-block; padding: 15px 40px; background: white; color: #f97316; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 20px; transition: transform 0.2s;">
+        <a href="/formular" style="display: inline-block; padding: 14px 36px; background: white; color: #f97316; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 20px; transition: all 0.3s; font-size: 1rem; border: 2px solid white;">
           Jetzt kostenlose Beratung anfragen
         </a>
       </div>
@@ -322,15 +322,15 @@ export const blogPosts: BlogPost[] = [
         <li>Sie haben weniger als 3.000€ finanzielle Rücklagen</li>
       </ol>
 
-      <div style="background: #fff7ed; padding: 25px; border-left: 4px solid #f97316; margin: 30px 0;">
-        <h3 style="margin-top: 0; color: #ea580c;">Kostenlose Bedarfsanalyse</h3>
-        <p>Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
-        <ul>
-          <li>15-minütiges Beratungsgespräch</li>
-          <li>Individuelle Risikoanalyse</li>
-          <li>Konkrete Empfehlung</li>
+      <div style="background: linear-gradient(135deg, #fff7ed 0%, #fef3e2 100%); padding: 30px; border-left: 4px solid #f97316; margin: 30px 0; border-radius: 8px; box-shadow: 0 4px 15px -2px rgba(249, 115, 22, 0.1);">
+        <h3 style="margin-top: 0; color: #ea580c; font-size: 1.2rem;">Kostenlose Bedarfsanalyse</h3>
+        <p style="color: #78350f; margin-bottom: 15px;">Unsicher, ob Rechtschutz für Sie sinnvoll ist? Ich analysiere Ihre Situation kostenlos:</p>
+        <ul style="color: #78350f;">
+          <li style="margin-bottom: 8px;">✓ 15-minütiges Beratungsgespräch</li>
+          <li style="margin-bottom: 8px;">✓ Individuelle Risikoanalyse</li>
+          <li style="margin-bottom: 8px;">✓ Konkrete Empfehlung</li>
         </ul>
-        <a href="/formular" style="display: inline-block; padding: 12px 30px; background: #f97316; color: white; text-decoration: none; border-radius: 6px; margin-top: 10px;">Jetzt Termin vereinbaren</a>
+        <a href="/formular" style="display: inline-block; padding: 12px 30px; background: #f97316; color: white; text-decoration: none; border-radius: 6px; margin-top: 15px; font-weight: 600; transition: all 0.3s;">Jetzt Termin vereinbaren</a>
       </div>
     `,
     internalLinks: [

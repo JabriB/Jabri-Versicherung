@@ -57,7 +57,7 @@ export default function BlogPost() {
   const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <nav className="text-sm text-slate-400 mb-8 flex items-center gap-2">
           <Link to="/" className="hover:text-orange-400 transition-colors">Home</Link>
@@ -127,16 +127,16 @@ export default function BlogPost() {
         />
 
         {post.internalLinks && post.internalLinks.length > 0 && (
-          <div className="mt-12 p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700">
-            <h3 className="text-xl font-bold text-white mb-4">Verwandte Artikel:</h3>
-            <ul className="space-y-2">
+          <div className="mt-12 p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl border border-slate-700/50 hover:border-orange-500/30 transition-all">
+            <h3 className="text-xl font-bold text-white mb-4 text-orange-400">Verwandte Artikel:</h3>
+            <ul className="space-y-3">
               {post.internalLinks.map((link, idx) => (
                 <li key={idx}>
                   <Link
                     to={link.url}
-                    className="text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2"
+                    className="text-orange-400 hover:text-orange-300 transition-all flex items-center gap-2 group"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                     {link.text}
@@ -151,10 +151,10 @@ export default function BlogPost() {
           {prevPost && (
             <Link
               to={`/blog/${prevPost.slug}`}
-              className="p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700 hover:border-orange-500 transition-all group"
+              className="p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 group"
             >
-              <div className="text-sm text-slate-400 mb-2">← Vorheriger Artikel</div>
-              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors">
+              <div className="text-sm text-slate-400 mb-3 group-hover:text-slate-300 transition-colors">← Vorheriger Artikel</div>
+              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors text-lg">
                 {prevPost.title}
               </div>
             </Link>
@@ -163,10 +163,10 @@ export default function BlogPost() {
           {nextPost && (
             <Link
               to={`/blog/${nextPost.slug}`}
-              className="p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-slate-700 hover:border-orange-500 transition-all group md:text-right"
+              className="p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 group md:text-right"
             >
-              <div className="text-sm text-slate-400 mb-2">Nächster Artikel →</div>
-              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors">
+              <div className="text-sm text-slate-400 mb-3 group-hover:text-slate-300 transition-colors">Nächster Artikel →</div>
+              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors text-lg">
                 {nextPost.title}
               </div>
             </Link>
