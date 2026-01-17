@@ -16,11 +16,11 @@ export default function LandingPage() {
   const t = getTranslation(language);
 
   useHead({
-    title: 'Versicherungsberatung Düren | Brhan Jabri | Jabri Versicherung',
-    description: 'Jabri Versicherung - Ihr Versicherungsberater in Düren. Professionelle Beratung für Rechtsschutz, Haftpflicht, Hausrat & Wohngebäude. Kostenlose Erstberatung ☎ +49 1575 5588142',
+    title: 'Versicherungsberatung Düren & Aachen | Brhan Jabri | Jabri Versicherung',
+    description: 'Jabri Versicherung - Ihr Versicherungsberater in Düren und Aachen. Professionelle Beratung für Rechtsschutz, Haftpflicht, Hausrat & Wohngebäude. Kostenlose Erstberatung ☎ +49 1575 5588142',
     canonical: 'https://jabriversicherung.de/',
-    ogTitle: 'Jabri Versicherung - Ihr Versicherungsberater in Düren | Brhan Jabri',
-    ogDescription: 'Professionelle Versicherungsberatung von Brhan Jabri in Düren. Rechtsschutz, Haftpflicht, Hausrat & Wohngebäude. Kostenlose Beratung in Deutsch, Englisch, Arabisch und Türkisch.',
+    ogTitle: 'Jabri Versicherung - Ihr Versicherungsberater in Düren & Aachen | Brhan Jabri',
+    ogDescription: 'Professionelle Versicherungsberatung von Brhan Jabri in Düren und Aachen. Rechtsschutz, Haftpflicht, Hausrat & Wohngebäude. Kostenlose Beratung in Deutsch, Englisch, Arabisch und Türkisch.',
     ogUrl: 'https://jabriversicherung.de/',
     ogImage: 'https://jabriversicherung.de/jabri-versicherung-logo.svg'
   });
