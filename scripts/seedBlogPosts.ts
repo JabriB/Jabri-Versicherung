@@ -532,6 +532,518 @@ const sampleBlogPosts: BlogPostData[] = [
       `
     }
   ]
+  },
+  {
+    slug: 'hausratversicherung-7-haeufigste-fehler-2026',
+    category: 'Hausratversicherung',
+    author: 'Brhan Jabri',
+    readTime: '10 min',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200',
+    imageAlt: 'Modernes Wohnzimmer mit Hausrat und Einrichtung',
+    wordCount: 1900,
+    publishedDate: '2026-01-21',
+    translations: [
+      {
+        language: 'de',
+        title: 'Hausratversicherung – Die 7 häufigsten Fehler vermeiden',
+        seoTitle: 'Hausratversicherung Fehler 2026 – Das sollten Sie wissen',
+        seoDescription: 'Die 7 häufigsten Fehler bei der Hausratversicherung und wie Sie diese vermeiden. Unterversicherung, Dokumentation & mehr. Jetzt informieren!',
+        keywords: ['Hausratversicherung Fehler', 'Unterversicherung vermeiden', 'Hausrat richtig versichern', 'Versicherungssumme Hausrat', 'Hausratversicherung Tipps'],
+        primaryKeyword: 'Hausratversicherung Fehler',
+        content: `
+          <h2>Warum eine Hausratversicherung wichtig ist</h2>
+          <p>Eine Hausratversicherung schützt Ihr gesamtes Hab und Gut vor finanziellen Verlusten durch Brand, Einbruch, Wasserschäden oder Sturm. Doch viele Versicherungsnehmer machen vermeidbare Fehler, die im Schadensfall zu erheblichen finanziellen Einbußen führen können. Laut Stiftung Warentest zahlt die Versicherung oft nur einen Bruchteil des tatsächlichen Schadens, wenn bestimmte Fallstricke nicht beachtet werden.</p>
+
+          <p>In diesem Ratgeber zeigen wir Ihnen die 7 häufigsten Fehler bei der Hausratversicherung und wie Sie diese vermeiden können.</p>
+
+          <h2>Fehler 1: Unterversicherung – Zu niedrige Versicherungssumme</h2>
+          <p>Der häufigste und teuerste Fehler ist die Unterversicherung. Dabei ist die vereinbarte Versicherungssumme niedriger als der tatsächliche Wert des Hausrats. Im Schadensfall ersetzt die Versicherung dann nur anteilig.</p>
+
+          <h3>Beispiel Unterversicherung</h3>
+          <p>Ihr Hausrat ist 50.000 Euro wert, versichert sind aber nur 30.000 Euro. Bei einem Schaden von 10.000 Euro zahlt die Versicherung nur 6.000 Euro (60% der Versicherungssumme entspricht 60% der Schadenssumme).</p>
+
+          <h3>So vermeiden Sie Unterversicherung</h3>
+          <ul>
+            <li>Richtwert: 650 Euro pro Quadratmeter Wohnfläche (Empfehlung Stiftung Warentest)</li>
+            <li>Vereinbaren Sie eine Klausel zum Unterversicherungsverzicht</li>
+            <li>Wählen Sie eine Indexklausel für automatische Wertanpassung</li>
+            <li>Überprüfen Sie die Versicherungssumme alle 2-3 Jahre</li>
+            <li>Besonders wertvolle Gegenstände separat dokumentieren</li>
+          </ul>
+
+          <h2>Fehler 2: Keine Dokumentation der Wertgegenstände</h2>
+          <p>Nach einem Einbruch oder Brand müssen Sie nachweisen, welche Gegenstände gestohlen oder zerstört wurden. Ohne Belege wird die Versicherung nur geringe Pauschalen zahlen.</p>
+
+          <h3>Was Sie dokumentieren sollten</h3>
+          <ul>
+            <li>Fotos aller wertvollen Gegenstände (Elektronik, Schmuck, Möbel)</li>
+            <li>Kaufbelege und Rechnungen aufbewahren</li>
+            <li>Wertgegenstandsverzeichnis erstellen und aktuell halten</li>
+            <li>Seriennummern von Elektronikgeräten notieren</li>
+            <li>Gutachten für besonders wertvolle Stücke (Kunst, Antiquitäten)</li>
+          </ul>
+
+          <p><strong>Tipp:</strong> Bewahren Sie die Dokumentation nicht nur zuhause auf, sondern auch digital in der Cloud oder bei Verwandten.</p>
+
+          <h2>Fehler 3: Grobe Fahrlässigkeit nicht mitversichert</h2>
+          <p>Viele günstige Tarife schließen Schäden durch grobe Fahrlässigkeit aus. Das bedeutet: Lassen Sie eine Kerze brennen oder vergessen die Haustür abzuschließen, kann die Versicherung die Leistung verweigern oder kürzen.</p>
+
+          <h3>Beispiele für grobe Fahrlässigkeit</h3>
+          <ul>
+            <li>Unbeaufsichtigte brennende Kerzen</li>
+            <li>Nicht abgeschlossene Haustür bei Abwesenheit</li>
+            <li>Offene Fenster im Erdgeschoss bei Urlaub</li>
+            <li>Vergessene Wasserhähne oder Waschmaschinen</li>
+          </ul>
+
+          <p><strong>Lösung:</strong> Wählen Sie einen Tarif, der grobe Fahrlässigkeit bis zur vollen Versicherungssumme mitversichert. Dies kostet nur wenige Euro mehr pro Jahr, kann aber tausende Euro sparen.</p>
+
+          <h2>Fehler 4: Elementarschäden nicht abgesichert</h2>
+          <p>Starkregen, Überschwemmungen und Hochwasser sind in der Basis-Hausratversicherung nicht enthalten. Gerade in Zeiten des Klimawandels werden solche Schäden jedoch immer häufiger.</p>
+
+          <h3>Was sind Elementarschäden?</h3>
+          <ul>
+            <li>Überschwemmung und Hochwasser</li>
+            <li>Starkregen und Rückstau</li>
+            <li>Erdbeben und Erdrutsch</li>
+            <li>Schneedruck und Lawinen</li>
+            <li>Vulkanausbruch</li>
+          </ul>
+
+          <p>Die Elementarschadenversicherung kostet je nach Region zwischen 5 und 20 Euro zusätzlich pro Jahr. In hochwassergefährdeten Gebieten kann sie existenziell wichtig sein.</p>
+
+          <h2>Fehler 5: Keine Anpassung bei Umzug oder Änderungen</h2>
+          <p>Bei einem Umzug ändert sich oft die Wohnfläche, die Sicherheitsausstattung oder der Wert des Hausrats. Wird die Versicherung nicht informiert, drohen Leistungskürzungen.</p>
+
+          <h3>Was bei einem Umzug wichtig ist</h3>
+          <ul>
+            <li>Versicherung über neue Wohnfläche informieren</li>
+            <li>Versicherungssumme an veränderten Hausratwert anpassen</li>
+            <li>Sicherheitsmerkmale der neuen Wohnung mitteilen (z.B. Alarm, Sicherheitstür)</li>
+            <li>Prüfen Sie, ob die alte Versicherung am neuen Wohnort noch günstig ist</li>
+            <li>Während des Umzugs besteht oft automatisch Versicherungsschutz für beide Wohnungen</li>
+          </ul>
+
+          <h2>Fehler 6: Falsche Selbstbeteiligung gewählt</h2>
+          <p>Eine höhere Selbstbeteiligung senkt die Versicherungsprämie, kann aber bei mehreren Schäden teuer werden. Eine zu niedrige Selbstbeteiligung macht die Versicherung unnötig teuer.</p>
+
+          <h3>Empfohlene Selbstbeteiligung</h3>
+          <ul>
+            <li>Für Singles und Paare: 150-250 Euro</li>
+            <li>Für Familien mit Kindern: 250-500 Euro</li>
+            <li>Bei hohem Hausratwert: Bis 1.000 Euro</li>
+          </ul>
+
+          <p><strong>Faustformel:</strong> Wählen Sie eine Selbstbeteiligung, die Sie im Schadensfall problemlos aus eigener Tasche zahlen können, ohne dass es finanziell wehtut.</p>
+
+          <h2>Fehler 7: Keine regelmäßige Überprüfung des Vertrags</h2>
+          <p>Viele Versicherungsnehmer schließen eine Hausratversicherung ab und schauen dann jahrzehntelang nicht mehr in den Vertrag. Dabei ändern sich Lebensumstände, Preise und Leistungen ständig.</p>
+
+          <h3>Das sollten Sie regelmäßig prüfen</h3>
+          <ul>
+            <li>Ist die Versicherungssumme noch aktuell? (alle 2-3 Jahre prüfen)</li>
+            <li>Gibt es günstigere Tarife mit besseren Leistungen?</li>
+            <li>Sind neue Risiken hinzugekommen? (z.B. teure E-Bikes, Homeoffice-Ausstattung)</li>
+            <li>Sind alle wichtigen Zusatzbausteine enthalten?</li>
+            <li>Wurde die Versicherungssumme der Inflation angepasst?</li>
+          </ul>
+
+          <p>Ein Versicherungsvergleich alle 3-5 Jahre kann mehrere hundert Euro pro Jahr sparen, ohne dass Sie auf Leistungen verzichten müssen.</p>
+
+          <h2>Checkliste: So finden Sie die richtige Hausratversicherung</h2>
+          <ul>
+            <li><strong>Versicherungssumme:</strong> Mindestens 650 Euro pro qm Wohnfläche</li>
+            <li><strong>Unterversicherungsverzicht:</strong> Muss im Vertrag enthalten sein</li>
+            <li><strong>Grobe Fahrlässigkeit:</strong> Bis zur vollen Summe mitversichert</li>
+            <li><strong>Elementarschäden:</strong> Als Zusatzbaustein empfehlenswert</li>
+            <li><strong>Fahrraddiebstahl:</strong> Wichtig für teure E-Bikes (Nachtzeitklausel beachten)</li>
+            <li><strong>Glasbruch:</strong> Optional, oft sinnvoll für Mieter</li>
+            <li><strong>Überspannungsschäden:</strong> Schutz für Elektronik bei Blitzschlag</li>
+            <li><strong>Selbstbeteiligung:</strong> 150-500 Euro je nach Haushalt</li>
+          </ul>
+
+          <h2>Fazit: Vermeiden Sie teure Fehler</h2>
+          <p>Die Hausratversicherung gehört zu den wichtigsten Versicherungen im Privatbereich. Doch nur wer die häufigsten Fehler kennt und vermeidet, ist im Schadensfall wirklich abgesichert. Besonders die Unterversicherung, fehlende Dokumentation und nicht mitversicherte grobe Fahrlässigkeit führen oft zu bösen Überraschungen.</p>
+
+          <p>Investieren Sie einmalig ein bis zwei Stunden, um Ihren Hausrat zu dokumentieren und Ihre Versicherung zu überprüfen. Diese Zeit kann Sie im Ernstfall vor finanziellen Verlusten in Höhe von mehreren tausend Euro bewahren.</p>
+        `
+      },
+      {
+        language: 'en',
+        title: 'Home Contents Insurance – Avoid These 7 Common Mistakes',
+        seoTitle: 'Home Contents Insurance Mistakes 2026 – What You Need to Know',
+        seoDescription: 'The 7 most common mistakes with home contents insurance and how to avoid them. Underinsurance, documentation & more. Get informed now!',
+        keywords: ['home contents insurance mistakes', 'avoid underinsurance', 'insure household contents properly', 'insurance sum household', 'home insurance tips'],
+        primaryKeyword: 'home contents insurance mistakes',
+        content: `
+          <h2>Why Home Contents Insurance Is Important</h2>
+          <p>Home contents insurance protects all your belongings from financial losses due to fire, burglary, water damage, or storms. However, many policyholders make avoidable mistakes that can lead to significant financial losses in the event of a claim. According to consumer protection agencies, insurance often only pays a fraction of the actual damage if certain pitfalls are not considered.</p>
+
+          <p>In this guide, we show you the 7 most common mistakes with home contents insurance and how to avoid them.</p>
+
+          <h2>Mistake 1: Underinsurance – Coverage Sum Too Low</h2>
+          <p>The most common and expensive mistake is underinsurance. The agreed coverage sum is lower than the actual value of household contents. In case of damage, the insurance only compensates proportionally.</p>
+
+          <h3>Underinsurance Example</h3>
+          <p>Your household contents are worth 50,000 euros, but only 30,000 euros are insured. For damage of 10,000 euros, the insurance only pays 6,000 euros (60% of coverage equals 60% of damage).</p>
+
+          <h3>How to Avoid Underinsurance</h3>
+          <ul>
+            <li>Guideline: 650 euros per square meter of living space</li>
+            <li>Agree on an underinsurance waiver clause</li>
+            <li>Choose an index clause for automatic value adjustment</li>
+            <li>Review coverage sum every 2-3 years</li>
+            <li>Document particularly valuable items separately</li>
+          </ul>
+
+          <h2>Mistake 2: No Documentation of Valuables</h2>
+          <p>After a burglary or fire, you must prove which items were stolen or destroyed. Without evidence, insurance will only pay low flat rates.</p>
+
+          <h3>What You Should Document</h3>
+          <ul>
+            <li>Photos of all valuable items (electronics, jewelry, furniture)</li>
+            <li>Keep purchase receipts and invoices</li>
+            <li>Create and maintain a valuables inventory</li>
+            <li>Note serial numbers of electronic devices</li>
+            <li>Expert appraisals for particularly valuable pieces (art, antiques)</li>
+          </ul>
+
+          <p><strong>Tip:</strong> Store documentation not only at home but also digitally in the cloud or with relatives.</p>
+
+          <h2>Mistake 3: Gross Negligence Not Covered</h2>
+          <p>Many cheap plans exclude damage caused by gross negligence. This means: If you leave a candle burning or forget to lock the front door, insurance can refuse or reduce benefits.</p>
+
+          <h3>Examples of Gross Negligence</h3>
+          <ul>
+            <li>Unattended burning candles</li>
+            <li>Unlocked front door when away</li>
+            <li>Open ground-floor windows during vacation</li>
+            <li>Forgotten water taps or washing machines</li>
+          </ul>
+
+          <p><strong>Solution:</strong> Choose a plan that covers gross negligence up to the full coverage sum. This costs only a few euros more per year but can save thousands.</p>
+
+          <h2>Mistake 4: Natural Hazards Not Covered</h2>
+          <p>Heavy rain, floods, and high water are not included in basic home contents insurance. Especially in times of climate change, such damage is becoming more frequent.</p>
+
+          <h3>What Are Natural Hazards?</h3>
+          <ul>
+            <li>Flooding and high water</li>
+            <li>Heavy rain and backwater</li>
+            <li>Earthquakes and landslides</li>
+            <li>Snow pressure and avalanches</li>
+            <li>Volcanic eruptions</li>
+          </ul>
+
+          <p>Natural hazard insurance costs between 5 and 20 euros extra per year depending on region. In flood-prone areas, it can be existentially important.</p>
+
+          <h2>Mistake 5: No Adjustment When Moving or Changes</h2>
+          <p>When moving, living space, security features, or household contents value often change. If insurance is not informed, benefit reductions threaten.</p>
+
+          <h3>What is Important When Moving</h3>
+          <ul>
+            <li>Inform insurance about new living space</li>
+            <li>Adjust coverage sum to changed household contents value</li>
+            <li>Report security features of new apartment (e.g., alarm, security door)</li>
+            <li>Check if old insurance is still competitive at new location</li>
+            <li>During the move, coverage often automatically applies to both apartments</li>
+          </ul>
+
+          <h2>Mistake 6: Wrong Deductible Chosen</h2>
+          <p>A higher deductible reduces insurance premiums but can be expensive with multiple claims. Too low deductible makes insurance unnecessarily expensive.</p>
+
+          <h3>Recommended Deductible</h3>
+          <ul>
+            <li>For singles and couples: 150-250 euros</li>
+            <li>For families with children: 250-500 euros</li>
+            <li>For high household contents value: Up to 1,000 euros</li>
+          </ul>
+
+          <p><strong>Rule of thumb:</strong> Choose a deductible you can easily pay out of pocket in case of damage without financial hardship.</p>
+
+          <h2>Mistake 7: No Regular Contract Review</h2>
+          <p>Many policyholders take out home contents insurance and then do not look at the contract for decades. Yet life circumstances, prices, and benefits constantly change.</p>
+
+          <h3>What You Should Check Regularly</h3>
+          <ul>
+            <li>Is coverage sum still current? (check every 2-3 years)</li>
+            <li>Are there cheaper plans with better benefits?</li>
+            <li>Have new risks been added? (e.g., expensive e-bikes, home office equipment)</li>
+            <li>Are all important additional modules included?</li>
+            <li>Has coverage sum been adjusted for inflation?</li>
+          </ul>
+
+          <p>An insurance comparison every 3-5 years can save several hundred euros per year without sacrificing benefits.</p>
+
+          <h2>Checklist: How to Find the Right Home Contents Insurance</h2>
+          <ul>
+            <li><strong>Coverage sum:</strong> At least 650 euros per sqm living space</li>
+            <li><strong>Underinsurance waiver:</strong> Must be included in contract</li>
+            <li><strong>Gross negligence:</strong> Covered up to full sum</li>
+            <li><strong>Natural hazards:</strong> Recommended as additional module</li>
+            <li><strong>Bicycle theft:</strong> Important for expensive e-bikes (note nighttime clause)</li>
+            <li><strong>Glass breakage:</strong> Optional, often useful for tenants</li>
+            <li><strong>Overvoltage damage:</strong> Protection for electronics during lightning</li>
+            <li><strong>Deductible:</strong> 150-500 euros depending on household</li>
+          </ul>
+
+          <h2>Conclusion: Avoid Expensive Mistakes</h2>
+          <p>Home contents insurance is one of the most important insurance policies for private individuals. But only those who know and avoid the most common mistakes are truly covered in case of damage. Especially underinsurance, missing documentation, and uninsured gross negligence often lead to unpleasant surprises.</p>
+
+          <p>Invest one to two hours once to document your household contents and review your insurance. This time can save you from financial losses of several thousand euros in an emergency.</p>
+        `
+      },
+      {
+        language: 'tr',
+        title: 'Ev Eşyası Sigortası – Bu 7 Yaygın Hatayı Önleyin',
+        seoTitle: 'Ev Eşyası Sigortası Hataları 2026 – Bilmeniz Gerekenler',
+        seoDescription: 'Ev eşyası sigortasında en yaygın 7 hata ve bunlardan nasıl kaçınılır. Yetersiz sigorta, belgelendirme ve daha fazlası. Şimdi bilgi edinin!',
+        keywords: ['ev eşyası sigortası hataları', 'yetersiz sigortadan kaçının', 'ev eşyasını doğru sigortalayın', 'sigorta tutarı ev eşyası', 'ev sigortası ipuçları'],
+        primaryKeyword: 'ev eşyası sigortası hataları',
+        content: `
+          <h2>Ev Eşyası Sigortası Neden Önemlidir</h2>
+          <p>Ev eşyası sigortası, tüm eşyalarınızı yangın, hırsızlık, su hasarı veya fırtına nedeniyle mali kayıplardan korur. Ancak birçok poliçe sahibi, hasar durumunda önemli mali kayıplara yol açabilecek önlenebilir hatalar yapar. Tüketici koruma kurumlarına göre, belirli tuzaklar dikkate alınmazsa sigorta genellikle gerçek hasarın sadece bir kısmını öder.</p>
+
+          <p>Bu kılavuzda, ev eşyası sigortasında en yaygın 7 hatayı ve bunlardan nasıl kaçınacağınızı gösteriyoruz.</p>
+
+          <h2>Hata 1: Yetersiz Sigorta – Çok Düşük Teminat Tutarı</h2>
+          <p>En yaygın ve en pahalı hata yetersiz sigortadır. Üzerinde anlaşılan teminat tutarı, ev eşyalarının gerçek değerinden düşüktür. Hasar durumunda sigorta sadece orantılı olarak tazmin eder.</p>
+
+          <h3>Yetersiz Sigorta Örneği</h3>
+          <p>Ev eşyalarınız 50.000 euro değerinde, ancak sadece 30.000 euro sigortalanmış. 10.000 euroluk hasar için sigorta sadece 6.000 euro öder (teminatın %60ı hasarın %60ına eşittir).</p>
+
+          <h3>Yetersiz Sigortadan Nasıl Kaçınılır</h3>
+          <ul>
+            <li>Kılavuz değer: Yaşam alanının metrekaresi başına 650 euro</li>
+            <li>Yetersiz sigorta feragat maddesi üzerinde anlaşın</li>
+            <li>Otomatik değer ayarlaması için endeks maddesi seçin</li>
+            <li>Teminat tutarını her 2-3 yılda bir gözden geçirin</li>
+            <li>Özellikle değerli eşyaları ayrı belgeleyin</li>
+          </ul>
+
+          <h2>Hata 2: Değerli Eşyaların Belgelenmemesi</h2>
+          <p>Bir hırsızlık veya yangından sonra, hangi eşyaların çalındığını veya yok edildiğini kanıtlamanız gerekir. Kanıt olmadan sigorta sadece düşük sabit oranlar öder.</p>
+
+          <h3>Belgelemeniz Gerekenler</h3>
+          <ul>
+            <li>Tüm değerli eşyaların fotoğrafları (elektronik, mücevher, mobilya)</li>
+            <li>Satın alma makbuzlarını ve faturaları saklayın</li>
+            <li>Değerli eşya envanteri oluşturun ve güncel tutun</li>
+            <li>Elektronik cihazların seri numaralarını not edin</li>
+            <li>Özellikle değerli parçalar için uzman değerlendirmeleri (sanat, antikalar)</li>
+          </ul>
+
+          <p><strong>İpucu:</strong> Belgeleri sadece evde değil, aynı zamanda bulutta veya akrabalarınızda dijital olarak da saklayın.</p>
+
+          <h2>Hata 3: Ağır İhmal Kapsanmıyor</h2>
+          <p>Birçok ucuz plan ağır ihmalden kaynaklanan hasarları hariç tutar. Bu şu anlama gelir: Yanan bir mum bırakırsanız veya ön kapıyı kilitlemeyi unutursanız, sigorta yardımları reddedebilir veya azaltabilir.</p>
+
+          <h3>Ağır İhmal Örnekleri</h3>
+          <ul>
+            <li>Gözetimsiz yanan mumlar</li>
+            <li>Dışarıdayken kilitlenmemiş ön kapı</li>
+            <li>Tatil sırasında zemin kat pencereleri açık</li>
+            <li>Unutulmuş su muslukları veya çamaşır makineleri</li>
+          </ul>
+
+          <p><strong>Çözüm:</strong> Tam teminat tutarına kadar ağır ihmali kapsayan bir plan seçin. Bu yılda sadece birkaç euro daha maliyete mal olur ancak binlerce euro tasarruf sağlayabilir.</p>
+
+          <h2>Hata 4: Doğal Afetler Kapsanmıyor</h2>
+          <p>Şiddetli yağmur, sel ve yüksek su temel ev eşyası sigortasına dahil değildir. Özellikle iklim değişikliği zamanlarında, bu tür hasarlar daha sık hale gelmektedir.</p>
+
+          <h3>Doğal Afetler Nelerdir?</h3>
+          <ul>
+            <li>Sel ve yüksek su</li>
+            <li>Şiddetli yağmur ve geri akış</li>
+            <li>Depremler ve toprak kaymaları</li>
+            <li>Kar basıncı ve çığlar</li>
+            <li>Volkanik patlamalar</li>
+          </ul>
+
+          <p>Doğal afet sigortası bölgeye bağlı olarak yılda 5 ile 20 euro arasında ekstra maliyete sahiptir. Sel riski olan bölgelerde varoluşsal olarak önemli olabilir.</p>
+
+          <h2>Hata 5: Taşınma veya Değişikliklerde Ayarlama Yapılmaması</h2>
+          <p>Taşınırken genellikle yaşam alanı, güvenlik özellikleri veya ev eşyası değeri değişir. Sigorta bilgilendirilmezse, yardım kesintileri tehdit eder.</p>
+
+          <h3>Taşınırken Önemli Olanlar</h3>
+          <ul>
+            <li>Sigortayı yeni yaşam alanı hakkında bilgilendirin</li>
+            <li>Teminat tutarını değişen ev eşyası değerine göre ayarlayın</li>
+            <li>Yeni dairenin güvenlik özelliklerini bildirin (örn. alarm, güvenlik kapısı)</li>
+            <li>Eski sigortanın yeni konumda hala rekabetçi olup olmadığını kontrol edin</li>
+            <li>Taşınma sırasında teminat genellikle otomatik olarak her iki daireye de uygulanır</li>
+          </ul>
+
+          <h2>Hata 6: Yanlış Muafiyet Seçildi</h2>
+          <p>Daha yüksek bir muafiyet sigorta primlerini azaltır ancak birden fazla hasar durumunda pahalı olabilir. Çok düşük muafiyet sigortayı gereksiz yere pahalı hale getirir.</p>
+
+          <h3>Önerilen Muafiyet</h3>
+          <ul>
+            <li>Bekârlar ve çiftler için: 150-250 euro</li>
+            <li>Çocuklu aileler için: 250-500 euro</li>
+            <li>Yüksek ev eşyası değeri için: 1.000 euroya kadar</li>
+          </ul>
+
+          <p><strong>Kural:</strong> Hasar durumunda mali zorluk çekmeden cebinizden kolayca ödeyebileceğiniz bir muafiyet seçin.</p>
+
+          <h2>Hata 7: Düzenli Sözleşme İncelemesi Yapılmaması</h2>
+          <p>Birçok poliçe sahibi ev eşyası sigortası yaptırır ve sonra onlarca yıl sözleşmeye bakmaz. Ancak yaşam koşulları, fiyatlar ve yardımlar sürekli değişir.</p>
+
+          <h3>Düzenli Olarak Kontrol Etmeniz Gerekenler</h3>
+          <ul>
+            <li>Teminat tutarı hala güncel mi? (her 2-3 yılda bir kontrol edin)</li>
+            <li>Daha iyi yardımlarla daha ucuz planlar var mı?</li>
+            <li>Yeni riskler eklendi mi? (örn. pahalı e-bisikletler, ev ofisi ekipmanı)</li>
+            <li>Tüm önemli ek modüller dahil mi?</li>
+            <li>Teminat tutarı enflasyona göre ayarlandı mı?</li>
+          </ul>
+
+          <p>Her 3-5 yılda bir sigorta karşılaştırması, yardımlardan ödün vermeden yılda birkaç yüz euro tasarruf sağlayabilir.</p>
+
+          <h2>Kontrol Listesi: Doğru Ev Eşyası Sigortasını Nasıl Bulursunuz</h2>
+          <ul>
+            <li><strong>Teminat tutarı:</strong> Yaşam alanının metrekaresi başına en az 650 euro</li>
+            <li><strong>Yetersiz sigorta feragati:</strong> Sözleşmeye dahil edilmelidir</li>
+            <li><strong>Ağır ihmal:</strong> Tam tutara kadar kapsanır</li>
+            <li><strong>Doğal afetler:</strong> Ek modül olarak önerilir</li>
+            <li><strong>Bisiklet hırsızlığı:</strong> Pahalı e-bisikletler için önemli (gece zamanı maddesine dikkat edin)</li>
+            <li><strong>Cam kırılması:</strong> İsteğe bağlı, kiracılar için genellikle faydalıdır</li>
+            <li><strong>Aşırı gerilim hasarı:</strong> Yıldırım sırasında elektronik için koruma</li>
+            <li><strong>Muafiyet:</strong> Haneye bağlı olarak 150-500 euro</li>
+          </ul>
+
+          <h2>Sonuç: Pahalı Hatalardan Kaçının</h2>
+          <p>Ev eşyası sigortası, bireyler için en önemli sigorta poliçelerinden biridir. Ancak sadece en yaygın hataları bilenler ve bunlardan kaçınanlar hasar durumunda gerçekten korunur. Özellikle yetersiz sigorta, eksik belgelendirme ve sigortasız ağır ihmal genellikle hoş olmayan sürprizlere yol açar.</p>
+
+          <p>Ev eşyalarınızı belgelemek ve sigortanızı gözden geçirmek için bir kez bir iki saat yatırım yapın. Bu zaman, acil bir durumda sizi birkaç bin euroluk mali kayıplardan kurtarabilir.</p>
+        `
+      },
+      {
+        language: 'ar',
+        title: 'تأمين محتويات المنزل – تجنب هذه الأخطاء السبعة الشائعة',
+        seoTitle: 'أخطاء تأمين محتويات المنزل 2026 – ما تحتاج لمعرفته',
+        seoDescription: 'الأخطاء السبعة الأكثر شيوعًا في تأمين محتويات المنزل وكيفية تجنبها. التأمين غير الكافي والتوثيق والمزيد. احصل على المعلومات الآن!',
+        keywords: ['أخطاء تأمين محتويات المنزل', 'تجنب التأمين غير الكافي', 'تأمين محتويات المنزل بشكل صحيح', 'مبلغ التأمين للمنزل', 'نصائح التأمين المنزلي'],
+        primaryKeyword: 'أخطاء تأمين محتويات المنزل',
+        content: `
+          <h2>لماذا يعتبر تأمين محتويات المنزل مهمًا</h2>
+          <p>يحمي تأمين محتويات المنزل جميع ممتلكاتك من الخسائر المالية بسبب الحريق أو السرقة أو أضرار المياه أو العواصف. ومع ذلك، يرتكب العديد من حاملي وثائق التأمين أخطاء يمكن تجنبها والتي يمكن أن تؤدي إلى خسائر مالية كبيرة في حالة المطالبة. وفقًا لوكالات حماية المستهلك، غالبًا ما يدفع التأمين جزءًا صغيرًا فقط من الضرر الفعلي إذا لم يتم النظر في بعض المخاطر.</p>
+
+          <p>في هذا الدليل، نوضح لك الأخطاء السبعة الأكثر شيوعًا في تأمين محتويات المنزل وكيفية تجنبها.</p>
+
+          <h2>الخطأ 1: التأمين غير الكافي – مبلغ التغطية منخفض جدًا</h2>
+          <p>الخطأ الأكثر شيوعًا والأكثر تكلفة هو التأمين غير الكافي. مبلغ التغطية المتفق عليه أقل من القيمة الفعلية لمحتويات المنزل. في حالة الضرر، يعوض التأمين فقط بشكل متناسب.</p>
+
+          <h3>مثال على التأمين غير الكافي</h3>
+          <p>محتويات منزلك تساوي 50,000 يورو، ولكن تم تأمين 30,000 يورو فقط. للحصول على أضرار قدرها 10,000 يورو، يدفع التأمين 6,000 يورو فقط (60٪ من التغطية تساوي 60٪ من الضرر).</p>
+
+          <h3>كيفية تجنب التأمين غير الكافي</h3>
+          <ul>
+            <li>دليل إرشادي: 650 يورو لكل متر مربع من مساحة المعيشة</li>
+            <li>الاتفاق على بند التنازل عن التأمين غير الكافي</li>
+            <li>اختر بند الفهرس للتعديل التلقائي للقيمة</li>
+            <li>راجع مبلغ التغطية كل 2-3 سنوات</li>
+            <li>وثق العناصر القيمة بشكل خاص بشكل منفصل</li>
+          </ul>
+
+          <h2>الخطأ 2: عدم توثيق الأشياء الثمينة</h2>
+          <p>بعد السرقة أو الحريق، يجب عليك إثبات العناصر التي تم سرقتها أو تدميرها. بدون دليل، سيدفع التأمين معدلات ثابتة منخفضة فقط.</p>
+
+          <h3>ما يجب عليك توثيقه</h3>
+          <ul>
+            <li>صور لجميع العناصر القيمة (الإلكترونيات والمجوهرات والأثاث)</li>
+            <li>احتفظ بإيصالات الشراء والفواتير</li>
+            <li>إنشاء والحفاظ على جرد الأشياء الثمينة</li>
+            <li>لاحظ الأرقام التسلسلية للأجهزة الإلكترونية</li>
+            <li>تقييمات الخبراء للقطع القيمة بشكل خاص (الفن والتحف)</li>
+          </ul>
+
+          <p><strong>نصيحة:</strong> قم بتخزين الوثائق ليس فقط في المنزل ولكن أيضًا رقميًا في السحابة أو مع الأقارب.</p>
+
+          <h2>الخطأ 3: الإهمال الجسيم غير مغطى</h2>
+          <p>تستبعد العديد من الخطط الرخيصة الأضرار الناجمة عن الإهمال الجسيم. وهذا يعني: إذا تركت شمعة تحترق أو نسيت قفل الباب الأمامي، يمكن للتأمين رفض أو تقليل الفوائد.</p>
+
+          <h3>أمثلة على الإهمال الجسيم</h3>
+          <ul>
+            <li>شموع تحترق دون مراقبة</li>
+            <li>باب أمامي غير مقفل عند الخروج</li>
+            <li>نوافذ الطابق الأرضي مفتوحة أثناء الإجازة</li>
+            <li>صنابير المياه أو غسالات الملابس المنسية</li>
+          </ul>
+
+          <p><strong>الحل:</strong> اختر خطة تغطي الإهمال الجسيم حتى مبلغ التغطية الكامل. هذا يكلف بضعة يوروهات فقط في السنة ولكن يمكن أن يوفر آلاف اليوروهات.</p>
+
+          <h2>الخطأ 4: الكوارث الطبيعية غير مغطاة</h2>
+          <p>الأمطار الغزيرة والفيضانات والمياه العالية غير مدرجة في تأمين محتويات المنزل الأساسي. خاصة في أوقات تغير المناخ، تصبح هذه الأضرار أكثر تكرارًا.</p>
+
+          <h3>ما هي الكوارث الطبيعية؟</h3>
+          <ul>
+            <li>الفيضانات والمياه العالية</li>
+            <li>الأمطار الغزيرة والتراجع</li>
+            <li>الزلازل والانهيارات الأرضية</li>
+            <li>ضغط الثلج والانهيارات الجليدية</li>
+            <li>الانفجارات البركانية</li>
+          </ul>
+
+          <p>يكلف تأمين الكوارث الطبيعية ما بين 5 و 20 يورو إضافية سنويًا حسب المنطقة. في المناطق المعرضة للفيضانات، يمكن أن يكون مهمًا للغاية.</p>
+
+          <h2>الخطأ 5: عدم التعديل عند الانتقال أو التغييرات</h2>
+          <p>عند الانتقال، غالبًا ما تتغير مساحة المعيشة أو ميزات الأمان أو قيمة محتويات المنزل. إذا لم يتم إبلاغ التأمين، فإن تخفيضات الاستحقاقات تهدد.</p>
+
+          <h3>ما هو المهم عند الانتقال</h3>
+          <ul>
+            <li>أبلغ التأمين عن مساحة المعيشة الجديدة</li>
+            <li>اضبط مبلغ التغطية على قيمة محتويات المنزل المتغيرة</li>
+            <li>أبلغ عن ميزات الأمان للشقة الجديدة (مثل الإنذار وباب الأمان)</li>
+            <li>تحقق مما إذا كان التأمين القديم لا يزال تنافسيًا في الموقع الجديد</li>
+            <li>أثناء النقل، غالبًا ما تنطبق التغطية تلقائيًا على كلتا الشقتين</li>
+          </ul>
+
+          <h2>الخطأ 6: اختيار الخصم الخاطئ</h2>
+          <p>يقلل الخصم الأعلى من أقساط التأمين ولكن يمكن أن يكون مكلفًا مع مطالبات متعددة. الخصم المنخفض جدًا يجعل التأمين مكلفًا دون داعٍ.</p>
+
+          <h3>الخصم الموصى به</h3>
+          <ul>
+            <li>للعزاب والأزواج: 150-250 يورو</li>
+            <li>للعائلات التي لديها أطفال: 250-500 يورو</li>
+            <li>لقيمة محتويات المنزل العالية: حتى 1000 يورو</li>
+          </ul>
+
+          <p><strong>قاعدة عامة:</strong> اختر خصمًا يمكنك دفعه بسهولة من جيبك في حالة الضرر دون صعوبة مالية.</p>
+
+          <h2>الخطأ 7: عدم مراجعة العقد بانتظام</h2>
+          <p>يأخذ العديد من حاملي وثائق التأمين تأمين محتويات المنزل ثم لا ينظرون إلى العقد لعقود. ومع ذلك، تتغير ظروف الحياة والأسعار والفوائد باستمرار.</p>
+
+          <h3>ما يجب عليك التحقق منه بانتظام</h3>
+          <ul>
+            <li>هل مبلغ التغطية لا يزال حاليًا؟ (تحقق كل 2-3 سنوات)</li>
+            <li>هل هناك خطط أرخص مع فوائد أفضل؟</li>
+            <li>هل تمت إضافة مخاطر جديدة؟ (مثل الدراجات الإلكترونية باهظة الثمن ومعدات المكتب المنزلي)</li>
+            <li>هل جميع الوحدات الإضافية المهمة مدرجة؟</li>
+            <li>هل تم تعديل مبلغ التغطية للتضخم؟</li>
+          </ul>
+
+          <p>يمكن أن توفر مقارنة التأمين كل 3-5 سنوات عدة مئات من اليوروهات سنويًا دون التضحية بالفوائد.</p>
+
+          <h2>قائمة التحقق: كيفية العثور على تأمين محتويات المنزل المناسب</h2>
+          <ul>
+            <li><strong>مبلغ التغطية:</strong> 650 يورو على الأقل لكل متر مربع من مساحة المعيشة</li>
+            <li><strong>التنازل عن التأمين غير الكافي:</strong> يجب تضمينه في العقد</li>
+            <li><strong>الإهمال الجسيم:</strong> مغطى حتى المبلغ الكامل</li>
+            <li><strong>الكوارث الطبيعية:</strong> موصى به كوحدة إضافية</li>
+            <li><strong>سرقة الدراجة:</strong> مهم للدراجات الإلكترونية باهظة الثمن (لاحظ بند الوقت الليلي)</li>
+            <li><strong>كسر الزجاج:</strong> اختياري، غالبًا ما يكون مفيدًا للمستأجرين</li>
+            <li><strong>أضرار الجهد الزائد:</strong> حماية للإلكترونيات أثناء البرق</li>
+            <li><strong>الخصم:</strong> 150-500 يورو حسب الأسرة</li>
+          </ul>
+
+          <h2>الخلاصة: تجنب الأخطاء باهظة الثمن</h2>
+          <p>يعد تأمين محتويات المنزل أحد أهم وثائق التأمين للأفراد. ولكن فقط أولئك الذين يعرفون ويتجنبون الأخطاء الأكثر شيوعًا يكونون محميين حقًا في حالة الضرر. خاصة التأمين غير الكافي والوثائق المفقودة والإهمال الجسيم غير المؤمن عليه غالبًا ما يؤدي إلى مفاجآت غير سارة.</p>
+
+          <p>استثمر ساعة أو ساعتين مرة واحدة لتوثيق محتويات منزلك ومراجعة تأمينك. يمكن أن يوفر لك هذا الوقت من الخسائر المالية التي تبلغ عدة آلاف من اليوروهات في حالة الطوارئ.</p>
+        `
+      }
+    ]
   }
 ];
 
