@@ -164,9 +164,9 @@ const sampleBlogPosts: BlogPostData[] = [
         `
       }
     ]
-
-    , {
-  slug: 'rechtschutzversicherung-kosten-nutzen-2026',
+  },
+  {
+    slug: 'rechtschutzversicherung-kosten-nutzen-2026',
   category: 'Rechtschutz',
   author: 'Brhan Jabri',
   readTime: '10 min',
@@ -268,7 +268,7 @@ const sampleBlogPosts: BlogPostData[] = [
       language: 'en',
       title: 'Legal Insurance – When Is It Worth It?',
       seoTitle: 'Legal Insurance Costs 2026 – Is It Worth It?',
-      seoDescription: 'Legal insurance: costs, coverage & when it's worth it. Comparison for employees & entrepreneurs. Get informed now!',
+      seoDescription: 'Legal insurance: costs, coverage & when it is worth it. Comparison for employees & entrepreneurs. Get informed now!',
       keywords: ['legal insurance costs', 'legal protection worth it', 'lawyer costs insurance', 'employment legal protection', 'legal insurance comparison'],
       primaryKeyword: 'legal insurance costs',
       content: `
@@ -532,7 +532,7 @@ const sampleBlogPosts: BlogPostData[] = [
       `
     }
   ]
-}
+  }
 ];
 
 async function seedBlogPosts() {
