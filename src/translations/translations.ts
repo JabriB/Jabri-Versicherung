@@ -7,6 +7,7 @@ export const translations = {
       phone: '+49 1575 5588 142'
     },
     nav: {
+      blog: 'Blog',
       benefits: 'Vorteile',
       products: 'Produkte',
       about: 'Über mich',
@@ -268,6 +269,7 @@ export const translations = {
       phone: '+49 1575 5588 142'
     },
     nav: {
+      blog: 'Blog',
       benefits: 'Benefits',
       products: 'Products',
       about: 'About Me',
@@ -529,6 +531,7 @@ export const translations = {
       phone: '+49 1575 5588 142'
     },
     nav: {
+      blog: 'مدونة',
       benefits: 'المزايا',
       products: 'المنتجات',
       about: 'عني',
@@ -790,6 +793,7 @@ export const translations = {
       phone: '+49 1575 5588 142'
     },
     nav: {
+      blog: 'Blog',
       benefits: 'Avantajlar',
       products: 'Ürünler',
       about: 'Hakkımda',
