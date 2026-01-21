@@ -151,6 +151,10 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-17765377014');
+      gtag('config', 'AW-17765377014', {
+        'page_path': window.location.pathname,
+        'page_title': document.title
+      });
     </script>
 
     <script type="application/ld+json">
