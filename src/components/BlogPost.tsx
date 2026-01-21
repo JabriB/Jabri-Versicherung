@@ -12,39 +12,22 @@ export default function BlogPost() {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
-            <p className="mt-4 text-slate-400">Loading blog post...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !post) {
-    return <Navigate to="/blog" replace />;
-  }
-
-  const translation = post.translation;
+  const translation = post?.translation;
 
   useSEO({
     title: translation?.seo_title || 'Blog Post',
     description: translation?.seo_description || '',
     keywords: translation?.keywords?.join(', ') || '',
-    image: post.image,
-    canonical: `https://jabriversicherung.de/blog/${post.slug}`,
+    image: post?.image || '',
+    canonical: `https://jabriversicherung.de/blog/${post?.slug || ''}`,
     type: 'article',
-    author: post.author,
-    datePublished: post.published_date,
-    schema: {
+    author: post?.author || '',
+    datePublished: post?.published_date || '',
+    schema: post && translation ? {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": translation?.seo_title,
-      "description": translation?.seo_description,
+      "headline": translation.seo_title,
+      "description": translation.seo_description,
       "image": post.image,
       "datePublished": post.published_date,
       "author": {
@@ -65,8 +48,25 @@ export default function BlogPost() {
         "@type": "WebPage",
         "@id": `https://jabriversicherung.de/blog/${post.slug}`
       }
-    }
+    } : undefined
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
+            <p className="mt-4 text-slate-400">Loading blog post...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !post) {
+    return <Navigate to="/blog" replace />;
+  }
 
   const currentIndex = allPosts.findIndex(p => p.id === post.id);
   const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
