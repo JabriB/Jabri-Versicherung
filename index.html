@@ -145,16 +145,31 @@
       }
     </style>
 
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17765377014"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-17765377014');
-      gtag('config', 'AW-17765377014', {
-        'page_path': window.location.pathname,
-        'page_title': document.title
-      });
+    </script>
+
+    <!-- Event snippet for Request quote conversion page -->
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17765377014/kkOyCIm88ekbEPbHmJdC',
+          'value': 1.0,
+          'currency': 'EUR',
+          'event_callback': callback
+        });
+        return false;
+      }
     </script>
 
     <script type="application/ld+json">
