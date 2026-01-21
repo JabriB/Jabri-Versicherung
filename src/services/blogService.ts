@@ -7,10 +7,9 @@ export class BlogService {
       .from('blog_posts')
       .select(`
         *,
-        translation:blog_post_translations!inner(*)
+        translation:blog_post_translations(*)
       `)
       .eq('is_published', true)
-      .eq('blog_post_translations.language', language)
       .order('published_date', { ascending: false });
 
     if (error) {
@@ -20,8 +19,8 @@ export class BlogService {
 
     return (data || []).map(post => ({
       ...post,
-      translation: Array.isArray(post.translation) ? post.translation[0] : post.translation
-    }));
+      translation: (post.translation || []).find((t: any) => t.language === language) || null
+    })).filter(post => post.translation !== null);
   }
 
   static async getBlogPostBySlug(slug: string, language: Language = 'de'): Promise<BlogPostWithTranslation | null> {
@@ -29,11 +28,10 @@ export class BlogService {
       .from('blog_posts')
       .select(`
         *,
-        translation:blog_post_translations!inner(*)
+        translation:blog_post_translations(*)
       `)
       .eq('slug', slug)
       .eq('is_published', true)
-      .eq('blog_post_translations.language', language)
       .maybeSingle();
 
     if (error) {
@@ -43,9 +41,12 @@ export class BlogService {
 
     if (!data) return null;
 
+    const translation = (data.translation || []).find((t: any) => t.language === language);
+    if (!translation) return null;
+
     return {
       ...data,
-      translation: Array.isArray(data.translation) ? data.translation[0] : data.translation
+      translation
     };
   }
 
@@ -54,11 +55,10 @@ export class BlogService {
       .from('blog_posts')
       .select(`
         *,
-        translation:blog_post_translations!inner(*)
+        translation:blog_post_translations(*)
       `)
       .eq('category', category)
       .eq('is_published', true)
-      .eq('blog_post_translations.language', language)
       .order('published_date', { ascending: false });
 
     if (error) {
@@ -68,8 +68,8 @@ export class BlogService {
 
     return (data || []).map(post => ({
       ...post,
-      translation: Array.isArray(post.translation) ? post.translation[0] : post.translation
-    }));
+      translation: (post.translation || []).find((t: any) => t.language === language) || null
+    })).filter(post => post.translation !== null);
   }
 
   static async searchBlogPosts(query: string, language: Language = 'de'): Promise<BlogPostWithTranslation[]> {
@@ -77,11 +77,9 @@ export class BlogService {
       .from('blog_posts')
       .select(`
         *,
-        translation:blog_post_translations!inner(*)
+        translation:blog_post_translations(*)
       `)
       .eq('is_published', true)
-      .eq('blog_post_translations.language', language)
-      .or(`slug.ilike.%${query}%,category.ilike.%${query}%`)
       .order('published_date', { ascending: false });
 
     if (error) {
@@ -91,18 +89,20 @@ export class BlogService {
 
     const posts = (data || []).map(post => ({
       ...post,
-      translation: Array.isArray(post.translation) ? post.translation[0] : post.translation
-    }));
+      translation: (post.translation || []).find((t: any) => t.language === language) || null
+    })).filter(post => post.translation !== null);
 
+    const searchLower = query.toLowerCase();
     return posts.filter(post => {
       const translation = post.translation;
       if (!translation) return false;
 
-      const searchLower = query.toLowerCase();
       return (
+        post.slug.toLowerCase().includes(searchLower) ||
+        post.category.toLowerCase().includes(searchLower) ||
         translation.title.toLowerCase().includes(searchLower) ||
         translation.content.toLowerCase().includes(searchLower) ||
-        translation.keywords.some(k => k.toLowerCase().includes(searchLower))
+        translation.keywords.some((k: string) => k.toLowerCase().includes(searchLower))
       );
     });
   }
