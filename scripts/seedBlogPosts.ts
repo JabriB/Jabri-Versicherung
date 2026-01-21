@@ -15,6 +15,16 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+interface Translation {
+  language: 'de' | 'en' | 'tr' | 'ar';
+  title: string;
+  seoTitle: string;
+  seoDescription: string;
+  content: string;
+  keywords: string[];
+  primaryKeyword: string;
+}
+
 interface BlogPostData {
   slug: string;
   category: string;
@@ -24,15 +34,7 @@ interface BlogPostData {
   imageAlt: string;
   wordCount: number;
   publishedDate: string;
-  translations: {
-    language: 'de' | 'en' | 'tr' | 'ar';
-    title: string;
-    seoTitle: string;
-    seoDescription: string;
-    content: string;
-    keywords: string[];
-    primaryKeyword: string;
-  }[];
+  translations: Translation[];
 }
 
 const sampleBlogPosts: BlogPostData[] = [
@@ -166,10 +168,15 @@ const sampleBlogPosts: BlogPostData[] = [
 ];
 
 async function seedBlogPosts() {
-  console.log('Starting blog posts seeding...');
+  console.log('\n🚀 Starting blog posts seeding...\n');
+
+  let successCount = 0;
+  let skipCount = 0;
+  let errorCount = 0;
 
   for (const postData of sampleBlogPosts) {
     try {
+      // Check if post already exists
       const { data: existingPost } = await supabase
         .from('blog_posts')
         .select('id')
@@ -177,10 +184,12 @@ async function seedBlogPosts() {
         .maybeSingle();
 
       if (existingPost) {
-        console.log(`Post with slug "${postData.slug}" already exists. Skipping...`);
+        console.log(`⏭️  Post already exists: "${postData.slug}"`);
+        skipCount++;
         continue;
       }
 
+      // Create main blog post
       const { data: newPost, error: postError } = await supabase
         .from('blog_posts')
         .insert([{
@@ -198,13 +207,23 @@ async function seedBlogPosts() {
         .single();
 
       if (postError) {
-        console.error(`Error creating post "${postData.slug}":`, postError);
+        console.error(`❌ Error creating post "${postData.slug}":`, postError.message);
+        errorCount++;
         continue;
       }
 
-      console.log(`Created blog post: ${postData.slug} (ID: ${newPost.id})`);
+      console.log(`📝 Created: ${postData.slug} (ID: ${newPost.id})`);
+
+      // Create translations for all languages
+      const supportedLanguages = ['de', 'en', 'tr', 'ar'];
+      let translationCount = 0;
 
       for (const translation of postData.translations) {
+        if (!supportedLanguages.includes(translation.language)) {
+          console.warn(`   ⚠️  Unsupported language: ${translation.language}`);
+          continue;
+        }
+
         const { error: translationError } = await supabase
           .from('blog_post_translations')
           .insert([{
@@ -219,19 +238,40 @@ async function seedBlogPosts() {
           }]);
 
         if (translationError) {
-          console.error(`Error creating translation for "${postData.slug}" (${translation.language}):`, translationError);
+          console.error(`   ❌ ${translation.language}: ${translationError.message}`);
+          errorCount++;
         } else {
-          console.log(`  - Created ${translation.language} translation`);
+          const langName = {
+            de: 'Deutsch',
+            en: 'English',
+            tr: 'Türkçe',
+            ar: 'العربية'
+          }[translation.language];
+          console.log(`   ✓ ${translation.language} (${langName})`);
+          translationCount++;
         }
       }
 
-      console.log(`✓ Successfully seeded: ${postData.slug}\n`);
+      if (translationCount === 4) {
+        console.log(`✅ Successfully seeded: ${postData.slug}\n`);
+        successCount++;
+      } else {
+        console.log(`⚠️  Partially seeded: ${postData.slug} (${translationCount}/4 translations)\n`);
+      }
     } catch (error) {
-      console.error(`Error processing post "${postData.slug}":`, error);
+      console.error(`❌ Error processing post "${postData.slug}":`, error);
+      errorCount++;
     }
   }
 
-  console.log('Blog posts seeding completed!');
+  // Summary
+  console.log('\n📊 Seeding Summary:');
+  console.log(`✅ Successfully created: ${successCount}`);
+  console.log(`⏭️  Already existed: ${skipCount}`);
+  if (errorCount > 0) {
+    console.log(`❌ Errors: ${errorCount}`);
+  }
+  console.log('\n✨ Blog posts seeding completed!\n');
 }
 
 seedBlogPosts().catch(console.error);
