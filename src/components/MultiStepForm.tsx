@@ -263,7 +263,7 @@ export default function MultiStepForm() {
     switch (currentStep) {
       case 1:
         return formData.interests.length > 0;
-      case 2: {
+      case 2:
         const hasName = formData.firstName.trim() !== '' && formData.lastName.trim() !== '';
         const hasEmail = formData.email.trim() !== '';
         const hasPhone = formData.phone.trim() !== '';
@@ -271,7 +271,6 @@ export default function MultiStepForm() {
         const hasValidPhone = validatePhone(formData.phone);
         const ageValidation = validateAge(formData.birthDate);
         return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && ageValidation.isValid && !validationErrors.email && !validationErrors.phone && !validationErrors.birthDate;
-      }
       case 3:
         return !validationErrors.postalCode;
       default:

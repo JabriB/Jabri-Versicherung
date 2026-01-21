@@ -19,7 +19,7 @@ export class BlogService {
 
     return (data || []).map(post => ({
       ...post,
-      translation: (post.translation || []).find((t: BlogPostTranslation) => t.language === language) || null
+      translation: (post.translation || []).find((t: any) => t.language === language) || null
     })).filter(post => post.translation !== null);
   }
 
@@ -41,7 +41,7 @@ export class BlogService {
 
     if (!data) return null;
 
-    const translation = (data.translation || []).find((t: BlogPostTranslation) => t.language === language);
+    const translation = (data.translation || []).find((t: any) => t.language === language);
     if (!translation) return null;
 
     return {
@@ -68,7 +68,7 @@ export class BlogService {
 
     return (data || []).map(post => ({
       ...post,
-      translation: (post.translation || []).find((t: BlogPostTranslation) => t.language === language) || null
+      translation: (post.translation || []).find((t: any) => t.language === language) || null
     })).filter(post => post.translation !== null);
   }
 
@@ -89,7 +89,7 @@ export class BlogService {
 
     const posts = (data || []).map(post => ({
       ...post,
-      translation: (post.translation || []).find((t: BlogPostTranslation) => t.language === language) || null
+      translation: (post.translation || []).find((t: any) => t.language === language) || null
     })).filter(post => post.translation !== null);
 
     const searchLower = query.toLowerCase();
