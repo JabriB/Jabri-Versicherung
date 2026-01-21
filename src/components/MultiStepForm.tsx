@@ -251,11 +251,18 @@ export default function MultiStepForm() {
         (window as any).gtag('event', 'conversion', {
           'send_to': 'AW-17765377014/kkOyCIm88ekbEPbHmJdC',
           'value': 1.0,
-          'currency': 'EUR'
+          'currency': 'EUR',
+          'event_callback': () => {
+            setIsSubmitted(true);
+          }
         });
-      }
 
-      setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(true);
+        }, 1000);
+      } else {
+        setIsSubmitted(true);
+      }
     } catch (error) {
       const errorMessage = error instanceof Error
         ? `Error: ${error.message}`

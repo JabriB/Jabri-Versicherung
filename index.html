@@ -151,12 +151,15 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'AW-17765377014');
+      gtag('config', 'AW-17765377014', {
+        'allow_google_signals': true,
+        'allow_ad_personalization_signals': true
+      });
     </script>
 
     <!-- Event snippet for Request quote conversion page -->
     <script>
-      function gtag_report_conversion(url) {
+      window.gtag_report_conversion = function(url) {
         var callback = function () {
           if (typeof(url) != 'undefined') {
             window.location = url;
@@ -169,7 +172,7 @@
           'event_callback': callback
         });
         return false;
-      }
+      };
     </script>
 
     <script type="application/ld+json">
@@ -271,5 +274,10 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Google conversion noscript -->
+    <noscript>
+      <img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/17765377014/?label=kkOyCIm88ekbEPbHmJdC&amp;guid=ON&amp;script=0" />
+    </noscript>
   </body>
 </html>
