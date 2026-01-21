@@ -8,7 +8,6 @@ import { useHead } from '../hooks/useHead';
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
   const [openPanels, setOpenPanels] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -46,7 +45,6 @@ export default function LandingPage() {
       navigate('/formular');
       return;
     }
-    setActiveSection(sectionId);
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
