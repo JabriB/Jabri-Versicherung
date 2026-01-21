@@ -1,14 +1,43 @@
 import { Link } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
-import { blogPosts } from '../data/blogPosts';
+import { useBlogPosts } from '../hooks/useBlogPosts';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function BlogHome() {
+  const { posts, loading, error } = useBlogPosts();
+  const { t } = useLanguage();
+
   useSEO({
     title: 'Blog - Versicherungsberatung Aachen & Düren | Jabri Versicherung',
     description: 'Experten-Tipps zu Rechtschutz, Haftpflicht, Hausrat & mehr. Kostenlose Beratung für Aachen, Düren, Eschweiler.',
     keywords: 'Versicherung Blog, Rechtschutz Tipps, Versicherungsberatung Aachen',
     canonical: 'https://jabriversicherung.de/blog'
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
+            <p className="mt-4 text-slate-400">Loading blog posts...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center text-red-400">
+            <p>Error loading blog posts. Please try again later.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
@@ -29,8 +58,13 @@ export default function BlogHome() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {blogPosts.map((post, index) => (
+        {posts.length === 0 ? (
+          <div className="text-center text-slate-400 py-16">
+            <p className="text-lg">No blog posts available yet.</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {posts.map((post, index) => (
             <article
               key={post.id}
               className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl overflow-hidden border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer animate-fade-in-up opacity-0"
@@ -39,7 +73,7 @@ export default function BlogHome() {
               <Link to={`/blog/${post.slug}`} className="block overflow-hidden">
                 <img
                   src={post.image}
-                  alt={post.imageAlt}
+                  alt={post.image_alt}
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700 group-hover:rotate-1"
                 />
               </Link>
@@ -49,22 +83,22 @@ export default function BlogHome() {
                   <span className="px-3 py-1 bg-orange-500/20 text-orange-300 text-sm rounded-full border border-orange-500/30 group-hover:bg-orange-500/30 group-hover:border-orange-500/50 transition-all duration-300 group-hover:scale-105">
                     {post.category}
                   </span>
-                  <span className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors">{post.readTime}</span>
+                  <span className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors">{post.read_time}</span>
                 </div>
 
                 <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors duration-300">
                   <Link to={`/blog/${post.slug}`}>
-                    {post.title}
+                    {post.translation?.title || 'Untitled'}
                   </Link>
                 </h2>
 
                 <p className="text-slate-300 mb-6 line-clamp-3 group-hover:text-slate-200 transition-colors duration-300">
-                  {post.seoDescription}
+                  {post.translation?.seo_description || ''}
                 </p>
 
                 <div className="flex items-center justify-between pt-6 border-t border-slate-700/50 group-hover:border-orange-500/20 transition-colors duration-300">
                   <div className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
-                    {new Date(post.date).toLocaleDateString('de-DE', {
+                    {new Date(post.published_date).toLocaleDateString('de-DE', {
                       year: 'numeric',
                       month: 'short',
                       day: 'numeric'
@@ -84,7 +118,8 @@ export default function BlogHome() {
               </div>
             </article>
           ))}
-        </div>
+          </div>
+        )}
 
         <div className="mt-16 flex justify-center">
           <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-2xl p-10 max-w-lg w-full hover:border-orange-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/20 group backdrop-blur-xl">

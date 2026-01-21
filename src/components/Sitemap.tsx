@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
-import { FileText, Home, Shield, Lock, FileCheck, HelpCircle } from 'lucide-react';
+import { FileText, Home, Shield, Lock, FileCheck, HelpCircle, BookOpen } from 'lucide-react';
+import { useBlogPosts } from '../hooks/useBlogPosts';
 
 export default function Sitemap() {
   const { language } = useLanguage();
   const t = getTranslation(language);
+  const { posts, loading } = useBlogPosts();
 
   const pages = [
     {
@@ -89,6 +91,49 @@ export default function Sitemap() {
             );
           })}
         </div>
+
+        {!loading && posts.length > 0 && (
+          <div className="mt-12 sm:mt-16">
+            <div className="mb-6 sm:mb-8">
+              <div className="flex items-center gap-3 mb-2">
+                <BookOpen className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400" />
+                <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                  {language === 'de' ? 'Blog Artikel' : language === 'en' ? 'Blog Posts' : language === 'ar' ? 'مقالات المدونة' : 'Blog Yazıları'}
+                </h2>
+              </div>
+              <p className="text-sm sm:text-base text-slate-400">
+                {language === 'de' ? `${posts.length} Artikel verfügbar` : language === 'en' ? `${posts.length} articles available` : language === 'ar' ? `${posts.length} مقالة متاحة` : `${posts.length} makale mevcut`}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+              {posts.map((post) => (
+                <Link
+                  key={post.id}
+                  to={`/blog/${post.slug}`}
+                  className="block bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-slate-700/30 rounded-lg p-4 sm:p-5 hover:bg-slate-800/60 hover:border-orange-500/30 transition-all duration-300 group"
+                >
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center group-hover:bg-orange-500/30 transition-colors">
+                      <BookOpen className="w-4 h-4 text-orange-400" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-medium text-white mb-1 group-hover:text-orange-400 transition-colors line-clamp-1">
+                        {post.translation?.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-400 mb-1">
+                        {post.category} • {post.read_time}
+                      </p>
+                      <p className="text-xs text-slate-500 font-mono break-all">
+                        https://jabriversicherung.de/blog/{post.slug}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mt-10 sm:mt-12 lg:mt-16 text-center">
           <Link

@@ -1,36 +1,52 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
-import { blogPosts } from '../data/blogPosts';
+import { useBlogPost, useBlogPosts } from '../hooks/useBlogPosts';
 import { useEffect } from 'react';
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find(p => p.slug === slug);
+  const { post, loading, error } = useBlogPost(slug || '');
+  const { posts: allPosts } = useBlogPosts();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (!post) {
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
+            <p className="mt-4 text-slate-400">Loading blog post...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !post) {
     return <Navigate to="/blog" replace />;
   }
 
+  const translation = post.translation;
+
   useSEO({
-    title: post.seoTitle,
-    description: post.seoDescription,
-    keywords: post.keywords.join(', '),
+    title: translation?.seo_title || 'Blog Post',
+    description: translation?.seo_description || '',
+    keywords: translation?.keywords?.join(', ') || '',
     image: post.image,
     canonical: `https://jabriversicherung.de/blog/${post.slug}`,
     type: 'article',
     author: post.author,
-    datePublished: post.date,
+    datePublished: post.published_date,
     schema: {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": post.seoTitle,
-      "description": post.seoDescription,
+      "headline": translation?.seo_title,
+      "description": translation?.seo_description,
       "image": post.image,
-      "datePublished": post.date,
+      "datePublished": post.published_date,
       "author": {
         "@type": "Person",
         "name": post.author,
@@ -52,9 +68,9 @@ export default function BlogPost() {
     }
   });
 
-  const currentIndex = blogPosts.findIndex(p => p.id === post.id);
-  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const currentIndex = allPosts.findIndex(p => p.id === post.id);
+  const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-40">
@@ -64,7 +80,7 @@ export default function BlogPost() {
           <span>/</span>
           <Link to="/blog" className="hover:text-orange-400 transition-colors">Blog</Link>
           <span>/</span>
-          <span className="text-slate-300">{post.title}</span>
+          <span className="text-slate-300">{translation?.title}</span>
         </nav>
 
         <header className="mb-12">
@@ -75,7 +91,7 @@ export default function BlogPost() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            {post.title}
+            {translation?.title}
           </h1>
 
           <div className="flex flex-wrap items-center gap-6 text-slate-400 text-sm mb-8">
@@ -89,7 +105,7 @@ export default function BlogPost() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              {new Date(post.date).toLocaleDateString('de-DE', {
+              {new Date(post.published_date).toLocaleDateString('de-DE', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
@@ -99,13 +115,13 @@ export default function BlogPost() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              {post.readTime}
+              {post.read_time}
             </div>
           </div>
 
           <img
             src={post.image}
-            alt={post.imageAlt}
+            alt={post.image_alt}
             className="w-full rounded-xl shadow-2xl border border-slate-700"
           />
         </header>
@@ -123,29 +139,8 @@ export default function BlogPost() {
             prose-table:border-slate-700
             prose-th:bg-slate-800 prose-th:text-white
             prose-td:border-slate-700"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: translation?.content || '' }}
         />
-
-        {post.internalLinks && post.internalLinks.length > 0 && (
-          <div className="mt-12 p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl border border-slate-700/50 hover:border-orange-500/30 transition-all">
-            <h3 className="text-xl font-bold text-white mb-4 text-orange-400">Verwandte Artikel:</h3>
-            <ul className="space-y-3">
-              {post.internalLinks.map((link, idx) => (
-                <li key={idx}>
-                  <Link
-                    to={link.url}
-                    className="text-orange-400 hover:text-orange-300 transition-all flex items-center gap-2 group"
-                  >
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    {link.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
 
         <nav className="mt-12 grid md:grid-cols-2 gap-6">
           {prevPost && (
@@ -155,7 +150,7 @@ export default function BlogPost() {
             >
               <div className="text-sm text-slate-400 mb-3 group-hover:text-slate-300 transition-colors">← Vorheriger Artikel</div>
               <div className="text-white font-semibold group-hover:text-orange-400 transition-colors text-lg">
-                {prevPost.title}
+                {prevPost.translation?.title}
               </div>
             </Link>
           )}
@@ -167,7 +162,7 @@ export default function BlogPost() {
             >
               <div className="text-sm text-slate-400 mb-3 group-hover:text-slate-300 transition-colors">Nächster Artikel →</div>
               <div className="text-white font-semibold group-hover:text-orange-400 transition-colors text-lg">
-                {nextPost.title}
+                {nextPost.translation?.title}
               </div>
             </Link>
           )}
