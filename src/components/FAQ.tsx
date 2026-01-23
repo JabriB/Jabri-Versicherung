@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ChevronDown, Phone, Mail, Home, HelpCircle } from 'lucide-react';
 import { useHead } from '../hooks/useHead';
+import { pixelEvents } from '../lib/pixelTracking';
 
 export default function FAQ() {
   const { language } = useLanguage();
@@ -19,6 +20,7 @@ export default function FAQ() {
   });
 
   const toggleItem = (id: string) => {
+    pixelEvents.viewContent(`FAQ ${id}`, 'faq');
     setOpenItems(prev =>
       prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
     );
@@ -425,6 +427,7 @@ export default function FAQ() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
             <a
               href="tel:+4915755588142"
+              onClick={() => pixelEvents.contact()}
               className="inline-flex items-center gap-2 sm:gap-3 text-base sm:text-lg text-orange-400 hover:text-orange-300 transition-colors group"
             >
               <Phone className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
@@ -435,6 +438,7 @@ export default function FAQ() {
 
             <a
               href="mailto:jabri.versicherung@gmail.com"
+              onClick={() => pixelEvents.contact()}
               className="inline-flex items-center gap-2 sm:gap-3 text-base sm:text-lg text-orange-400 hover:text-orange-300 transition-colors group"
             >
               <Mail className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />

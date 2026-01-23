@@ -5,6 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
 import LanguageSelector from './LanguageSelector';
 import { useHead } from '../hooks/useHead';
+import { pixelEvents } from '../lib/pixelTracking';
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,13 +44,19 @@ export default function LandingPage() {
 
   const scrollToSection = (sectionId: string) => {
     if (sectionId === 'form') {
+      pixelEvents.viewContent('Consultation Form', 'page');
       navigate('/formular');
       return;
     }
+    pixelEvents.viewContent(sectionId, 'section');
     setActiveSection(sectionId);
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleContactClick = (contactType: string) => {
+    pixelEvents.contact();
   };
 
   return (
@@ -59,6 +66,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
           <a
             href="tel:+4915755588142"
+            onClick={() => handleContactClick('phone')}
             className="flex items-center justify-center gap-2 text-white hover:text-orange-100 transition group"
           >
             <Phone size={18} className="animate-pulse" />
@@ -807,6 +815,7 @@ export default function LandingPage() {
                   <div className="space-y-2">
                     <a
                       href="tel:+4915755588142"
+                      onClick={() => handleContactClick('phone')}
                       className="text-white hover:text-orange-400 transition flex items-center gap-2"
                     >
                       <Phone size={18} />
@@ -814,6 +823,7 @@ export default function LandingPage() {
                     </a>
                     <a
                       href="mailto:jabri.versicherung@gmail.com"
+                      onClick={() => handleContactClick('email')}
                       className="text-white hover:text-orange-400 transition block"
                     >
                       jabri.versicherung@gmail.com
@@ -1036,8 +1046,8 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold text-white mb-4">{t.footer.contact}</h3>
               <ul className="space-y-2 text-sm text-slate-400">
-                <li><a href="tel:+4915755588142" className="hover:text-white transition" dir="ltr">{t.emergency.phone}</a></li>
-                <li><a href="mailto:jabri.versicherung@gmail.com" className="hover:text-white transition">jabri.versicherung@gmail.com</a></li>
+                <li><a href="tel:+4915755588142" onClick={() => handleContactClick('phone')} className="hover:text-white transition" dir="ltr">{t.emergency.phone}</a></li>
+                <li><a href="mailto:jabri.versicherung@gmail.com" onClick={() => handleContactClick('email')} className="hover:text-white transition">jabri.versicherung@gmail.com</a></li>
               </ul>
             </div>
           </div>

@@ -5,6 +5,7 @@ import DatePicker from './DatePicker';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
 import { useHead } from '../hooks/useHead';
+import { pixelEvents } from '../lib/pixelTracking';
 
 interface FormData {
   firstName: string;
@@ -107,6 +108,10 @@ export default function MultiStepForm() {
       return () => clearTimeout(timer);
     }
   }, [isSubmitted, navigate]);
+
+  useEffect(() => {
+    pixelEvents.viewContent(`Form Step ${currentStep}`, 'form');
+  }, [currentStep]);
 
   const totalSteps = 3;
   const progress = (currentStep / totalSteps) * 100;
