@@ -247,15 +247,21 @@ export default function MultiStepForm() {
         throw new Error(`Submission failed with status ${response.status}`);
       }
 
-      if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'conversion', {
-          'send_to': 'AW-17765377014/kkOyCIm88ekbEPbHmJdC',
-          'value': 1.0,
-          'currency': 'EUR',
-          'event_callback': () => {
-            setIsSubmitted(true);
-          }
-        });
+      if (typeof window !== 'undefined') {
+        if (typeof (window as any).gtag === 'function') {
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17765377014/kkOyCIm88ekbEPbHmJdC',
+            'value': 1.0,
+            'currency': 'EUR',
+            'event_callback': () => {
+              setIsSubmitted(true);
+            }
+          });
+        }
+
+        if (typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'Lead');
+        }
 
         setTimeout(() => {
           setIsSubmitted(true);
