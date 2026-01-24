@@ -314,18 +314,16 @@ export default function LandingPage() {
             {/* Image Column */}
             <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
               <div className="relative w-full max-w-sm group">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl animate-pulse" />
-                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl" />
+                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-orange-500/50 transition-all duration-500 hover:shadow-2xl" style={{aspectRatio: '1/1.94'}}>
                   <img
-                    src="/tower-md.webp"
+                    src="/tower-sm.webp"
                     alt={t.about.name}
-                    width="600"
-                    height="1164"
+                    width="400"
+                    height="776"
                     loading="lazy"
                     decoding="async"
-                    srcSet="/tower-sm.webp 400w, /tower-md.webp 600w"
-                    sizes="(max-width: 768px) 90vw, 450px"
-                    className="w-full h-auto rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full rounded-2xl object-cover"
                   />
                 </div>
               </div>
