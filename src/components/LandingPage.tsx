@@ -321,11 +321,10 @@ export default function LandingPage() {
                     alt={t.about.name}
                     width="600"
                     height="1164"
-                    fetchPriority="high"
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
-                    srcSet="/tower-sm.webp 400w, /tower-md.webp 600w, /tower.webp 825w"
-                    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 450px, 400px"
+                    srcSet="/tower-sm.webp 400w, /tower-md.webp 600w"
+                    sizes="(max-width: 768px) 90vw, 450px"
                     className="w-full h-auto rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>

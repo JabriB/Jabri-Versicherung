@@ -21,13 +21,19 @@ export default defineConfig({
             if (id.includes('lucide-react')) {
               return 'icons';
             }
+            if (id.includes('@supabase')) {
+              return 'supabase';
+            }
             return 'vendor';
           }
-          if (id.includes('components/MultiStepForm')) {
+          if (id.includes('components/MultiStepForm') || id.includes('components/DatePicker')) {
             return 'form-chunk';
           }
           if (id.includes('components/LandingPage')) {
             return 'landing-chunk';
+          }
+          if (id.includes('components/Blog') || id.includes('hooks/useBlogPosts') || id.includes('services/blogService')) {
+            return 'blog-chunk';
           }
         },
       },
@@ -40,7 +46,12 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
-        passes: 2,
+        passes: 3,
+        unsafe: true,
+        unsafe_arrows: true,
+        unsafe_comps: true,
+        unsafe_math: true,
+        unsafe_methods: true,
       },
       mangle: {
         safari10: true,

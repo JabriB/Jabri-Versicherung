@@ -31,10 +31,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://connect.facebook.net" />
 
-    <link rel="preload" as="image" href="/tower-sm.webp" fetchpriority="high" imagesrcset="/tower-sm.webp 400w, /tower-md.webp 600w, /tower.webp 825w" imagesizes="(max-width: 768px) 90vw, (max-width: 1024px) 450px, 400px" />
+    <link rel="preload" as="image" href="/tower-sm.webp" fetchpriority="high" imagesrcset="/tower-sm.webp 400w, /tower-md.webp 600w" imagesizes="(max-width: 768px) 90vw, 450px" />
     <link rel="preload" as="image" href="/jabri-versicherung-logo.svg" fetchpriority="high" />
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin />
 
@@ -145,20 +145,28 @@
       }
     </style>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17765377014"></script>
+    <!-- Google tag (gtag.js) - Deferred for performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'AW-17765377014', {
-        'allow_google_signals': true,
-        'allow_ad_personalization_signals': true
-      });
-    </script>
 
-    <!-- Event snippet for Request quote conversion page -->
-    <script>
+      // Load GTM after page load
+      window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17765377014';
+        document.head.appendChild(script);
+
+        script.onload = function() {
+          gtag('config', 'AW-17765377014', {
+            'allow_google_signals': true,
+            'allow_ad_personalization_signals': true
+          });
+        };
+      });
+
+      // Event snippet for Request quote conversion page
       window.gtag_report_conversion = function(url) {
         var callback = function () {
           if (typeof(url) != 'undefined') {
@@ -175,18 +183,29 @@
       };
     </script>
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code - Deferred for performance -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1981688579056965');
-    fbq('track', 'PageView');
+    (function() {
+      window.fbq = function() {
+        window.fbq.callMethod ? window.fbq.callMethod.apply(window.fbq, arguments) : window.fbq.queue.push(arguments);
+      };
+      window.fbq.push = window.fbq;
+      window.fbq.loaded = true;
+      window.fbq.version = '2.0';
+      window.fbq.queue = [];
+
+      window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(script);
+
+        script.onload = function() {
+          fbq('init', '1981688579056965');
+          fbq('track', 'PageView');
+        };
+      });
+    })();
     </script>
     <!-- End Meta Pixel Code -->
 
