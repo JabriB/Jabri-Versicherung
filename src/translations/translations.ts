@@ -38,7 +38,7 @@ export const translations = {
     about: {
       title: 'Ihr persönlicher Berater',
       name: 'Brhan Jabri',
-      role: 'Versicherungsstellvertreter',
+      role: 'Versicherungsvertreter',
       description: 'Mit langjähriger Erfahrung und Expertise in der Versicherungsberatung stehe ich Ihnen als persönlicher Ansprechpartner zur Seite. Meine Leidenschaft ist es, maßgeschneiderte Lösungen zu entwickeln, die perfekt zu Ihren individuellen Bedürfnissen passen. In vier Sprachen berate ich Sie kompetent und transparent.',
       qualities: {
         item1: 'Mehrsprachige Beratung',
