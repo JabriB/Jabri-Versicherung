@@ -38,7 +38,7 @@ export default defineConfig({
         },
       },
     },
-    cssCodeSplit: true,
+    cssCodeSplit: false,
     target: 'es2020',
     minify: 'terser',
     terserOptions: {
