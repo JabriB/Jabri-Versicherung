@@ -25,7 +25,7 @@ export default function LegalLayout({ children, title }: LegalLayoutProps) {
                 />
               </div>
               <div>
-                <div className="text-xl font-bold text-white">Jabri Beratung</div>
+                <div className="text-xl font-bold text-white">Jabri Versicherung</div>
                 <div className="text-xs text-slate-400">Versicherungsvertreter</div>
               </div>
             </Link>
@@ -65,10 +65,10 @@ export default function LegalLayout({ children, title }: LegalLayoutProps) {
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="font-bold text-white">Jabri Beratung</span>
+            <span className="font-bold text-white">Jabri Versicherung</span>
           </div>
           <p className="text-sm text-slate-400">
-            © 2025 Jabri Beratung. Alle Rechte vorbehalten.
+            © 2025 Jabri Versicherung. Alle Rechte vorbehalten.
           </p>
         </div>
       </footer>

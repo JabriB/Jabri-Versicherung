@@ -124,6 +124,38 @@ export default function AGB() {
           </p>
         </section>
 
+        <section className="mt-8 bg-slate-700/30 border border-slate-600/30 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-white mb-4 text-center">
+            Weitere Seiten
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <Link
+              to="/"
+              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Startseite</span>
+            </Link>
+            <Link
+              to="/faq"
+              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">FAQ</span>
+            </Link>
+            <Link
+              to="/impressum"
+              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Impressum</span>
+            </Link>
+            <Link
+              to="/datenschutz"
+              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Datenschutz</span>
+            </Link>
+          </div>
+        </section>
+
       </div>
     </LegalLayout>
   );

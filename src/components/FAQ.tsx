@@ -447,6 +447,38 @@ export default function FAQ() {
           </div>
         </div>
 
+        <div className="mt-8 sm:mt-10 lg:mt-12 bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 sm:p-8">
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-4 text-center">
+            Weitere hilfreiche Seiten
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <Link
+              to="/"
+              className="text-center p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Startseite</span>
+            </Link>
+            <Link
+              to="/blog"
+              className="text-center p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Blog</span>
+            </Link>
+            <Link
+              to="/impressum"
+              className="text-center p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Impressum</span>
+            </Link>
+            <Link
+              to="/datenschutz"
+              className="text-center p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+            >
+              <span className="text-sm text-slate-300 hover:text-orange-400">Datenschutz</span>
+            </Link>
+          </div>
+        </div>
+
         <div className="mt-8 sm:mt-10 lg:mt-12 text-center">
           <Link
             to="/"

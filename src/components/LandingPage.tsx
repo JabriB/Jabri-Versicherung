@@ -95,7 +95,7 @@ export default function LandingPage() {
                 />
               </div>
               <div>
-                <div className="text-xl font-bold text-white">Jabri Beratung</div>
+                <div className="text-xl font-bold text-white">Jabri Versicherung</div>
                 <div className="text-xs text-slate-400">Versicherungsvertreter</div>
               </div>
             </div>
@@ -342,8 +342,12 @@ export default function LandingPage() {
                   {t.about.role}
                 </p>
               </div>
-              <p className="text-lg text-slate-300 mb-8 leading-relaxed">
+              <p className="text-lg text-slate-300 mb-4 leading-relaxed">
                 {t.about.description}
+              </p>
+
+              <p className="text-base text-slate-400 mb-6 leading-relaxed">
+                Mit langjähriger Erfahrung in der Versicherungsbranche biete ich umfassende Beratung für Privat- und Geschäftskunden in Düren, Aachen und Umgebung. Meine Expertise umfasst alle wichtigen Versicherungsbereiche - von Rechtsschutz über Haftpflicht bis hin zu Hausrat- und Wohngebäudeversicherungen. Als unabhängiger Versicherungsberater arbeite ich mit führenden Versicherungsgesellschaften zusammen, um für jeden Kunden die optimale Lösung zu finden. Mein Ziel ist es, Sie vor finanziellen Risiken zu schützen und gleichzeitig beste Konditionen zu sichern.
               </p>
 
               <div className="grid grid-cols-2 gap-4">
@@ -1012,7 +1016,7 @@ export default function LandingPage() {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <span className="font-bold text-white">Jabri Beratung</span>
+                <span className="font-bold text-white">Jabri Versicherung</span>
               </div>
               <p className="text-sm text-slate-400">
                 {t.footer.description}
