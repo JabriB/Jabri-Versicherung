@@ -45,7 +45,7 @@ export const translations = {
       title: 'Ihr persönlicher Berater',
       name: 'Brhan Jabri',
       role: 'Versicherungsvertreter',
-      description: 'Mit langjähriger Erfahrung und Expertise in der Versicherungsberatung stehe ich Ihnen als persönlicher Ansprechpartner zur Seite. Meine Leidenschaft ist es, maßgeschneiderte Lösungen zu entwickeln, die perfekt zu Ihren individuellen Bedürfnissen passen. In vier Sprachen berate ich Sie kompetent und transparent.',
+      description: 'Mit langjähriger Erfahrung in der Versicherungsbranche biete ich umfassende Beratung für Privat- und Geschäftskunden in Düren, Aachen und Umgebung. Meine Expertise umfasst alle wichtigen Versicherungsbereiche - von Rechtsschutz über Haftpflicht bis hin zu Hausrat- und Wohngebäudeversicherungen. Als unabhängiger Versicherungsberater arbeite ich mit führenden Versicherungsgesellschaften zusammen, um für jeden Kunden die optimale Lösung zu finden. Mein Ziel ist es, Sie vor finanziellen Risiken zu schützen und gleichzeitig beste Konditionen zu sichern.',
       qualities: {
         item1: 'Mehrsprachige Beratung',
         item2: 'Persönliche Betreuung',
@@ -313,7 +313,7 @@ export const translations = {
       title: 'Your Personal Advisor',
       name: 'Brhan Jabri',
       role: 'Insurance Representative',
-      description: 'With years of experience and expertise in insurance consulting, I am here as your personal contact. My passion is to develop tailored solutions that perfectly fit your individual needs. I advise you competently and transparently in four languages.',
+      description: 'With years of experience in the insurance industry, I offer comprehensive consulting for private and business clients in Düren, Aachen and the surrounding areas. My expertise covers all important areas of insurance - from legal protection to liability insurance to household and building insurance. As an independent insurance advisor, I work with leading insurance companies to find the optimal solution for each client. My goal is to protect you from financial risks while securing the best terms.',
       qualities: {
         item1: 'Multilingual Consulting',
         item2: 'Personal Support',
