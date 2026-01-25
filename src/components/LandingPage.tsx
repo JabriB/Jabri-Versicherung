@@ -347,7 +347,7 @@ export default function LandingPage() {
               </p>
 
               <p className="text-base text-slate-400 mb-6 leading-relaxed">
-                Mit langjähriger Erfahrung in der Versicherungsbranche biete ich umfassende Beratung für Privat- und Geschäftskunden in Düren, Aachen und Umgebung. Meine Expertise umfasst alle wichtigen Versicherungsbereiche - von Rechtsschutz über Haftpflicht bis hin zu Hausrat- und Wohngebäudeversicherungen. Als unabhängiger Versicherungsberater arbeite ich mit führenden Versicherungsgesellschaften zusammen, um für jeden Kunden die optimale Lösung zu finden. Mein Ziel ist es, Sie vor finanziellen Risiken zu schützen und gleichzeitig beste Konditionen zu sichern.
+                {t.about.expertise}
               </p>
 
               <div className="grid grid-cols-2 gap-4">

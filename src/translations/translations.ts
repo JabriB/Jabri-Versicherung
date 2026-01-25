@@ -46,6 +46,7 @@ export const translations = {
       name: 'Brhan Jabri',
       role: 'Versicherungsvertreter',
       description: 'Mit langjähriger Erfahrung und Expertise in der Versicherungsberatung stehe ich Ihnen als persönlicher Ansprechpartner zur Seite. Meine Leidenschaft ist es, maßgeschneiderte Lösungen zu entwickeln, die perfekt zu Ihren individuellen Bedürfnissen passen. In vier Sprachen berate ich Sie kompetent und transparent.',
+      expertise: 'Mit langjähriger Erfahrung in der Versicherungsbranche biete ich umfassende Beratung für Privat- und Geschäftskunden in Düren, Aachen und Umgebung. Meine Expertise umfasst alle wichtigen Versicherungsbereiche - von Rechtsschutz über Haftpflicht bis hin zu Hausrat- und Wohngebäudeversicherungen. Als unabhängiger Versicherungsberater arbeite ich mit führenden Versicherungsgesellschaften zusammen, um für jeden Kunden die optimale Lösung zu finden. Mein Ziel ist es, Sie vor finanziellen Risiken zu schützen und gleichzeitig beste Konditionen zu sichern.',
       qualities: {
         item1: 'Mehrsprachige Beratung',
         item2: 'Persönliche Betreuung',
@@ -314,6 +315,7 @@ export const translations = {
       name: 'Brhan Jabri',
       role: 'Insurance Representative',
       description: 'With years of experience and expertise in insurance consulting, I am here as your personal contact. My passion is to develop tailored solutions that perfectly fit your individual needs. I advise you competently and transparently in four languages.',
+      expertise: 'With many years of experience in the insurance industry, I offer comprehensive consulting for private and business clients in Düren, Aachen and the surrounding area. My expertise covers all important insurance areas - from legal protection to liability to household and building insurance. As an independent insurance consultant, I work with leading insurance companies to find the optimal solution for each client. My goal is to protect you from financial risks while securing the best conditions.',
       qualities: {
         item1: 'Multilingual Consulting',
         item2: 'Personal Support',
@@ -582,6 +584,7 @@ export const translations = {
       name: 'برهان جبري',
       role: 'ممثل التأمين',
       description: 'بفضل سنوات من الخبرة والتخصص في الاستشارات التأمينية، أنا هنا كجهة اتصال شخصية لك. شغفي هو تطوير حلول مخصصة تتناسب تماماً مع احتياجاتك الفردية. أقدم لك المشورة بكفاءة وشفافية بأربع لغات.',
+      expertise: 'بفضل سنوات عديدة من الخبرة في قطاع التأمين، أقدم استشارات شاملة للعملاء من القطاعين الخاص والتجاري في ديرين وآخن والمناطق المحيطة. تغطي خبرتي جميع مجالات التأمين المهمة - من الحماية القانونية إلى المسؤولية إلى تأمين الأسرة والمباني. كمستشار تأمين مستقل، أعمل مع شركات التأمين الرائدة لإيجاد الحل الأمثل لكل عميل. هدفي هو حمايتك من المخاطر المالية مع تأمين أفضل الشروط.',
       qualities: {
         item1: 'استشارة متعددة اللغات',
         item2: 'دعم شخصي',
@@ -850,6 +853,7 @@ export const translations = {
       name: 'Brhan Jabri',
       role: 'Sigorta Temsilcisi',
       description: 'Yılların deneyimi ve sigorta danışmanlığındaki uzmanlığımla sizin kişisel irtibat noktanız olarak hizmetinizdeyim. Tutkum, bireysel ihtiyaçlarınıza mükemmel şekilde uyan özel çözümler geliştirmektir. Size dört dilde yetkin ve şeffaf danışmanlık sunuyorum.',
+      expertise: 'Sigorta sektöründe uzun yılların deneyimiyle, Düren, Aachen ve çevresindeki özel ve ticari müşterilere kapsamlı danışmanlık sunuyorum. Uzmanlığım tüm önemli sigorta alanlarını kapsar - yasal korumadan sorumluluk sigortasına, ev eşyaları ve bina sigortasına kadar. Bağımsız bir sigorta danışmanı olarak, her müşteri için en uygun çözümü bulmak için önde gelen sigorta şirketleriyle çalışıyorum. Amacım, sizi finansal risklerden korurken en iyi koşulları güvence altına almaktır.',
       qualities: {
         item1: 'Çok Dilli Danışmanlık',
         item2: 'Kişisel Destek',
