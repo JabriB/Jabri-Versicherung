@@ -9,12 +9,12 @@ export const translations = {
     nav: {
       blog: 'Blog',
       benefits: 'Vorteile',
-      products: 'Produkte',
+      products: 'Versicherungen',
       about: 'Über mich',
       testimonials: 'Bewertungen',
       process: 'Ablauf',
       location: 'Standort',
-      cta: 'Kostenlose Analyse'
+      cta: 'Kostenlose Beratung'
     },
     hero: {
       badge: 'Professionelle Beratung für Ihre Zukunft',
@@ -139,11 +139,11 @@ export const translations = {
       requestButton: 'Jetzt anfordern'
     },
     footer: {
-      description: 'Professionelle Beratung für Ihren Erfolg.',
+      description: 'Professionelle Versicherungsberatung für Ihren Erfolg.',
       navigation: 'Navigation',
       legal: 'Rechtliches',
       contact: 'Kontakt',
-      copyright: '© 2025 BERATUNG Professional. Alle Rechte vorbehalten.',
+      copyright: '© 2025 Jabri Versicherung. Alle Rechte vorbehalten.',
       gdpr: 'Datenschutz- & DSGVO-konform',
       links: {
         imprint: 'Impressum',
@@ -271,12 +271,12 @@ export const translations = {
     nav: {
       blog: 'Blog',
       benefits: 'Benefits',
-      products: 'Products',
+      products: 'Insurance',
       about: 'About Me',
       testimonials: 'Reviews',
       process: 'Process',
       location: 'Location',
-      cta: 'Free Analysis'
+      cta: 'Free Consultation'
     },
     hero: {
       badge: 'Professional Consulting for Your Future',
@@ -401,11 +401,11 @@ export const translations = {
       requestButton: 'Request Now'
     },
     footer: {
-      description: 'Professional consulting for your success.',
+      description: 'Professional insurance consulting for your success.',
       navigation: 'Navigation',
       legal: 'Legal',
       contact: 'Contact',
-      copyright: '© 2025 CONSULTING Professional. All rights reserved.',
+      copyright: '© 2025 Jabri Insurance. All rights reserved.',
       gdpr: 'Privacy & GDPR compliant',
       links: {
         imprint: 'Imprint',
@@ -533,12 +533,12 @@ export const translations = {
     nav: {
       blog: 'مدونة',
       benefits: 'المزايا',
-      products: 'المنتجات',
+      products: 'التأمين',
       about: 'عني',
       testimonials: 'التقييمات',
       process: 'العملية',
       location: 'الموقع',
-      cta: 'تحليل مجاني'
+      cta: 'استشارة مجانية'
     },
     hero: {
       badge: 'استشارة احترافية لمستقبلك',
@@ -645,8 +645,8 @@ export const translations = {
     },
     location: {
       title: 'موقعنا',
-      subtitle: 'قم بزيارتنا في مكتبنا في دورين',
-      office: 'مكتب دورين',
+      subtitle: 'قم بزيارتنا في مكتبنا في ديرين',
+      office: 'مكتب ديرين',
       officeSubtitle: 'استشارة شخصية في الموقع',
       address: 'العنوان',
       contact: 'الاتصال',
@@ -663,16 +663,16 @@ export const translations = {
       requestButton: 'اطلب الآن'
     },
     footer: {
-      description: 'استشارة احترافية لنجاحك.',
+      description: 'استشارة التأمين المهنية لنجاحك.',
       navigation: 'التصفح',
       legal: 'قانوني',
       contact: 'الاتصال',
-      copyright: '© 2025 BERATUNG المهنية. جميع الحقوق محفوظة.',
+      copyright: '© 2025 جبري للتأمين. جميع الحقوق محفوظة.',
       gdpr: 'متوافق مع الخصوصية واللائحة العامة لحماية البيانات',
       links: {
-        imprint: 'بصمة',
+        imprint: 'بيان المسؤولية',
         privacy: 'الخصوصية',
-        terms: 'الشروط'
+        terms: 'الشروط والأحكام'
       }
     },
     cookies: {
@@ -795,12 +795,12 @@ export const translations = {
     nav: {
       blog: 'Blog',
       benefits: 'Avantajlar',
-      products: 'Ürünler',
+      products: 'Sigorta',
       about: 'Hakkımda',
       testimonials: 'Değerlendirmeler',
       process: 'Süreç',
       location: 'Konum',
-      cta: 'Ücretsiz Analiz'
+      cta: 'Ücretsiz Danışmanlık'
     },
     hero: {
       badge: 'Geleceğiniz için Profesyonel Danışmanlık',
@@ -925,16 +925,16 @@ export const translations = {
       requestButton: 'Şimdi Talep Et'
     },
     footer: {
-      description: 'Başarınız için profesyonel danışmanlık.',
+      description: 'Başarınız için profesyonel sigorta danışmanlığı.',
       navigation: 'Gezinme',
       legal: 'Yasal',
       contact: 'İletişim',
-      copyright: '© 2025 DANIŞMANLIK Profesyonel. Tüm hakları saklıdır.',
+      copyright: '© 2025 Jabri Sigorta. Tüm hakları saklıdır.',
       gdpr: 'Gizlilik ve GDPR uyumlu',
       links: {
-        imprint: 'Künye',
+        imprint: 'İmprint',
         privacy: 'Gizlilik',
-        terms: 'Şartlar'
+        terms: 'Şartlar ve Koşullar'
       }
     },
     cookies: {
