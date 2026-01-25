@@ -23,10 +23,10 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (priority) return;
+    if (priority || !containerRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,18 +37,16 @@ export default function OptimizedImage({
           }
         });
       },
-      { rootMargin: '50px' }
+      { rootMargin: '100px' }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-
+    observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [priority]);
 
   return (
     <div
+      ref={containerRef}
       style={{
         aspectRatio: `${width} / ${height}`,
         backgroundColor: '#1e293b',
@@ -59,7 +57,6 @@ export default function OptimizedImage({
     >
       {isInView && (
         <img
-          ref={imgRef}
           src={src}
           alt={alt}
           width={width}
