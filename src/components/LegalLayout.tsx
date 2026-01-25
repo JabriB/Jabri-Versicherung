@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 
 interface LegalLayoutProps {
   children: React.ReactNode;
@@ -7,6 +9,8 @@ interface LegalLayoutProps {
 }
 
 export default function LegalLayout({ children, title }: LegalLayoutProps) {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-700/50">
@@ -25,8 +29,8 @@ export default function LegalLayout({ children, title }: LegalLayoutProps) {
                 />
               </div>
               <div>
-                <div className="text-xl font-bold text-white">Jabri Versicherung</div>
-                <div className="text-xs text-slate-400">Versicherungsvertreter</div>
+                <div className="text-xl font-bold text-white">{t.common.companyName}</div>
+                <div className="text-xs text-slate-400">{t.common.companyRole}</div>
               </div>
             </Link>
             <Link
@@ -34,7 +38,7 @@ export default function LegalLayout({ children, title }: LegalLayoutProps) {
               className="flex items-center gap-2 text-slate-300 hover:text-white transition"
             >
               <ArrowLeft size={20} />
-              <span>Zurück</span>
+              <span>{t.common.backButton}</span>
             </Link>
           </div>
         </div>
@@ -65,10 +69,10 @@ export default function LegalLayout({ children, title }: LegalLayoutProps) {
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="font-bold text-white">Jabri Versicherung</span>
+            <span className="font-bold text-white">{t.common.companyName}</span>
           </div>
           <p className="text-sm text-slate-400">
-            © 2025 Jabri Versicherung. Alle Rechte vorbehalten.
+            © 2025 {t.common.companyName}. {t.common.allRightsReserved}
           </p>
         </div>
       </footer>

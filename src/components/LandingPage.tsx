@@ -95,8 +95,8 @@ export default function LandingPage() {
                 />
               </div>
               <div>
-                <div className="text-xl font-bold text-white">Jabri Versicherung</div>
-                <div className="text-xs text-slate-400">Versicherungsvertreter</div>
+                <div className="text-xl font-bold text-white">{t.common.companyName}</div>
+                <div className="text-xs text-slate-400">{t.common.companyRole}</div>
               </div>
             </div>
 
@@ -1016,7 +1016,7 @@ export default function LandingPage() {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <span className="font-bold text-white">Jabri Versicherung</span>
+                <span className="font-bold text-white">{t.common.companyName}</span>
               </div>
               <p className="text-sm text-slate-400">
                 {t.footer.description}

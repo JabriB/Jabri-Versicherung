@@ -2,6 +2,12 @@ import { Language } from '../contexts/LanguageContext';
 
 export const translations = {
   de: {
+    common: {
+      companyName: 'Jabri Versicherung',
+      companyRole: 'Versicherungsvertreter',
+      backButton: 'Zurück',
+      allRightsReserved: 'Alle Rechte vorbehalten.'
+    },
     emergency: {
       title: 'Notfall? Rufen Sie uns direkt an:',
       phone: '+49 1575 5588 142'
@@ -264,6 +270,12 @@ export const translations = {
     }
   },
   en: {
+    common: {
+      companyName: 'Jabri Insurance',
+      companyRole: 'Insurance Representative',
+      backButton: 'Back',
+      allRightsReserved: 'All rights reserved.'
+    },
     emergency: {
       title: 'Emergency? Call us directly:',
       phone: '+49 1575 5588 142'
@@ -526,6 +538,12 @@ export const translations = {
     }
   },
   ar: {
+    common: {
+      companyName: 'جبري للتأمين',
+      companyRole: 'ممثل التأمين',
+      backButton: 'رجوع',
+      allRightsReserved: 'جميع الحقوق محفوظة.'
+    },
     emergency: {
       title: 'حالة طوارئ؟ اتصل بنا مباشرة:',
       phone: '+49 1575 5588 142'
@@ -788,6 +806,12 @@ export const translations = {
     }
   },
   tr: {
+    common: {
+      companyName: 'Jabri Sigorta',
+      companyRole: 'Sigorta Temsilcisi',
+      backButton: 'Geri',
+      allRightsReserved: 'Tüm hakları saklıdır.'
+    },
     emergency: {
       title: 'Acil durum? Bizi hemen arayın:',
       phone: '+49 1575 5588 142'
