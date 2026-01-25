@@ -48,10 +48,11 @@ export default function OptimizedImage({
     <div
       ref={containerRef}
       style={{
-        aspectRatio: `${width} / ${height}`,
         backgroundColor: '#1e293b',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        width: '100%',
+        height: 'auto'
       }}
       className={className}
     >
@@ -69,8 +70,8 @@ export default function OptimizedImage({
           onLoad={() => setIsLoaded(true)}
           style={{
             width: '100%',
-            height: '100%',
-            objectFit: 'cover',
+            height: 'auto',
+            display: 'block',
             opacity: isLoaded ? 1 : 0,
             transition: 'opacity 0.3s ease-in-out'
           }}

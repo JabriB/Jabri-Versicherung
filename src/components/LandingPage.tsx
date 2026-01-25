@@ -851,7 +851,7 @@ export default function LandingPage() {
             </div>
 
             {/* Map */}
-            <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden h-[600px] hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+            <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
               <OptimizedImage
                 src="/map.webp"
                 alt="Standort Versicherung Düren-Aachen Brhan Jabri"
