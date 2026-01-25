@@ -45,8 +45,8 @@ export const translations = {
       title: 'Ihr persönlicher Berater',
       name: 'Brhan Jabri',
       role: 'Versicherungsvertreter',
-      description: 'Mit langjähriger Erfahrung und Expertise in der Versicherungsberatung stehe ich Ihnen als persönlicher Ansprechpartner zur Seite. Meine Leidenschaft ist es, maßgeschneiderte Lösungen zu entwickeln, die perfekt zu Ihren individuellen Bedürfnissen passen. In vier Sprachen berate ich Sie kompetent und transparent.',
-      expertise: 'Mit langjähriger Erfahrung in der Versicherungsbranche biete ich umfassende Beratung für Privat- und Geschäftskunden in Düren, Aachen und Umgebung. Meine Expertise umfasst alle wichtigen Versicherungsbereiche - von Rechtsschutz über Haftpflicht bis hin zu Hausrat- und Wohngebäudeversicherungen. Als unabhängiger Versicherungsberater arbeite ich mit führenden Versicherungsgesellschaften zusammen, um für jeden Kunden die optimale Lösung zu finden. Mein Ziel ist es, Sie vor finanziellen Risiken zu schützen und gleichzeitig beste Konditionen zu sichern.',
+      description: 'Mit langjähriger Erfahrung und Expertise in der Versicherungsberatung stehe ich Ihnen als persönlicher Ansprechpartner zur Seite. Meine Leidenschaft ist es, Ihre Bedürfnisse genau zu verstehen und darauf basierend individuelle Lösungen zu entwickeln. Mit Ehrlichkeit, Transparenz und Kompetenz berate ich Sie in vier Sprachen – damit Sie sich verstanden und gut aufgehoben fühlen.',
+      expertise: 'Als unabhängiger Versicherungsberater biete ich umfassende Versicherungslösungen für Privat- und Geschäftskunden in Düren, Aachen und Umgebung. Meine Expertise erstreckt sich über alle wichtigen Versicherungssparten: von Rechtsschutz- und Haftpflichtversicherungen bis zu Hausrat- und Wohngebäudeversicherungen. Ich arbeite vertrauensvoll mit den führenden Versicherungsgesellschaften zusammen, um jedem Kunden maßgeschneiderte Lösungen mit optimalen Konditionen zu bieten. Mein Fokus liegt darauf, Sie zuverlässig vor finanziellen Risiken zu schützen und Ihnen langfristige Sicherheit zu geben.',
       qualities: {
         item1: 'Mehrsprachige Beratung',
         item2: 'Persönliche Betreuung',
@@ -314,8 +314,8 @@ export const translations = {
       title: 'Your Personal Advisor',
       name: 'Brhan Jabri',
       role: 'Insurance Representative',
-      description: 'With years of experience and expertise in insurance consulting, I am here as your personal contact. My passion is to develop tailored solutions that perfectly fit your individual needs. I advise you competently and transparently in four languages.',
-      expertise: 'With many years of experience in the insurance industry, I offer comprehensive consulting for private and business clients in Düren, Aachen and the surrounding area. My expertise covers all important insurance areas - from legal protection to liability to household and building insurance. As an independent insurance consultant, I work with leading insurance companies to find the optimal solution for each client. My goal is to protect you from financial risks while securing the best conditions.',
+      description: 'With years of experience and expertise in insurance consulting, I am here as your personal contact. My passion is to truly understand your needs and develop individual solutions based on your unique situation. With honesty, transparency, and competence, I advise you in four languages – so you feel understood and well cared for.',
+      expertise: 'As an independent insurance consultant, I provide comprehensive insurance solutions for private and business clients in Düren, Aachen and the surrounding area. My expertise spans all major insurance sectors: from legal protection and liability insurance to household and building insurance. I work confidently with leading insurance companies to offer each client tailored solutions with optimal conditions. My focus is to reliably protect you from financial risks and provide you with lasting security.',
       qualities: {
         item1: 'Multilingual Consulting',
         item2: 'Personal Support',
@@ -583,8 +583,8 @@ export const translations = {
       title: 'مستشارك الشخصي',
       name: 'برهان جبري',
       role: 'ممثل التأمين',
-      description: 'بفضل سنوات من الخبرة والتخصص في الاستشارات التأمينية، أنا هنا كجهة اتصال شخصية لك. شغفي هو تطوير حلول مخصصة تتناسب تماماً مع احتياجاتك الفردية. أقدم لك المشورة بكفاءة وشفافية بأربع لغات.',
-      expertise: 'بفضل سنوات عديدة من الخبرة في قطاع التأمين، أقدم استشارات شاملة للعملاء من القطاعين الخاص والتجاري في ديرين وآخن والمناطق المحيطة. تغطي خبرتي جميع مجالات التأمين المهمة - من الحماية القانونية إلى المسؤولية إلى تأمين الأسرة والمباني. كمستشار تأمين مستقل، أعمل مع شركات التأمين الرائدة لإيجاد الحل الأمثل لكل عميل. هدفي هو حمايتك من المخاطر المالية مع تأمين أفضل الشروط.',
+      description: 'بفضل سنوات من الخبرة والتخصص في الاستشارات التأمينية، أنا هنا كشريكك الموثوق. شغفي هو الاستماع إليك بعناية وفهم احتياجاتك بشكل عميق، ثم تطوير حلول خاصة بك. مع الأمانة والشفافية والكفاءة، أقدم لك استشارات متميزة بأربع لغات – لتشعر بأنك مفهوم وفي أيدٍ آمنة.',
+      expertise: 'كمستشار تأمين مستقل، أقدم حلولاً تأمينية شاملة للعملاء الأفراد والشركات في منطقة ديرين وآخن والمناطق المحيطة. تشمل خبرتي جميع القطاعات التأمينية الرئيسية: من تأمين الحماية القانونية والمسؤولية إلى تأمين الأسرة والمباني. أعمل بثقة وشراكة مع شركات التأمين الرائدة لتقديم حلول مخصصة مع شروط مثالية لكل عميل. تركيزي هو حمايتك بموثوقية من المخاطر المالية وتوفير الأمان الدائم لك ولعائلتك.',
       qualities: {
         item1: 'استشارة متعددة اللغات',
         item2: 'دعم شخصي',
@@ -852,8 +852,8 @@ export const translations = {
       title: 'Kişisel Danışmanınız',
       name: 'Brhan Jabri',
       role: 'Sigorta Temsilcisi',
-      description: 'Yılların deneyimi ve sigorta danışmanlığındaki uzmanlığımla sizin kişisel irtibat noktanız olarak hizmetinizdeyim. Tutkum, bireysel ihtiyaçlarınıza mükemmel şekilde uyan özel çözümler geliştirmektir. Size dört dilde yetkin ve şeffaf danışmanlık sunuyorum.',
-      expertise: 'Sigorta sektöründe uzun yılların deneyimiyle, Düren, Aachen ve çevresindeki özel ve ticari müşterilere kapsamlı danışmanlık sunuyorum. Uzmanlığım tüm önemli sigorta alanlarını kapsar - yasal korumadan sorumluluk sigortasına, ev eşyaları ve bina sigortasına kadar. Bağımsız bir sigorta danışmanı olarak, her müşteri için en uygun çözümü bulmak için önde gelen sigorta şirketleriyle çalışıyorum. Amacım, sizi finansal risklerden korurken en iyi koşulları güvence altına almaktır.',
+      description: 'Yılların deneyimi ve sigorta danışmanlığındaki uzmanlığımla sizin güvenilir ortağınız olarak hizmetinizdeyim. Tutkum, sizin ihtiyaçlarınızı dikkatle dinlemek ve anlamak, sonrasında özel çözümler geliştirmektir. Dürüstlük, şeffaflık ve yetkinlikle dört dilde danışmanlık sunuyorum – böylece kendinizi anlaşılmış ve güvenilir ellerde hissedebilirsiniz.',
+      expertise: 'Bağımsız bir sigorta danışmanı olarak, Düren, Aachen ve çevresindeki özel ve ticari müşterilere kapsamlı sigorta çözümleri sunuyorum. Uzmanlığım tüm önemli sigorta alanlarını kapsıyor: yasal koruma ve sorumluluk sigortasından ev eşyaları ve bina sigortasına kadar. Öncü sigorta şirketleriyle güvenle ve ortaklaşa çalışarak her müşteriye en uygun şartlarla özelleştirilmiş çözümler sunuyorum. Odağım, sizi finansal risklerden güvenilir bir şekilde korumak ve uzun vadeli güvenlik sağlamaktır.',
       qualities: {
         item1: 'Çok Dilli Danışmanlık',
         item2: 'Kişisel Destek',
