@@ -1,5 +1,6 @@
 import { useHead } from '../hooks/useHead';
 import LegalLayout from './LegalLayout';
+import { Link } from 'react-router-dom';
 
 export default function Datenschutz() {
   useHead({
