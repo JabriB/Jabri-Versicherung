@@ -5,7 +5,13 @@ export default defineConfig({
   plugins: [react()],
   base: '/',
   optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
     exclude: ['lucide-react'],
+  },
+  server: {
+    warmup: {
+      clientFiles: ['./src/components/LandingPage.tsx', './src/main.tsx']
+    }
   },
   build: {
     rollupOptions: {

@@ -6,10 +6,10 @@ import { getTranslation } from '../translations/translations';
 import LanguageSelector from './LanguageSelector';
 import { useHead } from '../hooks/useHead';
 import { pixelEvents } from '../lib/pixelTracking';
+import OptimizedImage from './OptimizedImage';
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
   const [openPanels, setOpenPanels] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -49,7 +49,6 @@ export default function LandingPage() {
       return;
     }
     pixelEvents.viewContent(sectionId, 'section');
-    setActiveSection(sectionId);
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -315,15 +314,14 @@ export default function LandingPage() {
             <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
               <div className="relative w-full max-w-sm group">
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl" />
-                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-orange-500/50 transition-all duration-500 hover:shadow-2xl" style={{aspectRatio: '1/1.94'}}>
-                  <img
+                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-orange-500/50 transition-all duration-500 hover:shadow-2xl">
+                  <OptimizedImage
                     src="/tower-sm.webp"
                     alt={t.about.name}
-                    width="400"
-                    height="776"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full rounded-2xl object-cover"
+                    width={400}
+                    height={776}
+                    className="rounded-2xl"
+                    sizes="(max-width: 640px) 100vw, 400px"
                   />
                 </div>
               </div>
@@ -854,16 +852,13 @@ export default function LandingPage() {
 
             {/* Map */}
             <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden h-[600px] hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-              <img
+              <OptimizedImage
                 src="/map.webp"
                 alt="Standort Versicherung Düren-Aachen Brhan Jabri"
-                width="800"
-                height="600"
-                loading="lazy"
-                decoding="async"
-                srcSet="/map.webp"
+                width={800}
+                height={600}
                 sizes="(max-width: 1024px) 100vw, 500px"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="group-hover:scale-110 transition-transform duration-500"
               />
             </div>
           </div>
