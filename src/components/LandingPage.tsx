@@ -63,14 +63,14 @@ export default function LandingPage() {
     <>
       {/* Emergency Contact Banner */}
       <div className="fixed top-0 w-full z-50 bg-gradient-to-r from-orange-600 to-orange-500">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <a
             href="tel:+4915755588142"
             onClick={() => handleContactClick('phone')}
-            className="flex items-center justify-center gap-2 text-white hover:text-orange-100 transition group"
+            className="flex items-center justify-center gap-2 text-white hover:text-orange-100 transition group flex-wrap"
           >
-            <Phone size={18} className="animate-pulse" />
-            <span className="text-xs sm:text-base font-semibold">
+            <Phone size={18} className="animate-pulse flex-shrink-0" />
+            <span className="text-xs sm:text-sm font-semibold whitespace-normal">
               {t.emergency.title} <span className="underline group-hover:no-underline" dir="ltr">{t.emergency.phone}</span>
             </span>
           </a>
@@ -80,9 +80,9 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="fixed top-10 w-full z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-700/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
+          <div className="flex items-center justify-between min-h-16 py-2">
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
                 <img
                   src="/jabri-versicherung-logo.svg"
                   alt="Jabri Versicherung Logo"
@@ -94,49 +94,49 @@ export default function LandingPage() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div>
-                <div className="text-xl font-bold text-white">{t.common.companyName}</div>
-                <div className="text-xs text-slate-400">{t.common.companyRole}</div>
+              <div className="min-w-0">
+                <div className="text-lg font-bold text-white leading-tight">{t.common.companyName}</div>
+                <div className="text-xs text-slate-400 leading-tight">{t.common.companyRole}</div>
               </div>
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8">
-              <button onClick={() => scrollToSection('about')} className="text-slate-300 hover:text-white transition text-sm">
+            <div className="hidden lg:flex items-center gap-6 px-4">
+              <button onClick={() => scrollToSection('about')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.about}
               </button>
-              <button onClick={() => scrollToSection('vorteile')} className="text-slate-300 hover:text-white transition text-sm">
+              <button onClick={() => scrollToSection('vorteile')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.benefits}
               </button>
-              <button onClick={() => scrollToSection('produkte')} className="text-slate-300 hover:text-white transition text-sm">
+              <button onClick={() => scrollToSection('produkte')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.products}
               </button>
-              <Link to="/blog" className="text-slate-300 hover:text-white transition text-sm">
+              <Link to="/blog" className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.blog}
               </Link>
-              <button onClick={() => scrollToSection('testimonials')} className="text-slate-300 hover:text-white transition text-sm">
+              <button onClick={() => scrollToSection('testimonials')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.testimonials}
               </button>
-              <button onClick={() => scrollToSection('ablauf')} className="text-slate-300 hover:text-white transition text-sm">
+              <button onClick={() => scrollToSection('ablauf')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.process}
               </button>
-              <button onClick={() => scrollToSection('standort')} className="text-slate-300 hover:text-white transition text-sm">
+              <button onClick={() => scrollToSection('standort')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
                 {t.nav.location}
               </button>
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
               <LanguageSelector />
               <button
                 onClick={() => scrollToSection('form')}
-                className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold transition transform hover:scale-105"
+                className="px-5 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold text-sm transition transform hover:scale-105 whitespace-nowrap"
               >
                 {t.nav.cta}
               </button>
             </div>
 
             {/* Mobile Menu Button & Language Selector */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="lg:hidden flex items-center gap-2 flex-shrink-0">
               <LanguageSelector />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -151,7 +151,7 @@ export default function LandingPage() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden pb-4 space-y-3">
+            <div className="lg:hidden pb-4 space-y-3">
               <button
                 onClick={() => scrollToSection('about')}
                 className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
