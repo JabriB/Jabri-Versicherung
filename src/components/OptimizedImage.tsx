@@ -24,6 +24,7 @@ export default function OptimizedImage({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
   const containerRef = useRef<HTMLDivElement>(null);
+  const aspectRatio = width && height ? width / height : undefined;
 
   useEffect(() => {
     if (priority || !containerRef.current) return;
@@ -52,7 +53,7 @@ export default function OptimizedImage({
         position: 'relative',
         overflow: 'hidden',
         width: '100%',
-        height: 'auto'
+        aspectRatio: aspectRatio ? `${aspectRatio}` : undefined
       }}
       className={className}
     >
@@ -70,8 +71,9 @@ export default function OptimizedImage({
           onLoad={() => setIsLoaded(true)}
           style={{
             width: '100%',
-            height: 'auto',
+            height: '100%',
             display: 'block',
+            objectFit: 'cover',
             opacity: isLoaded ? 1 : 0,
             transition: 'opacity 0.3s ease-in-out'
           }}
