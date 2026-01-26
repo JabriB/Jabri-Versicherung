@@ -9,6 +9,7 @@ interface OptimizedImageProps {
   priority?: boolean;
   sizes?: string;
   srcSet?: string;
+  fillContainer?: boolean;
 }
 
 export default function OptimizedImage({
@@ -19,12 +20,13 @@ export default function OptimizedImage({
   className = '',
   priority = false,
   sizes,
-  srcSet
+  srcSet,
+  fillContainer = false
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
   const containerRef = useRef<HTMLDivElement>(null);
-  const aspectRatio = width && height ? width / height : undefined;
+  const aspectRatio = !fillContainer && width && height ? width / height : undefined;
 
   useEffect(() => {
     if (priority || !containerRef.current) return;
@@ -53,6 +55,7 @@ export default function OptimizedImage({
         position: 'relative',
         overflow: 'hidden',
         width: '100%',
+        height: fillContainer ? '100%' : 'auto',
         aspectRatio: aspectRatio ? `${aspectRatio}` : undefined
       }}
       className={className}

@@ -851,17 +851,16 @@ export default function LandingPage() {
             </div>
 
             {/* Map */}
-            <div className="hidden lg:flex bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-              <div className="w-full h-full">
-                <OptimizedImage
-                  src="/map.webp"
-                  alt="Standort Versicherung Düren-Aachen Brhan Jabri"
-                  width={800}
-                  height={600}
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                  className="group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
+            <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group min-h-0">
+              <OptimizedImage
+                src="/map.webp"
+                alt="Standort Versicherung Düren-Aachen Brhan Jabri"
+                width={800}
+                height={600}
+                sizes="(max-width: 1024px) 100vw, 500px"
+                className="group-hover:scale-110 transition-transform duration-500 h-full w-full"
+                fillContainer
+              />
             </div>
           </div>
         </div>
