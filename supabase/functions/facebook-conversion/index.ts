@@ -43,7 +43,7 @@ Deno.serve(async (req: Request) => {
 
     const event: ConversionEvent = await req.json();
     const accessToken = Deno.env.get("FACEBOOK_CONVERSION_API_TOKEN");
-    const pixelId = "1981688579056965";
+    const pixelId = "1256434379746230";
 
     if (!accessToken) {
       return new Response(

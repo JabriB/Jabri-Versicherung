@@ -252,6 +252,13 @@ export default function MultiStepForm() {
         throw new Error(`Submission failed with status ${response.status}`);
       }
 
+      pixelEvents.lead({
+        email: formData.email,
+        phone: formData.phone,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+      });
+
       if (typeof window !== 'undefined') {
         if (typeof (window as any).gtag === 'function') {
           (window as any).gtag('event', 'conversion', {
@@ -262,10 +269,6 @@ export default function MultiStepForm() {
               setIsSubmitted(true);
             }
           });
-        }
-
-        if (typeof (window as any).fbq === 'function') {
-          (window as any).fbq('track', 'Lead');
         }
 
         setTimeout(() => {
