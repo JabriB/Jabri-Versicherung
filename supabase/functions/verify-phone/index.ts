@@ -13,10 +13,32 @@ interface RequestPayload {
   code?: string;
 }
 
+// Generate a random 6-digit verification code
 function generateVerificationCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
+// Generate a unique request ID for correlation
+function generateRequestId(): string {
+  return crypto.randomUUID();
+}
+
+// Hash the verification code using SHA-256
+async function hashCode(code: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(code);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Compare a plain code with a hashed code
+async function compareCode(plainCode: string, hashedCode: string): Promise<boolean> {
+  const plainHash = await hashCode(plainCode);
+  return plainHash === hashedCode;
+}
+
+// Normalize phone number to E.164 format (Germany-specific)
 function normalizePhoneNumber(phone: string): string {
   const cleaned = phone.replace(/\D/g, '');
 
@@ -31,6 +53,56 @@ function normalizePhoneNumber(phone: string): string {
   return `+${cleaned}`;
 }
 
+// Validate E.164 phone number format
+function isValidE164(phone: string): boolean {
+  return /^\+\d{1,15}$/.test(phone);
+}
+
+// Extract IP address from request
+function getClientIp(req: Request): string {
+  return req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+         req.headers.get('x-real-ip') ||
+         'unknown';
+}
+
+// Rate limiting check: max 3 sends per hour per phone
+async function checkRateLimit(supabase: any, phone: string, ip: string): Promise<{ allowed: boolean; error?: string }> {
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+  // Check by phone number
+  const { data: phoneSends } = await supabase
+    .from('phone_verifications')
+    .select('last_sent_at')
+    .eq('phone_number', phone)
+    .gte('last_sent_at', oneHourAgo.toISOString())
+    .order('last_sent_at', { ascending: false });
+
+  if (phoneSends && phoneSends.length >= 3) {
+    const oldestSend = new Date(phoneSends[phoneSends.length - 1].last_sent_at);
+    const minutesUntilReset = Math.ceil((60 - (Date.now() - oldestSend.getTime()) / 60000));
+    return {
+      allowed: false,
+      error: `Rate limit exceeded. Please wait ${minutesUntilReset} minutes before requesting a new code.`
+    };
+  }
+
+  // Check by IP address (prevent abuse from same IP)
+  const { data: ipSends } = await supabase
+    .from('phone_verifications')
+    .select('last_sent_at')
+    .eq('ip_address', ip)
+    .gte('last_sent_at', oneHourAgo.toISOString());
+
+  if (ipSends && ipSends.length >= 10) {
+    return {
+      allowed: false,
+      error: 'Too many verification requests from your location. Please try again later.'
+    };
+  }
+
+  return { allowed: true };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, {
@@ -38,6 +110,9 @@ Deno.serve(async (req: Request) => {
       headers: corsHeaders,
     });
   }
+
+  const requestId = generateRequestId();
+  const clientIp = getClientIp(req);
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -52,7 +127,11 @@ Deno.serve(async (req: Request) => {
 
     if (!phone) {
       return new Response(
-        JSON.stringify({ success: false, error: "Phone number is required" }),
+        JSON.stringify({
+          success: false,
+          error: "Phone number is required",
+          requestId
+        }),
         {
           status: 400,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -62,9 +141,42 @@ Deno.serve(async (req: Request) => {
 
     const normalizedPhone = normalizePhoneNumber(phone);
 
+    // Validate phone number format
+    if (!isValidE164(normalizedPhone)) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Invalid phone number format. Please enter a valid German phone number.",
+          requestId
+        }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
     if (action === 'send') {
+      // Check rate limiting
+      const rateLimitCheck = await checkRateLimit(supabase, normalizedPhone, clientIp);
+      if (!rateLimitCheck.allowed) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: rateLimitCheck.error,
+            requestId
+          }),
+          {
+            status: 429,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
       const verificationCode = generateVerificationCode();
+      const codeHash = await hashCode(verificationCode);
       const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+      const now = new Date().toISOString();
 
       const { data: existing } = await supabase
         .from('phone_verifications')
@@ -77,7 +189,8 @@ Deno.serve(async (req: Request) => {
           return new Response(
             JSON.stringify({
               success: false,
-              error: "This phone number is already verified and registered"
+              error: "This phone number is already verified and registered",
+              requestId
             }),
             {
               status: 400,
@@ -86,27 +199,41 @@ Deno.serve(async (req: Request) => {
           );
         }
 
+        // Update existing record with new code
         const { error: updateError } = await supabase
           .from('phone_verifications')
           .update({
-            verification_code: verificationCode,
+            verification_code_hash: codeHash,
             code_expires_at: expiresAt.toISOString(),
             attempts: 0,
-            updated_at: new Date().toISOString(),
+            last_sent_at: now,
+            ip_address: clientIp,
+            request_id: requestId,
+            updated_at: now,
           })
           .eq('phone_number', normalizedPhone);
 
-        if (updateError) throw updateError;
+        if (updateError) {
+          console.error(`[${requestId}] Database update error:`, updateError);
+          throw updateError;
+        }
       } else {
+        // Create new verification record
         const { error: insertError } = await supabase
           .from('phone_verifications')
           .insert({
             phone_number: normalizedPhone,
-            verification_code: verificationCode,
+            verification_code_hash: codeHash,
             code_expires_at: expiresAt.toISOString(),
+            last_sent_at: now,
+            ip_address: clientIp,
+            request_id: requestId,
           });
 
-        if (insertError) throw insertError;
+        if (insertError) {
+          console.error(`[${requestId}] Database insert error:`, insertError);
+          throw insertError;
+        }
       }
 
       // Send SMS via Vonage
@@ -119,7 +246,10 @@ Deno.serve(async (req: Request) => {
 
       if (!isDevMode) {
         try {
-          // Send SMS using Vonage API
+          // Send SMS using Vonage API with timeout
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
           const vonageUrl = "https://rest.nexmo.com/sms/json";
           const vonageResponse = await fetch(vonageUrl, {
             method: 'POST',
@@ -133,23 +263,58 @@ Deno.serve(async (req: Request) => {
               from: vonageFromNumber,
               text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
             }),
+            signal: controller.signal,
           });
+
+          clearTimeout(timeoutId);
+
+          if (!vonageResponse.ok) {
+            throw new Error(`Vonage API returned ${vonageResponse.status}`);
+          }
 
           const responseData = await vonageResponse.json();
 
-          if (!vonageResponse.ok || responseData.messages?.[0]?.status !== '0') {
-            const errorMessage = responseData.messages?.[0]?.error_text || responseData.error_description || 'Unknown error';
-            console.error('Vonage error:', errorMessage);
-            throw new Error(`Failed to send SMS: ${errorMessage}`);
+          // Validate response structure
+          if (!responseData.messages || !Array.isArray(responseData.messages) || responseData.messages.length === 0) {
+            console.error(`[${requestId}] Invalid Vonage response structure:`, responseData);
+            throw new Error('Invalid response from SMS provider');
           }
 
-          console.log(`SMS sent successfully to ${normalizedPhone}`);
+          const message = responseData.messages[0];
+
+          // Check status codes
+          if (message.status !== '0') {
+            const errorText = message['error-text'] || 'Unknown error';
+            console.error(`[${requestId}] Vonage error: ${errorText} (status: ${message.status})`);
+
+            // Handle specific Vonage error codes
+            if (message.status === '1') {
+              throw new Error('SMS configuration error. Please contact support.');
+            } else if (message.status === '4') {
+              throw new Error('SMS service authentication failed. Please contact support.');
+            } else if (message.status === '9') {
+              throw new Error('Insufficient SMS credits. Please contact support.');
+            } else {
+              throw new Error(`Failed to send SMS: ${errorText}`);
+            }
+          }
+
+          console.log(`[${requestId}] SMS sent successfully to ${normalizedPhone}`);
         } catch (smsError) {
-          console.error('Error sending SMS:', smsError);
+          console.error(`[${requestId}] Error sending SMS:`, smsError);
+
+          // Provide user-friendly error message
+          const errorMessage = smsError instanceof Error && smsError.name === 'AbortError'
+            ? 'SMS request timed out. Please try again.'
+            : smsError instanceof Error
+              ? smsError.message
+              : 'Failed to send verification code. Please try again.';
+
           return new Response(
             JSON.stringify({
               success: false,
-              error: "Failed to send verification code. Please try again."
+              error: errorMessage,
+              requestId
             }),
             {
               status: 500,
@@ -158,16 +323,19 @@ Deno.serve(async (req: Request) => {
           );
         }
       } else {
-        // Dev mode: log to console
-        console.log(`[DEV MODE] Verification code for ${normalizedPhone}: ${verificationCode}`);
+        // Dev mode: log to console only (DO NOT return code to client)
+        console.log(`[${requestId}] [DEV MODE] Verification code for ${normalizedPhone}: ${verificationCode}`);
+        console.log(`[${requestId}] [DEV MODE] In production, this would be sent via SMS`);
       }
 
       return new Response(
         JSON.stringify({
           success: true,
-          message: "Verification code sent",
-          // Only include devCode in dev mode
-          ...(isDevMode && { devCode: verificationCode })
+          message: isDevMode
+            ? "Dev mode: Check server logs for verification code"
+            : "Verification code sent successfully",
+          requestId
+          // SECURITY: Never return the actual code to the client
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -178,7 +346,26 @@ Deno.serve(async (req: Request) => {
     if (action === 'verify') {
       if (!code) {
         return new Response(
-          JSON.stringify({ success: false, error: "Verification code is required" }),
+          JSON.stringify({
+            success: false,
+            error: "Verification code is required",
+            requestId
+          }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      // Validate code format (must be 6 digits)
+      if (!/^\d{6}$/.test(code)) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "Verification code must be 6 digits",
+            requestId
+          }),
           {
             status: 400,
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -192,11 +379,18 @@ Deno.serve(async (req: Request) => {
         .eq('phone_number', normalizedPhone)
         .maybeSingle();
 
-      if (fetchError) throw fetchError;
+      if (fetchError) {
+        console.error(`[${requestId}] Database fetch error:`, fetchError);
+        throw fetchError;
+      }
 
       if (!verification) {
         return new Response(
-          JSON.stringify({ success: false, error: "No verification request found" }),
+          JSON.stringify({
+            success: false,
+            error: "No verification request found. Please request a new code.",
+            requestId
+          }),
           {
             status: 404,
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -204,9 +398,28 @@ Deno.serve(async (req: Request) => {
         );
       }
 
+      // Check if already verified
+      if (verification.verified) {
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: "Phone number already verified",
+            requestId
+          }),
+          {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      // Check attempt limit
       if (verification.attempts >= 5) {
         return new Response(
-          JSON.stringify({ success: false, error: "Too many attempts. Please request a new code" }),
+          JSON.stringify({
+            success: false,
+            error: "Too many verification attempts. Please request a new code.",
+            requestId
+          }),
           {
             status: 429,
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -214,27 +427,13 @@ Deno.serve(async (req: Request) => {
         );
       }
 
+      // Check expiration
       if (new Date(verification.code_expires_at) < new Date()) {
-        return new Response(
-          JSON.stringify({ success: false, error: "Verification code expired. Please request a new one" }),
-          {
-            status: 400,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          }
-        );
-      }
-
-      if (verification.verification_code !== code) {
-        await supabase
-          .from('phone_verifications')
-          .update({ attempts: verification.attempts + 1 })
-          .eq('phone_number', normalizedPhone);
-
         return new Response(
           JSON.stringify({
             success: false,
-            error: "Invalid verification code",
-            attemptsLeft: 5 - (verification.attempts + 1)
+            error: "Verification code expired. Please request a new one.",
+            requestId
           }),
           {
             status: 400,
@@ -243,6 +442,33 @@ Deno.serve(async (req: Request) => {
         );
       }
 
+      // Verify the code using hash comparison
+      const isCodeValid = await compareCode(code, verification.verification_code_hash);
+
+      if (!isCodeValid) {
+        // Increment attempts
+        await supabase
+          .from('phone_verifications')
+          .update({ attempts: verification.attempts + 1 })
+          .eq('phone_number', normalizedPhone);
+
+        const attemptsLeft = 5 - (verification.attempts + 1);
+
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "Invalid verification code",
+            attemptsLeft,
+            requestId
+          }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      // Mark as verified
       const { error: updateError } = await supabase
         .from('phone_verifications')
         .update({
@@ -251,10 +477,19 @@ Deno.serve(async (req: Request) => {
         })
         .eq('phone_number', normalizedPhone);
 
-      if (updateError) throw updateError;
+      if (updateError) {
+        console.error(`[${requestId}] Database update error:`, updateError);
+        throw updateError;
+      }
+
+      console.log(`[${requestId}] Phone ${normalizedPhone} verified successfully`);
 
       return new Response(
-        JSON.stringify({ success: true, message: "Phone number verified successfully" }),
+        JSON.stringify({
+          success: true,
+          message: "Phone number verified successfully",
+          requestId
+        }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
@@ -262,18 +497,23 @@ Deno.serve(async (req: Request) => {
     }
 
     return new Response(
-      JSON.stringify({ success: false, error: "Invalid action" }),
+      JSON.stringify({
+        success: false,
+        error: "Invalid action. Must be 'send' or 'verify'.",
+        requestId
+      }),
       {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
     );
   } catch (error) {
-    console.error("Error:", error);
+    console.error(`[${requestId}] Unexpected error:`, error);
     return new Response(
       JSON.stringify({
         success: false,
-        error: error instanceof Error ? error.message : "Internal server error"
+        error: error instanceof Error ? error.message : "Internal server error",
+        requestId
       }),
       {
         status: 500,

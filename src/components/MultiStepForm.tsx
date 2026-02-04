@@ -37,7 +37,8 @@ interface PhoneVerificationState {
   sendingCode: boolean;
   verifying: boolean;
   error?: string;
-  devCode?: string;
+  lastSentAt?: number;
+  verifiedPhone?: string;
 }
 
 const initialFormData: FormData = {
@@ -239,9 +240,19 @@ export default function MultiStepForm() {
       return;
     }
 
+    const now = Date.now();
+    if (phoneVerification.lastSentAt && (now - phoneVerification.lastSentAt) < 30000) {
+      const secondsLeft = Math.ceil((30000 - (now - phoneVerification.lastSentAt)) / 1000);
+      setPhoneVerification(prev => ({ ...prev, error: `Please wait ${secondsLeft} seconds before resending` }));
+      return;
+    }
+
     setPhoneVerification(prev => ({ ...prev, sendingCode: true, error: undefined }));
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-phone`,
         {
@@ -254,8 +265,15 @@ export default function MultiStepForm() {
             phone: formData.phone,
             action: 'send',
           }),
+          signal: controller.signal,
         }
       );
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
 
       const data = await response.json();
 
@@ -264,7 +282,7 @@ export default function MultiStepForm() {
           ...prev,
           codeSent: true,
           sendingCode: false,
-          devCode: data.devCode,
+          lastSentAt: Date.now(),
         }));
       } else {
         setPhoneVerification(prev => ({
@@ -274,10 +292,16 @@ export default function MultiStepForm() {
         }));
       }
     } catch (error) {
+      const errorMessage = error instanceof Error && error.name === 'AbortError'
+        ? 'Request timed out. Please try again.'
+        : error instanceof Error
+          ? error.message
+          : 'Network error. Please try again.';
+
       setPhoneVerification(prev => ({
         ...prev,
         sendingCode: false,
-        error: 'Network error. Please try again.',
+        error: errorMessage,
       }));
     }
   };
@@ -288,9 +312,17 @@ export default function MultiStepForm() {
       return;
     }
 
+    if (!/^\d{6}$/.test(phoneVerification.verificationCode)) {
+      setPhoneVerification(prev => ({ ...prev, error: 'Code must be exactly 6 digits' }));
+      return;
+    }
+
     setPhoneVerification(prev => ({ ...prev, verifying: true, error: undefined }));
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-phone`,
         {
@@ -304,8 +336,15 @@ export default function MultiStepForm() {
             action: 'verify',
             code: phoneVerification.verificationCode,
           }),
+          signal: controller.signal,
         }
       );
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
 
       const data = await response.json();
 
@@ -315,6 +354,7 @@ export default function MultiStepForm() {
           isVerified: true,
           verifying: false,
           error: undefined,
+          verifiedPhone: formData.phone,
         }));
       } else {
         setPhoneVerification(prev => ({
@@ -324,10 +364,16 @@ export default function MultiStepForm() {
         }));
       }
     } catch (error) {
+      const errorMessage = error instanceof Error && error.name === 'AbortError'
+        ? 'Request timed out. Please try again.'
+        : error instanceof Error
+          ? error.message
+          : 'Network error. Please try again.';
+
       setPhoneVerification(prev => ({
         ...prev,
         verifying: false,
-        error: 'Network error. Please try again.',
+        error: errorMessage,
       }));
     }
   };
@@ -373,16 +419,34 @@ export default function MultiStepForm() {
   };
 
   const handleSubmit = async () => {
+    if (phoneVerification.verifiedPhone !== formData.phone) {
+      alert('Phone number has been changed. Please verify it again before submitting.');
+      setCurrentStep(2);
+      return;
+    }
+
+    if (!phoneVerification.isVerified) {
+      alert('Please verify your phone number before submitting.');
+      setCurrentStep(2);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch('https://n8n.srv1116248.hstgr.cloud/webhook/master', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(`Submission failed with status ${response.status}`);
@@ -644,21 +708,19 @@ export default function MultiStepForm() {
                     {phoneVerification.codeSent && !phoneVerification.isVerified && (
                       <div className="space-y-4 p-4 bg-gradient-to-br from-slate-900/70 to-slate-900/50 rounded-xl border border-slate-600/50 backdrop-blur-sm">
                         <div>
-                          <p className="text-sm text-slate-300 font-medium mb-3">Enter the 6-digit verification code</p>
-                          {phoneVerification.devCode && (
-                            <p className="text-xs text-yellow-400 bg-yellow-500/20 border border-yellow-500/30 px-3 py-2 rounded-lg">
-                              Dev mode: <span className="font-mono font-bold">{phoneVerification.devCode}</span>
-                            </p>
-                          )}
+                          <p className="text-sm text-slate-300 font-medium">Enter the 6-digit verification code sent to your phone</p>
+                          <p className="text-xs text-slate-500 mt-1">The code expires in 10 minutes</p>
                         </div>
 
                         <div className="space-y-3">
                           <input
                             type="text"
+                            inputMode="numeric"
                             maxLength={6}
                             value={phoneVerification.verificationCode}
-                            onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, '') }))}
+                            onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, ''), error: undefined }))}
                             placeholder="000000"
+                            autoComplete="one-time-code"
                             className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-2xl font-mono tracking-widest font-bold transition-all hover:border-orange-500/50"
                           />
                           <button
