@@ -688,7 +688,7 @@ export default function MultiStepForm() {
                             type="button"
                             onClick={sendVerificationCode}
                             disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
-                            className="basis-1/2 px-3 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transform hover:scale-105 shadow-lg shadow-orange-500/20"
+                            className="basis-1/2 px-3 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-lg shadow-orange-500/20"
                           >
                             {phoneVerification.sendingCode ? 'Sending...' : t.form.step3.verifyNumber}
                           </button>
