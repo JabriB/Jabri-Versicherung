@@ -30,6 +30,16 @@ interface ValidationErrors {
   birthDate?: string;
 }
 
+interface PhoneVerificationState {
+  isVerified: boolean;
+  codeSent: boolean;
+  verificationCode: string;
+  sendingCode: boolean;
+  verifying: boolean;
+  error?: string;
+  devCode?: string;
+}
+
 const initialFormData: FormData = {
   firstName: '',
   lastName: '',
@@ -61,6 +71,13 @@ export default function MultiStepForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
+  const [phoneVerification, setPhoneVerification] = useState<PhoneVerificationState>({
+    isVerified: false,
+    codeSent: false,
+    verificationCode: '',
+    sendingCode: false,
+    verifying: false,
+  });
   const navigate = useNavigate();
 
   useHead({
@@ -188,6 +205,13 @@ export default function MultiStepForm() {
       } else {
         setValidationErrors(prev => ({ ...prev, phone: undefined }));
       }
+      setPhoneVerification({
+        isVerified: false,
+        codeSent: false,
+        verificationCode: '',
+        sendingCode: false,
+        verifying: false,
+      });
     }
 
     if (field === 'postalCode' && typeof value === 'string') {
@@ -205,6 +229,105 @@ export default function MultiStepForm() {
       } else {
         setValidationErrors(prev => ({ ...prev, birthDate: undefined }));
       }
+    }
+  };
+
+  const sendVerificationCode = async () => {
+    if (!formData.phone || !validatePhone(formData.phone)) {
+      setPhoneVerification(prev => ({ ...prev, error: 'Please enter a valid phone number' }));
+      return;
+    }
+
+    setPhoneVerification(prev => ({ ...prev, sendingCode: true, error: undefined }));
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-phone`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            phone: formData.phone,
+            action: 'send',
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setPhoneVerification(prev => ({
+          ...prev,
+          codeSent: true,
+          sendingCode: false,
+          devCode: data.devCode,
+        }));
+      } else {
+        setPhoneVerification(prev => ({
+          ...prev,
+          sendingCode: false,
+          error: data.error || 'Failed to send verification code',
+        }));
+      }
+    } catch (error) {
+      setPhoneVerification(prev => ({
+        ...prev,
+        sendingCode: false,
+        error: 'Network error. Please try again.',
+      }));
+    }
+  };
+
+  const verifyCode = async () => {
+    if (!phoneVerification.verificationCode) {
+      setPhoneVerification(prev => ({ ...prev, error: 'Please enter the verification code' }));
+      return;
+    }
+
+    setPhoneVerification(prev => ({ ...prev, verifying: true, error: undefined }));
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-phone`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            phone: formData.phone,
+            action: 'verify',
+            code: phoneVerification.verificationCode,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setPhoneVerification(prev => ({
+          ...prev,
+          isVerified: true,
+          verifying: false,
+          error: undefined,
+        }));
+      } else {
+        setPhoneVerification(prev => ({
+          ...prev,
+          verifying: false,
+          error: data.error || 'Invalid verification code',
+        }));
+      }
+    } catch (error) {
+      setPhoneVerification(prev => ({
+        ...prev,
+        verifying: false,
+        error: 'Network error. Please try again.',
+      }));
     }
   };
 
@@ -303,7 +426,8 @@ export default function MultiStepForm() {
         const hasValidEmail = validateEmail(formData.email);
         const hasValidPhone = validatePhone(formData.phone);
         const ageValidation = validateAge(formData.birthDate);
-        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && ageValidation.isValid && !validationErrors.email && !validationErrors.phone && !validationErrors.birthDate;
+        const isPhoneVerified = phoneVerification.isVerified;
+        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && ageValidation.isValid && isPhoneVerified && !validationErrors.email && !validationErrors.phone && !validationErrors.birthDate;
       case 3:
         return !validationErrors.postalCode;
       default:
@@ -448,20 +572,79 @@ export default function MultiStepForm() {
                   <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
                     {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => updateField('phone', e.target.value)}
-                    placeholder={t.form.step3.phonePlaceholder}
-                    className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01] ${
-                      validationErrors.phone ? 'border-red-500' : 'border-slate-600'
-                    }`}
-                  />
-                  {validationErrors.phone && (
-                    <p className="text-red-400 text-xs mt-1">{validationErrors.phone}</p>
-                  )}
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <input
+                        id="phone"
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => updateField('phone', e.target.value)}
+                        placeholder={t.form.step3.phonePlaceholder}
+                        disabled={phoneVerification.isVerified}
+                        className={`flex-1 px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
+                          validationErrors.phone ? 'border-red-500' : phoneVerification.isVerified ? 'border-green-500' : 'border-slate-600'
+                        }`}
+                      />
+                      {!phoneVerification.isVerified && !phoneVerification.codeSent && (
+                        <button
+                          type="button"
+                          onClick={sendVerificationCode}
+                          disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
+                          className="px-4 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                        >
+                          {phoneVerification.sendingCode ? 'Sending...' : 'Send Code'}
+                        </button>
+                      )}
+                      {phoneVerification.isVerified && (
+                        <div className="flex items-center px-4 py-3 bg-green-500/20 border border-green-500 rounded-xl">
+                          <CheckCircle2 className="w-5 h-5 text-green-400" />
+                        </div>
+                      )}
+                    </div>
+                    {validationErrors.phone && (
+                      <p className="text-red-400 text-xs mt-1">{validationErrors.phone}</p>
+                    )}
+                    {phoneVerification.codeSent && !phoneVerification.isVerified && (
+                      <div className="space-y-2 p-3 bg-slate-900/70 rounded-lg border border-slate-600">
+                        <p className="text-sm text-slate-300">Enter the 6-digit code sent to your phone</p>
+                        {phoneVerification.devCode && (
+                          <p className="text-xs text-yellow-400 bg-yellow-500/10 px-2 py-1 rounded">
+                            Dev mode: {phoneVerification.devCode}
+                          </p>
+                        )}
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            maxLength={6}
+                            value={phoneVerification.verificationCode}
+                            onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, '') }))}
+                            placeholder="000000"
+                            className="flex-1 px-3 py-2 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-lg tracking-widest"
+                          />
+                          <button
+                            type="button"
+                            onClick={verifyCode}
+                            disabled={phoneVerification.verificationCode.length !== 6 || phoneVerification.verifying}
+                            className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {phoneVerification.verifying ? 'Verifying...' : 'Verify'}
+                          </button>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={sendVerificationCode}
+                          disabled={phoneVerification.sendingCode}
+                          className="text-xs text-orange-400 hover:text-orange-300 transition-all"
+                        >
+                          Resend code
+                        </button>
+                      </div>
+                    )}
+                    {phoneVerification.error && (
+                      <p className="text-red-400 text-xs">{phoneVerification.error}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
