@@ -31,35 +31,53 @@ function base64UrlEncode(str: string): string {
     .replace(/=/g, '');
 }
 
-// Generate Vonage JWT token using HMAC-SHA256
-async function generateVonageJWT(apiKey: string, apiSecret: string): Promise<string> {
+// Convert PEM formatted private key to PKCS8 format for Web Crypto API
+function pemToArrayBuffer(pem: string): ArrayBuffer {
+  const binaryString = atob(
+    pem
+      .replace(/-----BEGIN PRIVATE KEY-----/g, '')
+      .replace(/-----END PRIVATE KEY-----/g, '')
+      .replace(/\n/g, '')
+  );
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+// Generate Vonage JWT token using RSA-SHA256
+async function generateVonageJWT(applicationId: string, privateKey: string): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   const payload = {
-    application_id: apiKey,
+    application_id: applicationId,
     iat: now,
     exp: now + 900, // 15 minutes
     jti: crypto.randomUUID(),
   };
 
-  const header = { alg: "HS256", typ: "JWT" };
+  const header = { alg: "RS256", typ: "JWT" };
   const encodedHeader = base64UrlEncode(JSON.stringify(header));
   const encodedPayload = base64UrlEncode(JSON.stringify(payload));
 
   const signatureInput = `${encodedHeader}.${encodedPayload}`;
 
-  // Sign using HMAC-SHA256
-  const encoder = new TextEncoder();
-  const keyData = encoder.encode(apiSecret);
+  const keyBuffer = pemToArrayBuffer(privateKey);
+
   const key = await crypto.subtle.importKey(
-    'raw',
-    keyData,
-    { name: 'HMAC', hash: 'SHA-256' },
+    'pkcs8',
+    keyBuffer,
+    {
+      name: 'RSASSA-PKCS1-v1_5',
+      hash: 'SHA-256',
+    },
     false,
     ['sign']
   );
 
+  const encoder = new TextEncoder();
   const signature = await crypto.subtle.sign(
-    'HMAC',
+    'RSASSA-PKCS1-v1_5',
     key,
     encoder.encode(signatureInput)
   );
@@ -268,11 +286,11 @@ Deno.serve(async (req: Request) => {
       }
 
       // Get Vonage credentials
-      const vonageApiKey = Deno.env.get("VONAGE_API_KEY");
-      const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
+      const vonageApplicationId = Deno.env.get("VONAGE_APPLICATION_ID");
+      const vonagePrivateKey = Deno.env.get("VONAGE_PRIVATE_KEY");
 
       // Dev mode: If Vonage credentials are not configured
-      if (!vonageApiKey || !vonageApiSecret) {
+      if (!vonageApplicationId || !vonagePrivateKey) {
         console.log(`[${requestId}] DEV MODE - Vonage credentials not configured`);
 
         const verificationCode = generateVerificationCode();
@@ -327,7 +345,7 @@ Deno.serve(async (req: Request) => {
       try {
         console.log(`[${requestId}] Using Vonage Verify API v2 for ${normalizedPhone}`);
 
-        const jwt = await generateVonageJWT(vonageApiKey, vonageApiSecret);
+        const jwt = await generateVonageJWT(vonageApplicationId, vonagePrivateKey);
 
         const verifyRequestBody = {
           brand: "Jabri Versicherung",
@@ -546,13 +564,13 @@ Deno.serve(async (req: Request) => {
       }
 
       // Check if using Vonage Verify API or dev mode
-      const vonageApiKey = Deno.env.get("VONAGE_API_KEY");
-      const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
+      const vonageApplicationId = Deno.env.get("VONAGE_APPLICATION_ID");
+      const vonagePrivateKey = Deno.env.get("VONAGE_PRIVATE_KEY");
 
       let isCodeValid = false;
 
       // Dev mode: Use hash comparison
-      if (!vonageApiKey || !vonageApiSecret || verification.verification_code_hash) {
+      if (!vonageApplicationId || !vonagePrivateKey || verification.verification_code_hash) {
         console.log(`[${requestId}] DEV MODE - Verifying code using hash comparison`);
         isCodeValid = await compareCode(code, verification.verification_code_hash);
       }
@@ -561,7 +579,7 @@ Deno.serve(async (req: Request) => {
         console.log(`[${requestId}] Production mode - Verifying code with Vonage API`);
 
         try {
-          const jwt = await generateVonageJWT(vonageApiKey, vonageApiSecret);
+          const jwt = await generateVonageJWT(vonageApplicationId, vonagePrivateKey);
 
           const verifyCheckBody = {
             code: code
