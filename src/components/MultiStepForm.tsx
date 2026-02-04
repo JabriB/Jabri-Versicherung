@@ -624,24 +624,22 @@ export default function MultiStepForm() {
                         </div>
 
                         <div className="space-y-3">
-                          <div className="flex gap-3">
-                            <input
-                              type="text"
-                              maxLength={6}
-                              value={phoneVerification.verificationCode}
-                              onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, '') }))}
-                              placeholder="000000"
-                              className="flex-1 px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-2xl font-mono tracking-widest font-bold transition-all hover:border-orange-500/50"
-                            />
-                            <button
-                              type="button"
-                              onClick={verifyCode}
-                              disabled={phoneVerification.verificationCode.length !== 6 || phoneVerification.verifying}
-                              className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transform hover:scale-105 shadow-lg shadow-green-500/20"
-                            >
-                              {phoneVerification.verifying ? 'Verifying...' : 'Verify'}
-                            </button>
-                          </div>
+                          <input
+                            type="text"
+                            maxLength={6}
+                            value={phoneVerification.verificationCode}
+                            onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, '') }))}
+                            placeholder="000000"
+                            className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-2xl font-mono tracking-widest font-bold transition-all hover:border-orange-500/50"
+                          />
+                          <button
+                            type="button"
+                            onClick={verifyCode}
+                            disabled={phoneVerification.verificationCode.length !== 6 || phoneVerification.verifying}
+                            className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-lg shadow-green-500/20"
+                          >
+                            {phoneVerification.verifying ? 'Verifying...' : 'Verify'}
+                          </button>
                           <button
                             type="button"
                             onClick={sendVerificationCode}
