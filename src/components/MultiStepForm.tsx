@@ -569,7 +569,7 @@ export default function MultiStepForm() {
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-3">
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-200 mb-3">
                     {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
                   <div className="space-y-4">
