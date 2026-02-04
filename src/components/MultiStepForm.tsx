@@ -271,11 +271,11 @@ export default function MultiStepForm() {
 
       clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || `Request failed with status ${response.status}`);
+      }
 
       if (data.success) {
         setPhoneVerification(prev => ({
@@ -342,11 +342,11 @@ export default function MultiStepForm() {
 
       clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || `Request failed with status ${response.status}`);
+      }
 
       if (data.success) {
         setPhoneVerification(prev => ({

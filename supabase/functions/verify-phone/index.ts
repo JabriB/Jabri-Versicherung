@@ -42,15 +42,24 @@ async function compareCode(plainCode: string, hashedCode: string): Promise<boole
 function normalizePhoneNumber(phone: string): string {
   const cleaned = phone.replace(/\D/g, '');
 
+  // German numbers must have at least 9 digits (without country code)
+  // or 10+ digits if country code is included
+  if (cleaned.length < 9) {
+    throw new Error('Phone number too short. German numbers need at least 9 digits.');
+  }
+
   if (cleaned.startsWith('49')) {
     return `+${cleaned}`;
   } else if (cleaned.startsWith('0')) {
     return `+49${cleaned.substring(1)}`;
   } else if (cleaned.length >= 10) {
     return `+49${cleaned}`;
+  } else if (cleaned.length === 9) {
+    // 9 digits without country code
+    return `+49${cleaned}`;
   }
 
-  return `+${cleaned}`;
+  throw new Error('Invalid phone number format for Germany.');
 }
 
 // Validate E.164 phone number format
