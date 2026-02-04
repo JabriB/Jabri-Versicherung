@@ -247,33 +247,44 @@ Deno.serve(async (req: Request) => {
 
       if (!isDevMode) {
         try {
+          console.log(`[${requestId}] Attempting to send SMS to ${normalizedPhone}`);
+          console.log(`[${requestId}] API Key configured: ${!!vonageApiKey}, Secret configured: ${!!vonageApiSecret}, From configured: ${!!vonageFromNumber}`);
+
           // Send SMS using Vonage API with timeout
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
           const vonageUrl = "https://rest.nexmo.com/sms/json";
+          const params = new URLSearchParams({
+            api_key: vonageApiKey,
+            api_secret: vonageApiSecret,
+            to: normalizedPhone,
+            from: vonageFromNumber,
+            text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
+          });
+
+          console.log(`[${requestId}] Sending to Vonage API with to: ${normalizedPhone}, from: ${vonageFromNumber}`);
+
           const vonageResponse = await fetch(vonageUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: new URLSearchParams({
-              api_key: vonageApiKey,
-              api_secret: vonageApiSecret,
-              to: normalizedPhone,
-              from: vonageFromNumber,
-              text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
-            }),
+            body: params.toString(),
             signal: controller.signal,
           });
 
           clearTimeout(timeoutId);
+          console.log(`[${requestId}] Vonage response status: ${vonageResponse.status}`);
 
           if (!vonageResponse.ok) {
-            throw new Error(`Vonage API returned ${vonageResponse.status}`);
+            const errorText = await vonageResponse.text();
+            console.error(`[${requestId}] Vonage HTTP error ${vonageResponse.status}: ${errorText}`);
+            throw new Error(`Vonage API returned ${vonageResponse.status}: ${errorText}`);
           }
 
           const responseData = await vonageResponse.json();
+          console.log(`[${requestId}] Vonage response: ${JSON.stringify(responseData)}`);
 
           // Validate response structure
           if (!responseData.messages || !Array.isArray(responseData.messages) || responseData.messages.length === 0) {
