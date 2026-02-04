@@ -143,7 +143,7 @@ All formats are automatically normalized to E.164 format (+49xxxxxxxxx).
 **Step 1: Send Verification (POST /v2/verify)**
 ```json
 {
-  "brand": "Jabri Versicherung",
+  "brand": "ARAG Brhan Jabri",
   "code_length": 6,
   "channel_timeout": 300,
   "workflow": [
