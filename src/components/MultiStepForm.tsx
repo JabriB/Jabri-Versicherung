@@ -285,6 +285,7 @@ export default function MultiStepForm() {
           codeSent: true,
           sendingCode: false,
           lastSentAt: Date.now(),
+          error: data.devMode ? `DEV MODE: Your code is ${data.devCode}` : undefined,
         }));
       } else {
         setPhoneVerification(prev => ({
@@ -742,8 +743,16 @@ export default function MultiStepForm() {
                         </div>
 
                         {phoneVerification.error && (
-                          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
-                            <p className="text-red-400 text-sm font-medium flex items-start gap-2">
+                          <div className={`p-3 border rounded-lg ${
+                            phoneVerification.error.startsWith('DEV MODE')
+                              ? 'bg-blue-500/10 border-blue-500/30'
+                              : 'bg-red-500/10 border-red-500/30'
+                          }`}>
+                            <p className={`text-sm font-medium flex items-start gap-2 ${
+                              phoneVerification.error.startsWith('DEV MODE')
+                                ? 'text-blue-400'
+                                : 'text-red-400'
+                            }`}>
                               <span className="mt-0.5">•</span>
                               <span>{phoneVerification.error}</span>
                             </p>
