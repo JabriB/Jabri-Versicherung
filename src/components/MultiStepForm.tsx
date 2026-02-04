@@ -569,7 +569,7 @@ export default function MultiStepForm() {
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-200 mb-3">
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-3">
                     {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
                   <div className="space-y-4">
@@ -584,7 +584,7 @@ export default function MultiStepForm() {
                             onChange={(e) => updateField('phone', e.target.value)}
                             placeholder={t.form.step3.phonePlaceholder}
                             disabled={phoneVerification.isVerified}
-                            className={`flex-1 px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
+                            className={`flex-1 px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
                               validationErrors.phone ? 'border-red-500' : phoneVerification.isVerified ? 'border-green-500' : 'border-slate-600'
                             }`}
                           />
