@@ -109,13 +109,62 @@ Deno.serve(async (req: Request) => {
         if (insertError) throw insertError;
       }
 
-      console.log(`Verification code for ${normalizedPhone}: ${verificationCode}`);
+      // Send SMS via Twilio
+      const twilioAccountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
+      const twilioAuthToken = Deno.env.get("TWILIO_AUTH_TOKEN");
+      const twilioPhoneNumber = Deno.env.get("TWILIO_PHONE_NUMBER");
+
+      // Dev mode fallback if Twilio is not configured
+      const isDevMode = !twilioAccountSid || !twilioAuthToken || !twilioPhoneNumber;
+
+      if (!isDevMode) {
+        try {
+          // Send SMS using Twilio API
+          const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`;
+          const twilioResponse = await fetch(twilioUrl, {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Basic ' + btoa(`${twilioAccountSid}:${twilioAuthToken}`),
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+              To: normalizedPhone,
+              From: twilioPhoneNumber,
+              Body: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
+            }),
+          });
+
+          if (!twilioResponse.ok) {
+            const errorData = await twilioResponse.json();
+            console.error('Twilio error:', errorData);
+            throw new Error(`Failed to send SMS: ${errorData.message || 'Unknown error'}`);
+          }
+
+          console.log(`SMS sent successfully to ${normalizedPhone}`);
+        } catch (smsError) {
+          console.error('Error sending SMS:', smsError);
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: "Failed to send verification code. Please try again."
+            }),
+            {
+              status: 500,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            }
+          );
+        }
+      } else {
+        // Dev mode: log to console
+        console.log(`[DEV MODE] Verification code for ${normalizedPhone}: ${verificationCode}`);
+      }
 
       return new Response(
         JSON.stringify({
           success: true,
           message: "Verification code sent",
-          devCode: verificationCode
+          // Only include devCode in dev mode
+          ...(isDevMode && { devCode: verificationCode })
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
