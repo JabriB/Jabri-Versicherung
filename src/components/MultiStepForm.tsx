@@ -569,80 +569,98 @@ export default function MultiStepForm() {
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-3">
                     {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
-                  <div className="space-y-2">
-                    <div className="flex gap-2">
-                      <input
-                        id="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => updateField('phone', e.target.value)}
-                        placeholder={t.form.step3.phonePlaceholder}
-                        disabled={phoneVerification.isVerified}
-                        className={`flex-1 px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
-                          validationErrors.phone ? 'border-red-500' : phoneVerification.isVerified ? 'border-green-500' : 'border-slate-600'
-                        }`}
-                      />
-                      {!phoneVerification.isVerified && !phoneVerification.codeSent && (
-                        <button
-                          type="button"
-                          onClick={sendVerificationCode}
-                          disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
-                          className="px-4 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                        >
-                          {phoneVerification.sendingCode ? 'Sending...' : 'Send Code'}
-                        </button>
-                      )}
-                      {phoneVerification.isVerified && (
-                        <div className="flex items-center px-4 py-3 bg-green-500/20 border border-green-500 rounded-xl">
-                          <CheckCircle2 className="w-5 h-5 text-green-400" />
+                  <div className="space-y-4">
+                    {!phoneVerification.codeSent ? (
+                      <div className="space-y-3">
+                        <div className="flex gap-3">
+                          <input
+                            id="phone"
+                            type="tel"
+                            required
+                            value={formData.phone}
+                            onChange={(e) => updateField('phone', e.target.value)}
+                            placeholder={t.form.step3.phonePlaceholder}
+                            disabled={phoneVerification.isVerified}
+                            className={`flex-1 px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
+                              validationErrors.phone ? 'border-red-500' : phoneVerification.isVerified ? 'border-green-500' : 'border-slate-600'
+                            }`}
+                          />
+                          {!phoneVerification.isVerified && (
+                            <button
+                              type="button"
+                              onClick={sendVerificationCode}
+                              disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
+                              className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transform hover:scale-105 shadow-lg shadow-orange-500/20"
+                            >
+                              {phoneVerification.sendingCode ? 'Sending...' : 'Send Code'}
+                            </button>
+                          )}
+                          {phoneVerification.isVerified && (
+                            <div className="flex items-center justify-center px-6 py-3 bg-green-500/20 border border-green-500 rounded-xl">
+                              <CheckCircle2 className="w-5 h-5 text-green-400" />
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                    {validationErrors.phone && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.phone}</p>
-                    )}
-                    {phoneVerification.codeSent && !phoneVerification.isVerified && (
-                      <div className="space-y-2 p-3 bg-slate-900/70 rounded-lg border border-slate-600">
-                        <p className="text-sm text-slate-300">Enter the 6-digit code sent to your phone</p>
-                        {phoneVerification.devCode && (
-                          <p className="text-xs text-yellow-400 bg-yellow-500/10 px-2 py-1 rounded">
-                            Dev mode: {phoneVerification.devCode}
+                        {validationErrors.phone && (
+                          <p className="text-red-400 text-sm flex items-center gap-1">
+                            <span>•</span> {validationErrors.phone}
                           </p>
                         )}
-                        <div className="flex gap-2">
-                          <input
-                            type="text"
-                            maxLength={6}
-                            value={phoneVerification.verificationCode}
-                            onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, '') }))}
-                            placeholder="000000"
-                            className="flex-1 px-3 py-2 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-lg tracking-widest"
-                          />
+                      </div>
+                    ) : null}
+
+                    {phoneVerification.codeSent && !phoneVerification.isVerified && (
+                      <div className="space-y-4 p-4 bg-gradient-to-br from-slate-900/70 to-slate-900/50 rounded-xl border border-slate-600/50 backdrop-blur-sm">
+                        <div>
+                          <p className="text-sm text-slate-300 font-medium mb-3">Enter the 6-digit verification code</p>
+                          {phoneVerification.devCode && (
+                            <p className="text-xs text-yellow-400 bg-yellow-500/20 border border-yellow-500/30 px-3 py-2 rounded-lg">
+                              Dev mode: <span className="font-mono font-bold">{phoneVerification.devCode}</span>
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="space-y-3">
+                          <div className="flex gap-3">
+                            <input
+                              type="text"
+                              maxLength={6}
+                              value={phoneVerification.verificationCode}
+                              onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, '') }))}
+                              placeholder="000000"
+                              className="flex-1 px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-2xl font-mono tracking-widest font-bold transition-all hover:border-orange-500/50"
+                            />
+                            <button
+                              type="button"
+                              onClick={verifyCode}
+                              disabled={phoneVerification.verificationCode.length !== 6 || phoneVerification.verifying}
+                              className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transform hover:scale-105 shadow-lg shadow-green-500/20"
+                            >
+                              {phoneVerification.verifying ? 'Verifying...' : 'Verify'}
+                            </button>
+                          </div>
                           <button
                             type="button"
-                            onClick={verifyCode}
-                            disabled={phoneVerification.verificationCode.length !== 6 || phoneVerification.verifying}
-                            className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            onClick={sendVerificationCode}
+                            disabled={phoneVerification.sendingCode}
+                            className="w-full text-sm text-slate-400 hover:text-orange-400 transition-all font-medium py-2"
                           >
-                            {phoneVerification.verifying ? 'Verifying...' : 'Verify'}
+                            {phoneVerification.sendingCode ? 'Sending new code...' : 'Resend verification code'}
                           </button>
                         </div>
-                        <button
-                          type="button"
-                          onClick={sendVerificationCode}
-                          disabled={phoneVerification.sendingCode}
-                          className="text-xs text-orange-400 hover:text-orange-300 transition-all"
-                        >
-                          Resend code
-                        </button>
+
+                        {phoneVerification.error && (
+                          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                            <p className="text-red-400 text-sm font-medium flex items-start gap-2">
+                              <span className="mt-0.5">•</span>
+                              <span>{phoneVerification.error}</span>
+                            </p>
+                          </div>
+                        )}
                       </div>
-                    )}
-                    {phoneVerification.error && (
-                      <p className="text-red-400 text-xs">{phoneVerification.error}</p>
                     )}
                   </div>
                 </div>
