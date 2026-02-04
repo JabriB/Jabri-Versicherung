@@ -593,13 +593,13 @@ export default function MultiStepForm() {
                               type="button"
                               onClick={sendVerificationCode}
                               disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
-                              className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transform hover:scale-105 shadow-lg shadow-orange-500/20"
+                              className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transform hover:scale-105 shadow-lg shadow-orange-500/20"
                             >
                               {phoneVerification.sendingCode ? 'Sending...' : 'Send Code'}
                             </button>
                           )}
                           {phoneVerification.isVerified && (
-                            <div className="flex items-center justify-center px-6 py-3 bg-green-500/20 border border-green-500 rounded-xl">
+                            <div className="flex items-center justify-center px-4 py-2 bg-green-500/20 border border-green-500 rounded-lg">
                               <CheckCircle2 className="w-5 h-5 text-green-400" />
                             </div>
                           )}
