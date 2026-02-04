@@ -241,8 +241,9 @@ Deno.serve(async (req: Request) => {
       const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
       const vonageFromNumber = Deno.env.get("VONAGE_FROM_NUMBER");
 
-      // Dev mode fallback if Vonage is not configured
-      const isDevMode = !vonageApiKey || !vonageApiSecret || !vonageFromNumber;
+      // Dev mode fallback if Vonage is not configured or uses placeholder values
+      const isDevMode = !vonageApiKey || !vonageApiSecret || !vonageFromNumber ||
+        vonageApiKey.includes('your_') || vonageApiSecret.includes('your_') || vonageFromNumber.includes('your_');
 
       if (!isDevMode) {
         try {
