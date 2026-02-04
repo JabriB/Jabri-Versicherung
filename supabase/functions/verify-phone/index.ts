@@ -109,35 +109,38 @@ Deno.serve(async (req: Request) => {
         if (insertError) throw insertError;
       }
 
-      // Send SMS via Twilio
-      const twilioAccountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
-      const twilioAuthToken = Deno.env.get("TWILIO_AUTH_TOKEN");
-      const twilioPhoneNumber = Deno.env.get("TWILIO_PHONE_NUMBER");
+      // Send SMS via Vonage
+      const vonageApiKey = Deno.env.get("VONAGE_API_KEY");
+      const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
+      const vonageFromNumber = Deno.env.get("VONAGE_FROM_NUMBER");
 
-      // Dev mode fallback if Twilio is not configured
-      const isDevMode = !twilioAccountSid || !twilioAuthToken || !twilioPhoneNumber;
+      // Dev mode fallback if Vonage is not configured
+      const isDevMode = !vonageApiKey || !vonageApiSecret || !vonageFromNumber;
 
       if (!isDevMode) {
         try {
-          // Send SMS using Twilio API
-          const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`;
-          const twilioResponse = await fetch(twilioUrl, {
+          // Send SMS using Vonage API
+          const vonageUrl = "https://rest.nexmo.com/sms/json";
+          const vonageResponse = await fetch(vonageUrl, {
             method: 'POST',
             headers: {
-              'Authorization': 'Basic ' + btoa(`${twilioAccountSid}:${twilioAuthToken}`),
               'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
-              To: normalizedPhone,
-              From: twilioPhoneNumber,
-              Body: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
+              api_key: vonageApiKey,
+              api_secret: vonageApiSecret,
+              to: normalizedPhone,
+              from: vonageFromNumber,
+              text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
             }),
           });
 
-          if (!twilioResponse.ok) {
-            const errorData = await twilioResponse.json();
-            console.error('Twilio error:', errorData);
-            throw new Error(`Failed to send SMS: ${errorData.message || 'Unknown error'}`);
+          const responseData = await vonageResponse.json();
+
+          if (!vonageResponse.ok || responseData.messages?.[0]?.status !== '0') {
+            const errorMessage = responseData.messages?.[0]?.error_text || responseData.error_description || 'Unknown error';
+            console.error('Vonage error:', errorMessage);
+            throw new Error(`Failed to send SMS: ${errorMessage}`);
           }
 
           console.log(`SMS sent successfully to ${normalizedPhone}`);
