@@ -13,7 +13,7 @@ interface RequestPayload {
   code?: string;
 }
 
-// Generate a random 6-digit verification code
+// Generate a random 6-digit verification code (for dev mode only)
 function generateVerificationCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -23,7 +23,57 @@ function generateRequestId(): string {
   return crypto.randomUUID();
 }
 
-// Hash the verification code using SHA-256
+// Base64 URL encoding
+function base64UrlEncode(str: string): string {
+  return btoa(str)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '');
+}
+
+// Generate Vonage JWT token using HMAC-SHA256
+async function generateVonageJWT(apiKey: string, apiSecret: string): Promise<string> {
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    application_id: apiKey,
+    iat: now,
+    exp: now + 900, // 15 minutes
+    jti: crypto.randomUUID(),
+  };
+
+  const header = { alg: "HS256", typ: "JWT" };
+  const encodedHeader = base64UrlEncode(JSON.stringify(header));
+  const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+
+  const signatureInput = `${encodedHeader}.${encodedPayload}`;
+
+  // Sign using HMAC-SHA256
+  const encoder = new TextEncoder();
+  const keyData = encoder.encode(apiSecret);
+  const key = await crypto.subtle.importKey(
+    'raw',
+    keyData,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    encoder.encode(signatureInput)
+  );
+
+  const signatureArray = Array.from(new Uint8Array(signature));
+  const signatureBase64 = btoa(String.fromCharCode(...signatureArray))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '');
+
+  return `${signatureInput}.${signatureBase64}`;
+}
+
+// Hash the verification code using SHA-256 (for dev mode only)
 async function hashCode(code: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(code);
@@ -32,7 +82,7 @@ async function hashCode(code: string): Promise<string> {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Compare a plain code with a hashed code
+// Compare a plain code with a hashed code (for dev mode only)
 async function compareCode(plainCode: string, hashedCode: string): Promise<boolean> {
   const plainHash = await hashCode(plainCode);
   return plainHash === hashedCode;
@@ -194,10 +244,8 @@ Deno.serve(async (req: Request) => {
         );
       }
 
-      const verificationCode = generateVerificationCode();
-      const codeHash = await hashCode(verificationCode);
-      const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
       const now = new Date().toISOString();
+      const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
       const { data: existing } = await supabase
         .from('phone_verifications')
@@ -205,77 +253,69 @@ Deno.serve(async (req: Request) => {
         .eq('phone_number', normalizedPhone)
         .maybeSingle();
 
-      if (existing) {
-        if (existing.verified) {
-          return new Response(
-            JSON.stringify({
-              success: false,
-              error: "This phone number is already verified and registered",
-              requestId
-            }),
-            {
-              status: 400,
-              headers: { ...corsHeaders, "Content-Type": "application/json" },
-            }
-          );
-        }
-
-        // Update existing record with new code
-        const { error: updateError } = await supabase
-          .from('phone_verifications')
-          .update({
-            verification_code_hash: codeHash,
-            code_expires_at: expiresAt.toISOString(),
-            attempts: 0,
-            last_sent_at: now,
-            ip_address: clientIp,
-            request_id: requestId,
-            updated_at: now,
-          })
-          .eq('phone_number', normalizedPhone);
-
-        if (updateError) {
-          console.error(`[${requestId}] Database update error:`, updateError);
-          throw updateError;
-        }
-      } else {
-        // Create new verification record
-        const { error: insertError } = await supabase
-          .from('phone_verifications')
-          .insert({
-            phone_number: normalizedPhone,
-            verification_code_hash: codeHash,
-            code_expires_at: expiresAt.toISOString(),
-            last_sent_at: now,
-            ip_address: clientIp,
-            request_id: requestId,
-          });
-
-        if (insertError) {
-          console.error(`[${requestId}] Database insert error:`, insertError);
-          throw insertError;
-        }
+      if (existing?.verified) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "This phone number is already verified and registered",
+            requestId
+          }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
       }
 
-      // Send SMS via Vonage
+      // Get Vonage credentials
       const vonageApiKey = Deno.env.get("VONAGE_API_KEY");
       const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
-      const vonageFromNumber = Deno.env.get("VONAGE_FROM_NUMBER");
 
-      // Dev mode: If Vonage credentials are not configured, log the code for testing
-      if (!vonageApiKey || !vonageApiSecret || !vonageFromNumber) {
+      // Dev mode: If Vonage credentials are not configured
+      if (!vonageApiKey || !vonageApiSecret) {
         console.log(`[${requestId}] DEV MODE - Vonage credentials not configured`);
-        console.log(`[${requestId}] DEV MODE - Verification code for ${normalizedPhone}: ${verificationCode}`);
-        console.log(`[${requestId}] DEV MODE - Code expires at: ${expiresAt.toISOString()}`);
 
-        // In dev mode, still return success so the flow can continue
+        const verificationCode = generateVerificationCode();
+        const codeHash = await hashCode(verificationCode);
+
+        console.log(`[${requestId}] DEV MODE - Verification code for ${normalizedPhone}: ${verificationCode}`);
+
+        // Store in database for dev mode verification
+        if (existing) {
+          await supabase
+            .from('phone_verifications')
+            .update({
+              verification_code_hash: codeHash,
+              code_expires_at: expiresAt.toISOString(),
+              attempts: 0,
+              last_sent_at: now,
+              ip_address: clientIp,
+              request_id: requestId,
+              updated_at: now,
+              vonage_request_id: null,
+            })
+            .eq('phone_number', normalizedPhone);
+        } else {
+          await supabase
+            .from('phone_verifications')
+            .insert({
+              phone_number: normalizedPhone,
+              verification_code_hash: codeHash,
+              code_expires_at: expiresAt.toISOString(),
+              last_sent_at: now,
+              ip_address: clientIp,
+              request_id: requestId,
+              vonage_request_id: null,
+            });
+        }
+
         return new Response(
           JSON.stringify({
             success: true,
             message: "Verification code sent successfully",
             requestId,
             devMode: true,
-            devCode: verificationCode // Only exposed in dev mode when credentials are missing
+            devCode: verificationCode
           }),
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -283,30 +323,36 @@ Deno.serve(async (req: Request) => {
         );
       }
 
+      // Production mode: Use Vonage Verify API v2
       try {
-        console.log(`[${requestId}] Attempting to send SMS to ${normalizedPhone} from ${vonageFromNumber}`);
+        console.log(`[${requestId}] Using Vonage Verify API v2 for ${normalizedPhone}`);
 
-        const vonageUrl = "https://rest.nexmo.com/sms/json";
+        const jwt = await generateVonageJWT(vonageApiKey, vonageApiSecret);
 
-        const params = new URLSearchParams({
-          api_key: vonageApiKey,
-          api_secret: vonageApiSecret,
-          to: normalizedPhone,
-          from: vonageFromNumber,
-          text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
-        });
+        const verifyRequestBody = {
+          brand: "Jabri Versicherung",
+          code_length: 6,
+          channel_timeout: 300,
+          workflow: [
+            {
+              channel: "sms",
+              to: normalizedPhone
+            }
+          ]
+        };
 
-        console.log(`[${requestId}] Request params - to: ${normalizedPhone}, from: ${vonageFromNumber}`);
+        console.log(`[${requestId}] Sending Vonage Verify request`);
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-        const vonageResponse = await fetch(vonageUrl, {
+        const vonageResponse = await fetch("https://api.nexmo.com/v2/verify", {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json',
           },
-          body: params.toString(),
+          body: JSON.stringify(verifyRequestBody),
           signal: controller.signal,
         });
 
@@ -317,7 +363,7 @@ Deno.serve(async (req: Request) => {
 
         if (!vonageResponse.ok) {
           console.error(`[${requestId}] Vonage HTTP error ${vonageResponse.status}: ${responseText}`);
-          throw new Error(`Vonage API error ${vonageResponse.status}: ${responseText}`);
+          throw new Error(`Vonage Verify API error ${vonageResponse.status}: ${responseText}`);
         }
 
         let responseData;
@@ -328,40 +374,51 @@ Deno.serve(async (req: Request) => {
           throw new Error('Invalid response format from SMS provider');
         }
 
-        if (!responseData.messages || !Array.isArray(responseData.messages) || responseData.messages.length === 0) {
-          console.error(`[${requestId}] Invalid Vonage response structure: ${JSON.stringify(responseData)}`);
-          throw new Error('No message in SMS provider response');
+        const vonageRequestId = responseData.request_id;
+        if (!vonageRequestId) {
+          console.error(`[${requestId}] No request_id in Vonage response: ${JSON.stringify(responseData)}`);
+          throw new Error('Invalid response from SMS provider');
         }
 
-        const message = responseData.messages[0];
+        console.log(`[${requestId}] Vonage request_id: ${vonageRequestId}`);
 
-        if (message.status !== '0') {
-          const errorText = message['error-text'] || message.status || 'Unknown error';
-          console.error(`[${requestId}] Vonage error status ${message.status}: ${errorText}`);
-
-          if (message.status === '1') {
-            throw new Error('Invalid credentials for SMS service');
-          } else if (message.status === '2') {
-            throw new Error('Invalid sender number or from parameter');
-          } else if (message.status === '3') {
-            throw new Error('Invalid recipient number - please verify the phone number');
-          } else if (message.status === '4') {
-            throw new Error('SMS service authentication failed');
-          } else if (message.status === '9') {
-            throw new Error('Insufficient SMS credits');
-          } else {
-            throw new Error(`SMS service error: ${errorText}`);
-          }
+        // Store vonage_request_id in database
+        if (existing) {
+          await supabase
+            .from('phone_verifications')
+            .update({
+              vonage_request_id: vonageRequestId,
+              code_expires_at: expiresAt.toISOString(),
+              attempts: 0,
+              last_sent_at: now,
+              ip_address: clientIp,
+              request_id: requestId,
+              updated_at: now,
+              verification_code_hash: null,
+            })
+            .eq('phone_number', normalizedPhone);
+        } else {
+          await supabase
+            .from('phone_verifications')
+            .insert({
+              phone_number: normalizedPhone,
+              vonage_request_id: vonageRequestId,
+              code_expires_at: expiresAt.toISOString(),
+              last_sent_at: now,
+              ip_address: clientIp,
+              request_id: requestId,
+              verification_code_hash: null,
+            });
         }
 
-        console.log(`[${requestId}] SMS sent successfully to ${normalizedPhone}, message ID: ${message['message-id']}`);
-      } catch (smsError) {
-        console.error(`[${requestId}] SMS error:`, smsError);
+        console.log(`[${requestId}] Verification request sent successfully via Vonage Verify API`);
+      } catch (verifyError) {
+        console.error(`[${requestId}] Vonage Verify API error:`, verifyError);
 
-        const errorMessage = smsError instanceof Error && smsError.name === 'AbortError'
-          ? 'SMS request timed out. Please try again.'
-          : smsError instanceof Error
-            ? smsError.message
+        const errorMessage = verifyError instanceof Error && verifyError.name === 'AbortError'
+          ? 'Verification request timed out. Please try again.'
+          : verifyError instanceof Error
+            ? verifyError.message
             : 'Failed to send verification code. Please try again.';
 
         return new Response(
@@ -488,8 +545,71 @@ Deno.serve(async (req: Request) => {
         );
       }
 
-      // Verify the code using hash comparison
-      const isCodeValid = await compareCode(code, verification.verification_code_hash);
+      // Check if using Vonage Verify API or dev mode
+      const vonageApiKey = Deno.env.get("VONAGE_API_KEY");
+      const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
+
+      let isCodeValid = false;
+
+      // Dev mode: Use hash comparison
+      if (!vonageApiKey || !vonageApiSecret || verification.verification_code_hash) {
+        console.log(`[${requestId}] DEV MODE - Verifying code using hash comparison`);
+        isCodeValid = await compareCode(code, verification.verification_code_hash);
+      }
+      // Production mode: Use Vonage Verify API v2
+      else if (verification.vonage_request_id) {
+        console.log(`[${requestId}] Production mode - Verifying code with Vonage API`);
+
+        try {
+          const jwt = await generateVonageJWT(vonageApiKey, vonageApiSecret);
+
+          const verifyCheckBody = {
+            code: code
+          };
+
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+          const vonageResponse = await fetch(
+            `https://api.nexmo.com/v2/verify/${verification.vonage_request_id}`,
+            {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${jwt}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(verifyCheckBody),
+              signal: controller.signal,
+            }
+          );
+
+          clearTimeout(timeoutId);
+
+          const responseText = await vonageResponse.text();
+          console.log(`[${requestId}] Vonage check response status: ${vonageResponse.status}, body: ${responseText}`);
+
+          if (vonageResponse.ok) {
+            const responseData = JSON.parse(responseText);
+            if (responseData.status === 'completed') {
+              isCodeValid = true;
+              console.log(`[${requestId}] Vonage verification completed successfully`);
+            } else {
+              console.log(`[${requestId}] Vonage verification status: ${responseData.status}`);
+            }
+          } else {
+            console.error(`[${requestId}] Vonage check failed: ${responseText}`);
+            // Treat API errors as invalid code
+            isCodeValid = false;
+          }
+        } catch (vonageError) {
+          console.error(`[${requestId}] Vonage check error:`, vonageError);
+          // If Vonage API fails, treat as invalid code
+          isCodeValid = false;
+        }
+      } else {
+        console.error(`[${requestId}] No verification method available`);
+        throw new Error('Invalid verification state');
+      }
 
       if (!isCodeValid) {
         // Increment attempts
