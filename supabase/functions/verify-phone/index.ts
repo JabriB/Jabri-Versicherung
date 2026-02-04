@@ -40,26 +40,23 @@ async function compareCode(plainCode: string, hashedCode: string): Promise<boole
 
 // Normalize phone number to E.164 format (Germany-specific)
 function normalizePhoneNumber(phone: string): string {
-  const cleaned = phone.replace(/\D/g, '');
+  let cleaned = phone.trim().replace(/\s+/g, '');
+  cleaned = cleaned.replace(/\D/g, '');
 
-  // German numbers must have at least 9 digits (without country code)
-  // or 10+ digits if country code is included
   if (cleaned.length < 9) {
     throw new Error('Phone number too short. German numbers need at least 9 digits.');
   }
 
   if (cleaned.startsWith('49')) {
+    // Already has country code 49
     return `+${cleaned}`;
   } else if (cleaned.startsWith('0')) {
+    // Starts with 0, replace with +49
     return `+49${cleaned.substring(1)}`;
-  } else if (cleaned.length >= 10) {
-    return `+49${cleaned}`;
-  } else if (cleaned.length === 9) {
-    // 9 digits without country code
+  } else {
+    // No country code prefix, add +49
     return `+49${cleaned}`;
   }
-
-  throw new Error('Invalid phone number format for Germany.');
 }
 
 // Validate E.164 phone number format
@@ -265,103 +262,113 @@ Deno.serve(async (req: Request) => {
       const vonageApiSecret = Deno.env.get("VONAGE_API_SECRET");
       const vonageFromNumber = Deno.env.get("VONAGE_FROM_NUMBER");
 
-      // Dev mode fallback if Vonage is not configured or uses placeholder values
-      const isDevMode = !vonageApiKey || !vonageApiSecret || !vonageFromNumber ||
-        vonageApiKey.includes('your_') || vonageApiSecret.includes('your_') || vonageFromNumber.includes('your_');
-
-      if (!isDevMode) {
-        try {
-          console.log(`[${requestId}] Attempting to send SMS to ${normalizedPhone}`);
-          console.log(`[${requestId}] API Key configured: ${!!vonageApiKey}, Secret configured: ${!!vonageApiSecret}, From configured: ${!!vonageFromNumber}`);
-
-          // Send SMS using Vonage API with timeout
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
-          const vonageUrl = "https://rest.nexmo.com/sms/json";
-          const params = new URLSearchParams({
-            api_key: vonageApiKey,
-            api_secret: vonageApiSecret,
-            to: normalizedPhone,
-            from: vonageFromNumber,
-            text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
-          });
-
-          console.log(`[${requestId}] Sending to Vonage API with to: ${normalizedPhone}, from: ${vonageFromNumber}`);
-
-          const vonageResponse = await fetch(vonageUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: params.toString(),
-            signal: controller.signal,
-          });
-
-          clearTimeout(timeoutId);
-          console.log(`[${requestId}] Vonage response status: ${vonageResponse.status}`);
-
-          if (!vonageResponse.ok) {
-            const errorText = await vonageResponse.text();
-            console.error(`[${requestId}] Vonage HTTP error ${vonageResponse.status}: ${errorText}`);
-            throw new Error(`Vonage API returned ${vonageResponse.status}: ${errorText}`);
+      if (!vonageApiKey || !vonageApiSecret || !vonageFromNumber) {
+        console.error(`[${requestId}] Vonage credentials missing: key=${!!vonageApiKey}, secret=${!!vonageApiSecret}, from=${!!vonageFromNumber}`);
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "SMS service not configured. Please contact support.",
+            requestId
+          }),
+          {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
           }
+        );
+      }
 
-          const responseData = await vonageResponse.json();
-          console.log(`[${requestId}] Vonage response: ${JSON.stringify(responseData)}`);
+      try {
+        console.log(`[${requestId}] Attempting to send SMS to ${normalizedPhone} from ${vonageFromNumber}`);
 
-          // Validate response structure
-          if (!responseData.messages || !Array.isArray(responseData.messages) || responseData.messages.length === 0) {
-            console.error(`[${requestId}] Invalid Vonage response structure:`, responseData);
-            throw new Error('Invalid response from SMS provider');
-          }
+        const vonageUrl = "https://rest.nexmo.com/sms/json";
 
-          const message = responseData.messages[0];
+        const params = new URLSearchParams({
+          api_key: vonageApiKey,
+          api_secret: vonageApiSecret,
+          to: normalizedPhone,
+          from: vonageFromNumber,
+          text: `Your verification code is: ${verificationCode}. This code will expire in 10 minutes.`,
+        });
 
-          // Check status codes
-          if (message.status !== '0') {
-            const errorText = message['error-text'] || 'Unknown error';
-            console.error(`[${requestId}] Vonage error: ${errorText} (status: ${message.status})`);
+        console.log(`[${requestId}] Request params - to: ${normalizedPhone}, from: ${vonageFromNumber}`);
 
-            // Handle specific Vonage error codes
-            if (message.status === '1') {
-              throw new Error('SMS configuration error. Please contact support.');
-            } else if (message.status === '4') {
-              throw new Error('SMS service authentication failed. Please contact support.');
-            } else if (message.status === '9') {
-              throw new Error('Insufficient SMS credits. Please contact support.');
-            } else {
-              throw new Error(`Failed to send SMS: ${errorText}`);
-            }
-          }
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-          console.log(`[${requestId}] SMS sent successfully to ${normalizedPhone}`);
-        } catch (smsError) {
-          console.error(`[${requestId}] Error sending SMS:`, smsError);
+        const vonageResponse = await fetch(vonageUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: params.toString(),
+          signal: controller.signal,
+        });
 
-          // Provide user-friendly error message
-          const errorMessage = smsError instanceof Error && smsError.name === 'AbortError'
-            ? 'SMS request timed out. Please try again.'
-            : smsError instanceof Error
-              ? smsError.message
-              : 'Failed to send verification code. Please try again.';
+        clearTimeout(timeoutId);
 
-          return new Response(
-            JSON.stringify({
-              success: false,
-              error: errorMessage,
-              requestId
-            }),
-            {
-              status: 500,
-              headers: { ...corsHeaders, "Content-Type": "application/json" },
-            }
-          );
+        const responseText = await vonageResponse.text();
+        console.log(`[${requestId}] Vonage response status: ${vonageResponse.status}, body: ${responseText}`);
+
+        if (!vonageResponse.ok) {
+          console.error(`[${requestId}] Vonage HTTP error ${vonageResponse.status}: ${responseText}`);
+          throw new Error(`Vonage API error ${vonageResponse.status}: ${responseText}`);
         }
-      } else {
-        // Dev mode: log to console only (DO NOT return code to client)
-        console.log(`[${requestId}] [DEV MODE] Verification code for ${normalizedPhone}: ${verificationCode}`);
-        console.log(`[${requestId}] [DEV MODE] In production, this would be sent via SMS`);
+
+        let responseData;
+        try {
+          responseData = JSON.parse(responseText);
+        } catch {
+          console.error(`[${requestId}] Failed to parse Vonage response as JSON: ${responseText}`);
+          throw new Error('Invalid response format from SMS provider');
+        }
+
+        if (!responseData.messages || !Array.isArray(responseData.messages) || responseData.messages.length === 0) {
+          console.error(`[${requestId}] Invalid Vonage response structure: ${JSON.stringify(responseData)}`);
+          throw new Error('No message in SMS provider response');
+        }
+
+        const message = responseData.messages[0];
+
+        if (message.status !== '0') {
+          const errorText = message['error-text'] || message.status || 'Unknown error';
+          console.error(`[${requestId}] Vonage error status ${message.status}: ${errorText}`);
+
+          if (message.status === '1') {
+            throw new Error('Invalid credentials for SMS service');
+          } else if (message.status === '2') {
+            throw new Error('Invalid sender number or from parameter');
+          } else if (message.status === '3') {
+            throw new Error('Invalid recipient number - please verify the phone number');
+          } else if (message.status === '4') {
+            throw new Error('SMS service authentication failed');
+          } else if (message.status === '9') {
+            throw new Error('Insufficient SMS credits');
+          } else {
+            throw new Error(`SMS service error: ${errorText}`);
+          }
+        }
+
+        console.log(`[${requestId}] SMS sent successfully to ${normalizedPhone}, message ID: ${message['message-id']}`);
+      } catch (smsError) {
+        console.error(`[${requestId}] SMS error:`, smsError);
+
+        const errorMessage = smsError instanceof Error && smsError.name === 'AbortError'
+          ? 'SMS request timed out. Please try again.'
+          : smsError instanceof Error
+            ? smsError.message
+            : 'Failed to send verification code. Please try again.';
+
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: errorMessage,
+            requestId
+          }),
+          {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
       }
 
       return new Response(
