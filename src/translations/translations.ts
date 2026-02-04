@@ -227,6 +227,7 @@ export const translations = {
         maritalStatus: 'Familienstand (optional)',
         emailPlaceholder: 'max@beispiel.de',
         phonePlaceholder: '0123 456 789',
+        verifyNumber: 'Nummer verifizieren',
         maritalStatusOptions: {
           single: 'Ledig',
           family: 'Familie'
@@ -496,6 +497,7 @@ export const translations = {
         maritalStatus: 'Marital Status (optional)',
         emailPlaceholder: 'max@example.com',
         phonePlaceholder: '0123 456 789',
+        verifyNumber: 'Verify Number',
         maritalStatusOptions: {
           single: 'Single',
           family: 'Family'
@@ -765,6 +767,7 @@ export const translations = {
         maritalStatus: 'الحالة الاجتماعية (اختياري)',
         emailPlaceholder: 'ahmed@example.com',
         phonePlaceholder: '0123 456 789',
+        verifyNumber: 'التحقق من الرقم',
         maritalStatusOptions: {
           single: 'أعزب',
           family: 'عائلة'
@@ -1034,6 +1037,7 @@ export const translations = {
         maritalStatus: 'Medeni Durum (isteğe bağlı)',
         emailPlaceholder: 'ahmet@example.com',
         phonePlaceholder: '0123 456 789',
+        verifyNumber: 'Numarayı Doğrula',
         maritalStatusOptions: {
           single: 'Bekar',
           family: 'Aile'
