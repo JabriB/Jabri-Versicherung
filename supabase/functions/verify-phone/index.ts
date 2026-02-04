@@ -374,11 +374,8 @@ Deno.serve(async (req: Request) => {
       return new Response(
         JSON.stringify({
           success: true,
-          message: isDevMode
-            ? "Dev mode: Check server logs for verification code"
-            : "Verification code sent successfully",
+          message: "Verification code sent successfully",
           requestId
-          // SECURITY: Never return the actual code to the client
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
