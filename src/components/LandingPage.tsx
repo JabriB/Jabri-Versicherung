@@ -45,6 +45,7 @@ export default function LandingPage() {
   const scrollToSection = (sectionId: string) => {
     if (sectionId === 'form') {
       pixelEvents.viewContent('Consultation Form', 'page');
+      pixelEvents.initiateCheckout();
       navigate('/formular');
       return;
     }

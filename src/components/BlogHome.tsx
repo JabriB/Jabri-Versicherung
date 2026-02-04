@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
 import { useBlogPosts } from '../hooks/useBlogPosts';
 import { useLanguage } from '../contexts/LanguageContext';
+import { pixelEvents } from '../lib/pixelTracking';
 
 export default function BlogHome() {
   const { posts, loading, error } = useBlogPosts();
@@ -230,6 +231,10 @@ export default function BlogHome() {
 
             <Link
               to="/formular"
+              onClick={() => {
+                pixelEvents.initiateCheckout();
+                pixelEvents.viewContent('Consultation Form', 'page');
+              }}
               className="block w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 px-7 rounded-lg transition-all hover:shadow-xl hover:shadow-orange-500/50 hover:-translate-y-0.5 active:translate-y-0 text-center group/btn"
             >
               <span className="flex items-center justify-center gap-2">

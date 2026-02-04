@@ -113,6 +113,10 @@ export default function MultiStepForm() {
     pixelEvents.viewContent(`Form Step ${currentStep}`, 'form');
   }, [currentStep]);
 
+  useEffect(() => {
+    pixelEvents.initiateCheckout();
+  }, []);
+
   const totalSteps = 3;
   const progress = (currentStep / totalSteps) * 100;
 

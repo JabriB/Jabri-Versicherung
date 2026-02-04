@@ -130,4 +130,9 @@ export const pixelEvents = {
       event_data: eventData,
     });
   },
+
+  initiateCheckout: () => {
+    trackPixelEvent('InitiateCheckout');
+    trackConversion({ event_name: 'InitiateCheckout' });
+  },
 };
