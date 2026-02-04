@@ -348,7 +348,7 @@ Deno.serve(async (req: Request) => {
         const jwt = await generateVonageJWT(vonageApplicationId, vonagePrivateKey);
 
         const verifyRequestBody = {
-          brand: "Jabri Versicherung",
+          brand: "ARAG Brhan Jabri",
           code_length: 6,
           channel_timeout: 300,
           workflow: [
