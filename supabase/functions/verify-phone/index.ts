@@ -148,7 +148,22 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const normalizedPhone = normalizePhoneNumber(phone);
+    let normalizedPhone: string;
+    try {
+      normalizedPhone = normalizePhoneNumber(phone);
+    } catch (normalizeError) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: normalizeError instanceof Error ? normalizeError.message : "Invalid phone number format",
+          requestId
+        }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
 
     // Validate phone number format
     if (!isValidE164(normalizedPhone)) {
