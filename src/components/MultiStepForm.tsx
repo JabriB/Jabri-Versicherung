@@ -148,7 +148,9 @@ export default function MultiStepForm() {
   const validatePhone = (phone: string): boolean => {
     if (!phone) return false;
     const phoneRegex = /^[\d\s+()-]{8,}$/;
-    return phoneRegex.test(phone);
+    if (!phoneRegex.test(phone)) return false;
+    const digitCount = phone.replace(/\D/g, '').length;
+    return digitCount >= 9;
   };
 
   const validatePostalCode = (code: string): boolean => {
