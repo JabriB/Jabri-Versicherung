@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -78,6 +78,7 @@ export default function MultiStepForm() {
     sendingCode: false,
     verifying: false,
   });
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useHead({
@@ -349,6 +350,14 @@ export default function MultiStepForm() {
     }));
   };
 
+  const toggleCategory = (categoryName: string) => {
+    setExpandedCategories(prev =>
+      prev.includes(categoryName)
+        ? prev.filter(c => c !== categoryName)
+        : [...prev, categoryName]
+    );
+  };
+
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
@@ -478,31 +487,51 @@ export default function MultiStepForm() {
                 <p className="text-slate-400">{t.form.step2.description}</p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {interestCategories.map((category, catIndex) => (
-                  <div key={category.name} className="space-y-2 animate-slide-up" style={{ animationDelay: `${catIndex * 0.1}s`, animationFillMode: 'backwards' }}>
-                    <h3 className="text-white font-semibold text-lg px-2">{category.name}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {category.items.map((interest, itemIndex) => (
-                        <button
-                          key={interest}
-                          type="button"
-                          onClick={() => toggleInterest(interest)}
-                          className={`px-4 py-3 rounded-xl border-2 transition-all text-left transform hover:scale-[1.02] animate-slide-up ${
-                            formData.interests.includes(interest)
-                              ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                              : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10'
-                          }`}
-                          style={{ animationDelay: `${itemIndex * 0.05}s`, animationFillMode: 'backwards' }}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm">{interest}</span>
-                            {formData.interests.includes(interest) && (
-                              <CheckCircle2 className="w-4 h-4 text-orange-400 animate-bounce-in flex-shrink-0 ml-2" />
-                            )}
-                          </div>
-                        </button>
-                      ))}
+                  <div key={category.name} className="border border-slate-600 rounded-xl overflow-hidden animate-slide-up" style={{ animationDelay: `${catIndex * 0.1}s`, animationFillMode: 'backwards' }}>
+                    <button
+                      type="button"
+                      onClick={() => toggleCategory(category.name)}
+                      className="w-full px-4 py-4 flex items-center justify-between bg-slate-800/50 hover:bg-slate-800/70 transition-colors"
+                    >
+                      <h3 className="text-white font-semibold text-lg">{category.name}</h3>
+                      <ChevronDown
+                        size={20}
+                        className={`text-slate-400 transition-transform duration-300 ${
+                          expandedCategories.includes(category.name) ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    <div
+                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                        expandedCategories.includes(category.name)
+                          ? 'max-h-[1000px] opacity-100'
+                          : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4 bg-slate-900/30 border-t border-slate-600">
+                        {category.items.map((interest, itemIndex) => (
+                          <button
+                            key={interest}
+                            type="button"
+                            onClick={() => toggleInterest(interest)}
+                            className={`px-4 py-3 rounded-xl border-2 transition-all text-left transform hover:scale-[1.02] animate-slide-up ${
+                              formData.interests.includes(interest)
+                                ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
+                                : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10'
+                            }`}
+                            style={{ animationDelay: `${itemIndex * 0.05}s`, animationFillMode: 'backwards' }}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm">{interest}</span>
+                              {formData.interests.includes(interest) && (
+                                <CheckCircle2 className="w-4 h-4 text-orange-400 animate-bounce-in flex-shrink-0 ml-2" />
+                              )}
+                            </div>
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
