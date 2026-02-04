@@ -139,41 +139,24 @@ function getClientIp(req: Request): string {
          'unknown';
 }
 
-// Rate limiting check: max 3 sends per hour per phone
+// Rate limiting check: No limit for unverified numbers, only prevent verified numbers from requesting new codes
 async function checkRateLimit(supabase: any, phone: string, ip: string): Promise<{ allowed: boolean; error?: string }> {
-  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-
-  // Check by phone number
-  const { data: phoneSends } = await supabase
+  // Check if phone is already verified
+  const { data: existing } = await supabase
     .from('phone_verifications')
-    .select('last_sent_at')
+    .select('verified')
     .eq('phone_number', phone)
-    .gte('last_sent_at', oneHourAgo.toISOString())
-    .order('last_sent_at', { ascending: false });
+    .maybeSingle();
 
-  if (phoneSends && phoneSends.length >= 3) {
-    const oldestSend = new Date(phoneSends[phoneSends.length - 1].last_sent_at);
-    const minutesUntilReset = Math.ceil((60 - (Date.now() - oldestSend.getTime()) / 60000));
+  // If number is already verified, don't allow new verification requests
+  if (existing?.verified) {
     return {
       allowed: false,
-      error: `Rate limit exceeded. Please wait ${minutesUntilReset} minutes before requesting a new code.`
+      error: "This phone number is already verified and registered"
     };
   }
 
-  // Check by IP address (prevent abuse from same IP)
-  const { data: ipSends } = await supabase
-    .from('phone_verifications')
-    .select('last_sent_at')
-    .eq('ip_address', ip)
-    .gte('last_sent_at', oneHourAgo.toISOString());
-
-  if (ipSends && ipSends.length >= 10) {
-    return {
-      allowed: false,
-      error: 'Too many verification requests from your location. Please try again later.'
-    };
-  }
-
+  // Allow unlimited requests for unverified numbers
   return { allowed: true };
 }
 
