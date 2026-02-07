@@ -230,6 +230,9 @@ export const translations = {
         emailPlaceholder: 'max@beispiel.de',
         phonePlaceholder: '0123 456 789',
         verifyNumber: 'Nummer verifizieren',
+        optionalDetails: 'Ergänzen Sie optionale Angaben für besseren Service',
+        verificationCodeLabel: 'Geben Sie den 6-stelligen Verifizierungscode ein, der an Ihr Telefon gesendet wurde',
+        codeExpires: 'Der Code verfällt in 10 Minuten',
         maritalStatusOptions: {
           single: 'Ledig',
           family: 'Familie'
@@ -502,6 +505,9 @@ export const translations = {
         emailPlaceholder: 'max@example.com',
         phonePlaceholder: '0123 456 789',
         verifyNumber: 'Verify Number',
+        optionalDetails: 'Complete optional details for better service',
+        verificationCodeLabel: 'Enter the 6-digit verification code sent to your phone',
+        codeExpires: 'The code expires in 10 minutes',
         maritalStatusOptions: {
           single: 'Single',
           family: 'Family'
@@ -774,6 +780,9 @@ export const translations = {
         emailPlaceholder: 'ahmed@example.com',
         phonePlaceholder: '0123 456 789',
         verifyNumber: 'التحقق من الرقم',
+        optionalDetails: 'أكمل التفاصيل الاختيارية للحصول على خدمة أفضل',
+        verificationCodeLabel: 'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى هاتفك',
+        codeExpires: 'ينتهي صلاحية الرمز في 10 دقائق',
         maritalStatusOptions: {
           single: 'أعزب',
           family: 'عائلة'
@@ -1046,6 +1055,9 @@ export const translations = {
         emailPlaceholder: 'ahmet@example.com',
         phonePlaceholder: '0123 456 789',
         verifyNumber: 'Numarayı Doğrula',
+        optionalDetails: 'Daha iyi hizmet için isteğe bağlı ayrıntıları tamamlayın',
+        verificationCodeLabel: 'Telefonunuza gönderilen 6 haneli doğrulama kodunu girin',
+        codeExpires: 'Kod 10 dakika içinde sona erer',
         maritalStatusOptions: {
           single: 'Bekar',
           family: 'Aile'
