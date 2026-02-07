@@ -192,6 +192,8 @@ export const translations = {
     form: {
       stepIndicator: 'Schritt',
       ofSteps: 'von',
+      progressMicrocopy: 'In 3 kurzen Schritten zu Ihrem Angebot',
+      timeEstimate: 'Unter 2 Minuten',
       step1: {
         title: 'Wie ist Ihr Name?',
         description: 'Bitte geben Sie Ihren vollständigen Namen ein.',
@@ -202,7 +204,7 @@ export const translations = {
       },
       step2: {
         title: 'Wofür interessieren Sie sich?',
-        description: 'Wählen Sie eine oder mehrere Optionen aus.',
+        description: 'Tippen Sie einfach auf alles, was Sie interessiert.',
         category1: 'Rechtsschutz',
         category2: 'Versicherungen',
         interests: {
@@ -462,6 +464,8 @@ export const translations = {
     form: {
       stepIndicator: 'Step',
       ofSteps: 'of',
+      progressMicrocopy: 'Your quote in 3 quick steps',
+      timeEstimate: 'Under 2 minutes',
       step1: {
         title: 'What is your name?',
         description: 'Please provide your full name.',
@@ -472,7 +476,7 @@ export const translations = {
       },
       step2: {
         title: 'What are you interested in?',
-        description: 'Select one or more options.',
+        description: 'Simply tap on everything that interests you.',
         category1: 'Legal Protection',
         category2: 'Insurance',
         interests: {
@@ -732,6 +736,8 @@ export const translations = {
     form: {
       stepIndicator: 'الخطوة',
       ofSteps: 'من',
+      progressMicrocopy: 'عرضك في 3 خطوات سريعة',
+      timeEstimate: 'أقل من دقيقتين',
       step1: {
         title: 'ما اسمك؟',
         description: 'يرجى تقديم اسمك الكامل.',
@@ -742,7 +748,7 @@ export const translations = {
       },
       step2: {
         title: 'فيم تهتم؟',
-        description: 'اختر خياراً واحداً أو أكثر.',
+        description: 'اضغط ببساطة على كل ما يهمك.',
         category1: 'الحماية القانونية',
         category2: 'التأمين',
         interests: {
@@ -1002,6 +1008,8 @@ export const translations = {
     form: {
       stepIndicator: 'Adım',
       ofSteps: '/den',
+      progressMicrocopy: '3 hızlı adımda teklifiniz',
+      timeEstimate: '2 dakikadan az',
       step1: {
         title: 'Adınız nedir?',
         description: 'Lütfen tam adınızı sağlayın.',
@@ -1012,7 +1020,7 @@ export const translations = {
       },
       step2: {
         title: 'Hangi konulara ilgi duymaktasınız?',
-        description: 'Bir veya daha fazla seçenek seçin.',
+        description: 'İlginizi çeken her şeye dokunun.',
         category1: 'Yasal Koruma',
         category2: 'Sigorta',
         interests: {

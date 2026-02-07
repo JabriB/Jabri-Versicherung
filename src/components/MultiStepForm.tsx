@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronRight, ChevronLeft, ChevronDown } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft, Scale, Briefcase, Building2, Dog, HeartPulse, Home, ShieldAlert, Sofa, Shield, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -79,7 +79,6 @@ export default function MultiStepForm() {
     sendingCode: false,
     verifying: false,
   });
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useHead({
@@ -113,6 +112,18 @@ export default function MultiStepForm() {
       ]
     }
   ];
+
+  const interestIcons: Record<string, React.ReactNode> = {
+    [t.form.step2.interests.item1]: <Briefcase className="w-5 h-5" />,
+    [t.form.step2.interests.item2]: <Building2 className="w-5 h-5" />,
+    [t.form.step2.interests.item3]: <Scale className="w-5 h-5" />,
+    [t.form.step2.interests.item4]: <Dog className="w-5 h-5" />,
+    [t.form.step2.interests.item5]: <HeartPulse className="w-5 h-5" />,
+    [t.form.step2.interests.item6]: <Home className="w-5 h-5" />,
+    [t.form.step2.interests.item7]: <ShieldAlert className="w-5 h-5" />,
+    [t.form.step2.interests.item8]: <Sofa className="w-5 h-5" />,
+    [t.form.step2.interests.item9]: <Shield className="w-5 h-5" />,
+  };
 
   const maritalStatusOptions = [
     t.form.step3.maritalStatusOptions.single,
@@ -399,14 +410,6 @@ export default function MultiStepForm() {
     }));
   };
 
-  const toggleCategory = (categoryName: string) => {
-    setExpandedCategories(prev =>
-      prev.includes(categoryName)
-        ? prev.filter(c => c !== categoryName)
-        : [...prev, categoryName]
-    );
-  };
-
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
@@ -534,9 +537,13 @@ export default function MultiStepForm() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8 animate-fade-in">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm font-medium animate-slide-in-right">{t.form.stepIndicator} {currentStep} {t.form.ofSteps} {totalSteps}</span>
-            <span className="text-slate-400 text-sm font-bold animate-scale-in">{Math.round(progress)}%</span>
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Clock className="w-4 h-4 text-orange-400" />
+            <span className="text-slate-300 text-sm font-medium">{t.form.progressMicrocopy} <span className="text-orange-400 font-semibold">({t.form.timeEstimate})</span></span>
+          </div>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-slate-400 text-sm font-medium">{t.form.stepIndicator} {currentStep} {t.form.ofSteps} {totalSteps}</span>
+            <span className="text-slate-400 text-sm font-bold">{Math.round(progress)}%</span>
           </div>
           <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
             <div
@@ -554,55 +561,39 @@ export default function MultiStepForm() {
                 <p className="text-slate-400">{t.form.step2.description}</p>
               </div>
 
-              <div className="space-y-3">
-                {interestCategories.map((category, catIndex) => (
-                  <div key={category.name} className="border border-slate-600 rounded-xl overflow-hidden animate-slide-up" style={{ animationDelay: `${catIndex * 0.1}s`, animationFillMode: 'backwards' }}>
-                    <button
-                      type="button"
-                      onClick={() => toggleCategory(category.name)}
-                      className="w-full px-4 py-4 flex items-center justify-between bg-slate-800/50 hover:bg-slate-800/70 transition-colors"
-                    >
-                      <h3 className="text-white font-semibold text-lg">{category.name}</h3>
-                      <ChevronDown
-                        size={20}
-                        className={`text-slate-400 transition-transform duration-300 ${
-                          expandedCategories.includes(category.name) ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-                    <div
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                        expandedCategories.includes(category.name)
-                          ? 'max-h-[1000px] opacity-100'
-                          : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4 bg-slate-900/30 border-t border-slate-600">
-                        {category.items.map((interest, itemIndex) => (
-                          <button
-                            key={interest}
-                            type="button"
-                            onClick={() => toggleInterest(interest)}
-                            className={`px-4 py-3 rounded-xl border-2 transition-all text-left transform hover:scale-[1.02] animate-slide-up ${
-                              formData.interests.includes(interest)
-                                ? 'bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                                : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10'
-                            }`}
-                            style={{ animationDelay: `${itemIndex * 0.05}s`, animationFillMode: 'backwards' }}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm">{interest}</span>
-                              {formData.interests.includes(interest) && (
-                                <CheckCircle2 className="w-4 h-4 text-orange-400 animate-bounce-in flex-shrink-0 ml-2" />
-                              )}
+              {interestCategories.map((category, catIndex) => (
+                <div key={category.name} className="animate-slide-up" style={{ animationDelay: `${catIndex * 0.08}s`, animationFillMode: 'backwards' }}>
+                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">{category.name}</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    {category.items.map((interest, itemIndex) => {
+                      const isSelected = formData.interests.includes(interest);
+                      return (
+                        <button
+                          key={interest}
+                          type="button"
+                          onClick={() => toggleInterest(interest)}
+                          className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border-2 transition-all text-center transform hover:scale-[1.03] active:scale-[0.98] animate-slide-up ${
+                            isSelected
+                              ? 'bg-orange-500/15 border-orange-500 text-white shadow-lg shadow-orange-500/20'
+                              : 'bg-slate-900/50 border-slate-600/80 text-slate-300 hover:border-orange-500/50 hover:bg-slate-800/70'
+                          }`}
+                          style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
+                        >
+                          <div className={`transition-colors ${isSelected ? 'text-orange-400' : 'text-slate-400'}`}>
+                            {interestIcons[interest] || <Shield className="w-5 h-5" />}
+                          </div>
+                          <span className="text-xs font-medium leading-tight">{interest}</span>
+                          {isSelected && (
+                            <div className="absolute top-1.5 right-1.5">
+                              <CheckCircle2 className="w-4 h-4 text-orange-400 animate-bounce-in" />
                             </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           )}
 
@@ -614,48 +605,55 @@ export default function MultiStepForm() {
               </div>
 
               <div className="space-y-4">
-                <div className="animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step1.firstName} <span className="text-orange-400">*</span>
-                  </label>
-                  <input
-                    id="firstName"
-                    type="text"
-                    required
-                    value={formData.firstName}
-                    onChange={(e) => updateField('firstName', e.target.value)}
-                    placeholder={t.form.step1.firstNamePlaceholder}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                  />
+                <div className="grid grid-cols-2 gap-3 animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-slate-300 mb-2">
+                      {t.form.step1.firstName} <span className="text-orange-400">*</span>
+                    </label>
+                    <input
+                      id="firstName"
+                      name="given-name"
+                      type="text"
+                      required
+                      autoComplete="given-name"
+                      value={formData.firstName}
+                      onChange={(e) => updateField('firstName', e.target.value)}
+                      placeholder={t.form.step1.firstNamePlaceholder}
+                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-2">
+                      {t.form.step1.lastName} <span className="text-orange-400">*</span>
+                    </label>
+                    <input
+                      id="lastName"
+                      name="family-name"
+                      type="text"
+                      required
+                      autoComplete="family-name"
+                      value={formData.lastName}
+                      onChange={(e) => updateField('lastName', e.target.value)}
+                      placeholder={t.form.step1.lastNamePlaceholder}
+                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50"
+                    />
+                  </div>
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step1.lastName} <span className="text-orange-400">*</span>
-                  </label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    required
-                    value={formData.lastName}
-                    onChange={(e) => updateField('lastName', e.target.value)}
-                    placeholder={t.form.step1.lastNamePlaceholder}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01]"
-                  />
-                </div>
-
-                <div className="animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
                     {t.form.step3.email} <span className="text-orange-400">*</span>
                   </label>
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     required
+                    autoComplete="email"
                     value={formData.email}
                     onChange={(e) => updateField('email', e.target.value)}
                     placeholder={t.form.step3.emailPlaceholder}
-                    className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 transform hover:scale-[1.01] ${
+                    className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 ${
                       validationErrors.email ? 'border-red-500' : 'border-slate-600'
                     }`}
                   />
@@ -664,7 +662,7 @@ export default function MultiStepForm() {
                   )}
                 </div>
 
-                <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+                <div className="animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
                   <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-3">
                     {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
@@ -673,8 +671,10 @@ export default function MultiStepForm() {
                       <div className="flex gap-3">
                         <input
                           id="phone"
+                          name="tel"
                           type="tel"
                           required
+                          autoComplete="tel"
                           value={formData.phone}
                           onChange={(e) => updateField('phone', e.target.value)}
                           placeholder={t.form.step3.phonePlaceholder}
@@ -763,7 +763,7 @@ export default function MultiStepForm() {
                   </div>
                 </div>
 
-                <div className="animate-slide-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
+                <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
                   <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
                     {t.form.step3.birthDate} <span className="text-orange-400">*</span>
                   </label>
@@ -840,7 +840,9 @@ export default function MultiStepForm() {
                     <div className="col-span-2">
                       <input
                         id="street"
+                        name="street-address"
                         type="text"
+                        autoComplete="address-line1"
                         value={formData.street}
                         onChange={(e) => updateField('street', e.target.value)}
                         placeholder={t.form.step4.streetPlaceholder}
@@ -850,7 +852,9 @@ export default function MultiStepForm() {
                     <div>
                       <input
                         id="houseNumber"
+                        name="address-line2"
                         type="text"
+                        autoComplete="address-line2"
                         value={formData.houseNumber}
                         onChange={(e) => updateField('houseNumber', e.target.value)}
                         placeholder={t.form.step4.houseNumberPlaceholder}
@@ -862,7 +866,9 @@ export default function MultiStepForm() {
                     <div>
                       <input
                         id="postalCode"
+                        name="postal-code"
                         type="text"
+                        autoComplete="postal-code"
                         value={formData.postalCode}
                         onChange={(e) => updateField('postalCode', e.target.value)}
                         placeholder={t.form.step4.postalCodePlaceholder}
@@ -877,7 +883,9 @@ export default function MultiStepForm() {
                     <div className="col-span-2">
                       <input
                         id="city"
+                        name="address-level2"
                         type="text"
+                        autoComplete="address-level2"
                         value={formData.city}
                         onChange={(e) => updateField('city', e.target.value)}
                         placeholder={t.form.step4.cityPlaceholder}
@@ -941,7 +949,7 @@ export default function MultiStepForm() {
               <button
                 type="button"
                 onClick={prevStep}
-                className="px-6 py-3 bg-slate-700/50 hover:bg-slate-700 text-white rounded-xl transition-all flex items-center gap-2 transform hover:scale-105 animate-slide-up"
+                className="px-5 py-3.5 bg-slate-700/50 hover:bg-slate-700 text-white rounded-xl transition-all flex items-center gap-2 transform hover:scale-105"
               >
                 <ChevronLeft className="w-5 h-5" />
                 {t.form.buttons.back}
@@ -953,20 +961,20 @@ export default function MultiStepForm() {
                 type="button"
                 onClick={nextStep}
                 disabled={!isStepValid()}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/50 animate-slide-up"
+                className="flex-1 px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-lg font-bold rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-[1.03] hover:shadow-xl hover:shadow-orange-500/40 active:scale-[0.98]"
               >
                 {t.form.buttons.next}
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-6 h-6" />
               </button>
             ) : (
               <button
                 type="button"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-105 hover:shadow-lg hover:shadow-green-500/50 animate-slide-up"
+                className="flex-1 px-6 py-4 bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white text-lg font-bold rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-[1.03] hover:shadow-xl hover:shadow-green-500/40 active:scale-[0.98]"
               >
                 {isSubmitting ? t.form.step5.submitting : t.form.buttons.submit}
-                {!isSubmitting && <CheckCircle2 className="w-5 h-5" />}
+                {!isSubmitting && <CheckCircle2 className="w-6 h-6" />}
               </button>
             )}
           </div>
