@@ -668,7 +668,7 @@ export default function MultiStepForm() {
                   </label>
                   <div className="space-y-4">
                     <div className="space-y-3">
-                      <div className="flex gap-3">
+                      <div className="flex flex-col sm:flex-row gap-3">
                         <input
                           id="phone"
                           name="tel"
@@ -679,7 +679,7 @@ export default function MultiStepForm() {
                           onChange={(e) => updateField('phone', e.target.value)}
                           placeholder={t.form.step3.phonePlaceholder}
                           disabled={phoneVerification.isVerified || phoneVerification.codeSent}
-                          className={`basis-1/2 px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
+                          className={`w-full sm:basis-1/2 px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
                             validationErrors.phone ? 'border-red-500' : phoneVerification.isVerified ? 'border-green-500' : 'border-slate-600'
                           }`}
                         />
@@ -688,7 +688,7 @@ export default function MultiStepForm() {
                             type="button"
                             onClick={sendVerificationCode}
                             disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
-                            className="basis-1/2 px-3 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-lg shadow-orange-500/20"
+                            className="w-full sm:basis-1/2 px-3 py-3 sm:py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm sm:text-xs font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-lg shadow-orange-500/20"
                           >
                             {phoneVerification.sendingCode ? 'Sending...' : t.form.step3.verifyNumber}
                           </button>
