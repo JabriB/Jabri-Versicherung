@@ -728,7 +728,7 @@ export default function LandingPage() {
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 group-hover:scale-125 transition-transform duration-300 inline-block" style={{ transitionDelay: `${i * 50}ms` }}>★</span>
+                    <span key={i} className="text-gold-500 group-hover:scale-125 transition-transform duration-300 inline-block" style={{ transitionDelay: `${i * 50}ms` }}>★</span>
                   ))}
                 </div>
                 <p className="text-neutral-200 mb-6 italic group-hover:text-white transition-colors">"{testimonial.text}"</p>
