@@ -209,8 +209,8 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
                     className={`
                       py-2 text-sm rounded-lg transition
                       ${!day.isCurrentMonth ? 'text-neutral-600' : 'text-neutral-200'}
-                      ${isSelected ? 'bg-blue-500 text-white font-semibold' : 'hover:bg-neutral-700'}
-                      ${isTodayDate && !isSelected ? 'ring-1 ring-blue-400' : ''}
+                      ${isSelected ? 'bg-gold-500 text-black font-semibold' : 'hover:bg-neutral-700'}
+                      ${isTodayDate && !isSelected ? 'ring-1 ring-gold-400' : ''}
                     `}
                   >
                     {day.date.getDate()}
