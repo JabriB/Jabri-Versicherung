@@ -425,12 +425,75 @@ export default function LandingPage() {
       {/* Insurance Products Section */}
       <section id="produkte" className="py-5 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">
               {t.products.title}
             </h2>
-            <p className="text-lg text-neutral-400">
+            <p className="text-lg text-neutral-400 mb-8">
               {t.products.subtitle}
+            </p>
+          </div>
+
+          {/* Main Insurance Categories Overview */}
+          <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-2xl overflow-hidden mb-8 hover:border-gold-500/30 transition-all duration-300">
+            <button
+              onClick={() => togglePanel('main-categories')}
+              className="w-full p-6 flex items-center justify-between hover:bg-neutral-800/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4">
+                <Shield className="text-gold-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={32} />
+                <h3 className="text-2xl font-bold text-white group-hover:text-gold-500 transition-colors">
+                  VERSICHERUNGEN
+                </h3>
+              </div>
+              <ChevronDown
+                className={`text-neutral-400 group-hover:text-gold-500 transition-all duration-300 ${
+                  openPanels.includes('main-categories') ? 'rotate-180' : ''
+                }`}
+                size={28}
+              />
+            </button>
+            <div
+              className={`transition-all duration-500 ease-in-out ${
+                openPanels.includes('main-categories')
+                  ? 'max-h-[1000px] opacity-100'
+                  : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="p-6 pt-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[
+                    { icon: '🐕', title: 'Hunde OP-Versicherung', subtitle: 'Private Krankenversicherung' },
+                    { icon: '❤️', title: 'Private Krankenversicherung', subtitle: 'Gesundheitsschutz' },
+                    { icon: '🏠', title: 'Gebäudeversicherung', subtitle: 'Wohngebäude-Schutz' },
+                    { icon: '⚠️', title: 'Unfallversicherung', subtitle: 'Unfall-Schutz' },
+                    { icon: '🛋️', title: 'Hausratversicherung', subtitle: 'Haushalt-Schutz' },
+                    { icon: '🛡️', title: 'Haftpflichtversicherung', subtitle: 'Haftpflicht-Schutz' },
+                  ].map((insurance, idx) => (
+                    <div
+                      key={idx}
+                      className="group p-6 bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-xl hover:border-gold-500/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-xl hover:shadow-gold-500/20"
+                      onClick={() => scrollToSection('form')}
+                    >
+                      <div className="text-4xl mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-300">
+                        {insurance.icon}
+                      </div>
+                      <h4 className="text-lg font-bold text-white group-hover:text-gold-500 transition-colors mb-2">
+                        {insurance.title}
+                      </h4>
+                      <p className="text-sm text-neutral-400 group-hover:text-neutral-200 transition-colors">
+                        {insurance.subtitle}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mb-8">
+            <p className="text-neutral-400 text-sm">
+              {language === 'de' ? 'Alle Versicherungsprodukte im Detail:' : 'All insurance products in detail:'}
             </p>
           </div>
 
