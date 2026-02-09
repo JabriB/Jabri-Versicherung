@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronRight, ChevronLeft, Scale, Briefcase, Building2, Dog, HeartPulse, Home, ShieldAlert, Sofa, Shield, Clock } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft, ChevronDown, Scale, Briefcase, Building2, Dog, HeartPulse, Home, ShieldAlert, Sofa, Shield, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -62,6 +62,7 @@ export default function MultiStepForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
   const navigate = useNavigate();
 
   useHead({
@@ -231,6 +232,13 @@ export default function MultiStepForm() {
   };
 
 
+  const toggleCategory = (categoryName: string) => {
+    setExpandedCategories(prev => ({
+      ...prev,
+      [categoryName]: !prev[categoryName]
+    }));
+  };
+
   const toggleInterest = (interest: string) => {
     setFormData(prev => ({
       ...prev,
@@ -387,39 +395,53 @@ export default function MultiStepForm() {
                 <p className="text-neutral-400">{t.form.step2.description}</p>
               </div>
 
-              {interestCategories.map((category, catIndex) => (
-                <div key={category.name} className="animate-slide-up" style={{ animationDelay: `${catIndex * 0.08}s`, animationFillMode: 'backwards' }}>
-                  <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">{category.name}</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {category.items.map((interest, itemIndex) => {
-                      const isSelected = formData.interests.includes(interest);
-                      return (
-                        <button
-                          key={interest}
-                          type="button"
-                          onClick={() => toggleInterest(interest)}
-                          className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border-2 transition-all text-center transform hover:scale-[1.03] active:scale-[0.98] animate-slide-up ${
-                            isSelected
-                              ? 'bg-gold-500/15 border-gold-500 text-white shadow-lg shadow-gold-500/20'
-                              : 'bg-neutral-900/50 border-neutral-600/80 text-neutral-200 hover:border-gold-500/50 hover:bg-neutral-800/70'
-                          }`}
-                          style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
-                        >
-                          <div className={`transition-colors ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}>
-                            {interestIcons[interest] || <Shield className="w-5 h-5" />}
-                          </div>
-                          <span className="text-xs font-medium leading-tight">{interest}</span>
-                          {isSelected && (
-                            <div className="absolute top-1.5 right-1.5">
-                              <CheckCircle2 className="w-4 h-4 text-gold-500 animate-bounce-in" />
-                            </div>
-                          )}
-                        </button>
-                      );
-                    })}
+              {interestCategories.map((category, catIndex) => {
+                const isExpanded = expandedCategories[category.name];
+                return (
+                  <div key={category.name} className="animate-slide-up" style={{ animationDelay: `${catIndex * 0.08}s`, animationFillMode: 'backwards' }}>
+                    <button
+                      type="button"
+                      onClick={() => toggleCategory(category.name)}
+                      className="w-full flex items-center justify-between text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3 hover:text-gold-400 transition-colors"
+                    >
+                      <h3>{category.name}</h3>
+                      <ChevronDown
+                        className={`w-5 h-5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                    {isExpanded && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        {category.items.map((interest, itemIndex) => {
+                          const isSelected = formData.interests.includes(interest);
+                          return (
+                            <button
+                              key={interest}
+                              type="button"
+                              onClick={() => toggleInterest(interest)}
+                              className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border-2 transition-all text-center transform hover:scale-[1.03] active:scale-[0.98] animate-slide-up ${
+                                isSelected
+                                  ? 'bg-gold-500/15 border-gold-500 text-white shadow-lg shadow-gold-500/20'
+                                  : 'bg-neutral-900/50 border-neutral-600/80 text-neutral-200 hover:border-gold-500/50 hover:bg-neutral-800/70'
+                              }`}
+                              style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
+                            >
+                              <div className={`transition-colors ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}>
+                                {interestIcons[interest] || <Shield className="w-5 h-5" />}
+                              </div>
+                              <span className="text-xs font-medium leading-tight">{interest}</span>
+                              {isSelected && (
+                                <div className="absolute top-1.5 right-1.5">
+                                  <CheckCircle2 className="w-4 h-4 text-gold-500 animate-bounce-in" />
+                                </div>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
