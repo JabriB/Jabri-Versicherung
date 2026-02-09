@@ -30,16 +30,6 @@ interface ValidationErrors {
   birthDate?: string;
 }
 
-interface PhoneVerificationState {
-  isVerified: boolean;
-  codeSent: boolean;
-  verificationCode: string;
-  sendingCode: boolean;
-  verifying: boolean;
-  error?: string;
-  lastSentAt?: number;
-  verifiedPhone?: string;
-}
 
 const initialFormData: FormData = {
   firstName: '',
@@ -72,13 +62,6 @@ export default function MultiStepForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
-  const [phoneVerification, setPhoneVerification] = useState<PhoneVerificationState>({
-    isVerified: false,
-    codeSent: false,
-    verificationCode: '',
-    sendingCode: false,
-    verifying: false,
-  });
   const navigate = useNavigate();
 
   useHead({
@@ -247,150 +230,6 @@ export default function MultiStepForm() {
     }
   };
 
-  const sendVerificationCode = async () => {
-    if (!formData.phone || !validatePhone(formData.phone)) {
-      setPhoneVerification(prev => ({ ...prev, error: 'Please enter a valid phone number' }));
-      return;
-    }
-
-    const now = Date.now();
-    if (phoneVerification.lastSentAt && (now - phoneVerification.lastSentAt) < 30000) {
-      const secondsLeft = Math.ceil((30000 - (now - phoneVerification.lastSentAt)) / 1000);
-      setPhoneVerification(prev => ({ ...prev, error: `Please wait ${secondsLeft} seconds before resending` }));
-      return;
-    }
-
-    setPhoneVerification(prev => ({ ...prev, sendingCode: true, error: undefined }));
-
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-phone`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
-            phone: formData.phone,
-            action: 'send',
-          }),
-          signal: controller.signal,
-        }
-      );
-
-      clearTimeout(timeoutId);
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || `Request failed with status ${response.status}`);
-      }
-
-      if (data.success) {
-        setPhoneVerification(prev => ({
-          ...prev,
-          codeSent: true,
-          sendingCode: false,
-          lastSentAt: Date.now(),
-          error: data.devMode ? `DEV MODE: Your code is ${data.devCode}` : undefined,
-        }));
-      } else {
-        setPhoneVerification(prev => ({
-          ...prev,
-          sendingCode: false,
-          error: data.error || 'Failed to send verification code',
-        }));
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Error && error.name === 'AbortError'
-        ? 'Request timed out. Please try again.'
-        : error instanceof Error
-          ? error.message
-          : 'Network error. Please try again.';
-
-      setPhoneVerification(prev => ({
-        ...prev,
-        sendingCode: false,
-        error: errorMessage,
-      }));
-    }
-  };
-
-  const verifyCode = async () => {
-    if (!phoneVerification.verificationCode) {
-      setPhoneVerification(prev => ({ ...prev, error: 'Please enter the verification code' }));
-      return;
-    }
-
-    if (!/^\d{6}$/.test(phoneVerification.verificationCode)) {
-      setPhoneVerification(prev => ({ ...prev, error: 'Code must be exactly 6 digits' }));
-      return;
-    }
-
-    setPhoneVerification(prev => ({ ...prev, verifying: true, error: undefined }));
-
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-phone`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
-            phone: formData.phone,
-            action: 'verify',
-            code: phoneVerification.verificationCode,
-          }),
-          signal: controller.signal,
-        }
-      );
-
-      clearTimeout(timeoutId);
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || `Request failed with status ${response.status}`);
-      }
-
-      if (data.success) {
-        setPhoneVerification(prev => ({
-          ...prev,
-          isVerified: true,
-          verifying: false,
-          error: undefined,
-          verifiedPhone: formData.phone,
-        }));
-      } else {
-        setPhoneVerification(prev => ({
-          ...prev,
-          verifying: false,
-          error: data.error || 'Invalid verification code',
-        }));
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Error && error.name === 'AbortError'
-        ? 'Request timed out. Please try again.'
-        : error instanceof Error
-          ? error.message
-          : 'Network error. Please try again.';
-
-      setPhoneVerification(prev => ({
-        ...prev,
-        verifying: false,
-        error: errorMessage,
-      }));
-    }
-  };
 
   const toggleInterest = (interest: string) => {
     setFormData(prev => ({
@@ -425,18 +264,6 @@ export default function MultiStepForm() {
   };
 
   const handleSubmit = async () => {
-    if (phoneVerification.verifiedPhone !== formData.phone) {
-      alert('Phone number has been changed. Please verify it again before submitting.');
-      setCurrentStep(2);
-      return;
-    }
-
-    if (!phoneVerification.isVerified) {
-      alert('Please verify your phone number before submitting.');
-      setCurrentStep(2);
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -505,8 +332,7 @@ export default function MultiStepForm() {
         const hasValidEmail = validateEmail(formData.email);
         const hasValidPhone = validatePhone(formData.phone);
         const ageValidation = validateAge(formData.birthDate);
-        const isPhoneVerified = phoneVerification.isVerified;
-        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && ageValidation.isValid && isPhoneVerified && !validationErrors.email && !validationErrors.phone && !validationErrors.birthDate;
+        return hasName && hasEmail && hasPhone && hasValidEmail && hasValidPhone && ageValidation.isValid && !validationErrors.email && !validationErrors.phone && !validationErrors.birthDate;
       case 3:
         return !validationErrors.postalCode;
       default:
@@ -666,101 +492,24 @@ export default function MultiStepForm() {
                   <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-3">
                     {t.form.step3.phone} <span className="text-orange-400">*</span>
                   </label>
-                  <div className="space-y-4">
-                    <div className="space-y-3">
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <input
-                          id="phone"
-                          name="tel"
-                          type="tel"
-                          required
-                          autoComplete="tel"
-                          value={formData.phone}
-                          onChange={(e) => updateField('phone', e.target.value)}
-                          placeholder={t.form.step3.phonePlaceholder}
-                          disabled={phoneVerification.isVerified || phoneVerification.codeSent}
-                          className={`w-full sm:basis-1/2 px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 disabled:opacity-50 disabled:cursor-not-allowed ${
-                            validationErrors.phone ? 'border-red-500' : phoneVerification.isVerified ? 'border-green-500' : 'border-slate-600'
-                          }`}
-                        />
-                        {!phoneVerification.isVerified && !phoneVerification.codeSent && (
-                          <button
-                            type="button"
-                            onClick={sendVerificationCode}
-                            disabled={!formData.phone || !!validationErrors.phone || phoneVerification.sendingCode}
-                            className="w-full sm:basis-1/2 px-3 py-3 sm:py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm sm:text-xs font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-lg shadow-orange-500/20"
-                          >
-                            {phoneVerification.sendingCode ? 'Sending...' : t.form.step3.verifyNumber}
-                          </button>
-                        )}
-                        {phoneVerification.isVerified && (
-                          <div className="flex items-center justify-center px-4 py-2 bg-green-500/20 border border-green-500 rounded-lg">
-                            <CheckCircle2 className="w-5 h-5 text-green-400" />
-                          </div>
-                        )}
-                      </div>
-                      {validationErrors.phone && (
-                        <p className="text-red-400 text-sm flex items-center gap-1">
-                          <span>•</span> {validationErrors.phone}
-                        </p>
-                      )}
-                    </div>
-
-                    {phoneVerification.codeSent && !phoneVerification.isVerified && (
-                      <div className="space-y-4 p-4 bg-gradient-to-br from-slate-900/70 to-slate-900/50 rounded-xl border border-slate-600/50 backdrop-blur-sm">
-                        <div>
-                          <p className="text-sm text-slate-300 font-medium">Enter the 6-digit verification code sent to your phone</p>
-                          <p className="text-xs text-slate-500 mt-1">The code expires in 10 minutes</p>
-                        </div>
-
-                        <div className="space-y-3">
-                          <input
-                            type="text"
-                            inputMode="numeric"
-                            maxLength={6}
-                            value={phoneVerification.verificationCode}
-                            onChange={(e) => setPhoneVerification(prev => ({ ...prev, verificationCode: e.target.value.replace(/\D/g, ''), error: undefined }))}
-                            placeholder="000000"
-                            autoComplete="one-time-code"
-                            className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center text-2xl font-mono tracking-widest font-bold transition-all hover:border-orange-500/50"
-                          />
-                          <button
-                            type="button"
-                            onClick={verifyCode}
-                            disabled={phoneVerification.verificationCode.length !== 6 || phoneVerification.verifying}
-                            className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-lg shadow-green-500/20"
-                          >
-                            {phoneVerification.verifying ? 'Verifying...' : 'Verify'}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={sendVerificationCode}
-                            disabled={phoneVerification.sendingCode}
-                            className="w-full text-sm text-slate-400 hover:text-orange-400 transition-all font-medium py-2"
-                          >
-                            {phoneVerification.sendingCode ? 'Sending new code...' : 'Resend verification code'}
-                          </button>
-                        </div>
-
-                        {phoneVerification.error && (
-                          <div className={`p-3 border rounded-lg ${
-                            phoneVerification.error.startsWith('DEV MODE')
-                              ? 'bg-blue-500/10 border-blue-500/30'
-                              : 'bg-red-500/10 border-red-500/30'
-                          }`}>
-                            <p className={`text-sm font-medium flex items-start gap-2 ${
-                              phoneVerification.error.startsWith('DEV MODE')
-                                ? 'text-blue-400'
-                                : 'text-red-400'
-                            }`}>
-                              <span className="mt-0.5">•</span>
-                              <span>{phoneVerification.error}</span>
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  <input
+                    id="phone"
+                    name="tel"
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    value={formData.phone}
+                    onChange={(e) => updateField('phone', e.target.value)}
+                    placeholder={t.form.step3.phonePlaceholder}
+                    className={`w-full px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 ${
+                      validationErrors.phone ? 'border-red-500' : 'border-slate-600'
+                    }`}
+                  />
+                  {validationErrors.phone && (
+                    <p className="text-red-400 text-sm flex items-center gap-1">
+                      <span>•</span> {validationErrors.phone}
+                    </p>
+                  )}
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
