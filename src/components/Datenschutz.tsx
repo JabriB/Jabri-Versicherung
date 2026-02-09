@@ -16,7 +16,7 @@ export default function Datenschutz() {
 
   return (
     <LegalLayout title="Datenschutzerklärung">
-      <div className="text-slate-300 space-y-6">
+      <div className="text-neutral-200 space-y-6">
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">1. Datenschutz auf einen Blick</h2>
 
@@ -70,7 +70,7 @@ export default function Datenschutz() {
           </p>
           <p>
             Details entnehmen Sie der Datenschutzerklärung des Anbieters:{' '}
-            <a href="https://www.hostinger.com/de/legal/datenschutz-bestimmungen" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 underline">
+            <a href="https://www.hostinger.com/de/legal/datenschutz-bestimmungen" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 underline">
               https://www.hostinger.com/de/legal/datenschutz-bestimmungen
             </a>
           </p>
@@ -125,34 +125,34 @@ export default function Datenschutz() {
           </ul>
         </section>
 
-        <section className="mt-8 bg-slate-700/30 border border-slate-600/30 rounded-xl p-6">
+        <section className="mt-8 bg-neutral-700/30 border border-neutral-600/30 rounded-xl p-6">
           <h3 className="text-lg font-bold text-white mb-4 text-center">
             Weitere Seiten
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Link
               to="/"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Startseite</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Startseite</span>
             </Link>
             <Link
               to="/faq"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">FAQ</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">FAQ</span>
             </Link>
             <Link
               to="/impressum"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Impressum</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Impressum</span>
             </Link>
             <Link
               to="/agb"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">AGB</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">AGB</span>
             </Link>
           </div>
         </section>

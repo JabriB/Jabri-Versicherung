@@ -151,19 +151,19 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
         onClick={() => setIsOpen(!isOpen)}
         readOnly
         placeholder={placeholder}
-        className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition cursor-pointer ${
-          className || 'border-slate-600'
+        className={`w-full px-4 py-3 bg-neutral-900/50 border rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition cursor-pointer ${
+          className || 'border-neutral-600'
         }`}
       />
 
       {isOpen && (
-        <div className="absolute z-50 mt-2 bg-slate-800 border border-slate-600 rounded-xl shadow-2xl overflow-hidden w-80">
-          <div className="p-4 border-b border-slate-600">
+        <div className="absolute z-50 mt-2 bg-neutral-800 border border-neutral-600 rounded-xl shadow-2xl overflow-hidden w-80">
+          <div className="p-4 border-b border-neutral-600">
             <div className="flex items-center gap-2 mb-4">
               <select
                 value={displayDate.getMonth()}
                 onChange={(e) => handleMonthChange(parseInt(e.target.value))}
-                className="flex-1 px-3 py-2 bg-slate-900/50 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition cursor-pointer"
+                className="flex-1 px-3 py-2 bg-neutral-900/50 border border-neutral-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition cursor-pointer"
               >
                 {months.map((month, index) => (
                   <option key={month} value={index}>
@@ -175,7 +175,7 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
               <select
                 value={displayDate.getFullYear()}
                 onChange={(e) => handleYearChange(parseInt(e.target.value))}
-                className="flex-1 px-3 py-2 bg-slate-900/50 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition cursor-pointer"
+                className="flex-1 px-3 py-2 bg-neutral-900/50 border border-neutral-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition cursor-pointer"
               >
                 {years.map((year) => (
                   <option key={year} value={year}>
@@ -189,7 +189,7 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
               {weekDays.map(day => (
                 <div
                   key={day}
-                  className="text-center text-xs font-medium text-slate-400 py-1"
+                  className="text-center text-xs font-medium text-neutral-400 py-1"
                 >
                   {day}
                 </div>
@@ -208,8 +208,8 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
                     onClick={() => handleDateSelect(day.date)}
                     className={`
                       py-2 text-sm rounded-lg transition
-                      ${!day.isCurrentMonth ? 'text-slate-600' : 'text-slate-200'}
-                      ${isSelected ? 'bg-blue-500 text-white font-semibold' : 'hover:bg-slate-700'}
+                      ${!day.isCurrentMonth ? 'text-neutral-600' : 'text-neutral-200'}
+                      ${isSelected ? 'bg-blue-500 text-white font-semibold' : 'hover:bg-neutral-700'}
                       ${isTodayDate && !isSelected ? 'ring-1 ring-blue-400' : ''}
                     `}
                   >
@@ -220,18 +220,18 @@ export default function DatePicker({ value, onChange, placeholder = 'mm/dd/yyyy'
             </div>
           </div>
 
-          <div className="p-3 bg-slate-900/50 flex justify-between">
+          <div className="p-3 bg-neutral-900/50 flex justify-between">
             <button
               type="button"
               onClick={handleClear}
-              className="px-3 py-1.5 text-sm text-slate-300 hover:text-white transition"
+              className="px-3 py-1.5 text-sm text-neutral-200 hover:text-white transition"
             >
               Clear
             </button>
             <button
               type="button"
               onClick={handleToday}
-              className="px-3 py-1.5 text-sm text-slate-300 hover:text-white transition"
+              className="px-3 py-1.5 text-sm text-neutral-200 hover:text-white transition"
             >
               Today
             </button>

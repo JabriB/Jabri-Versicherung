@@ -53,11 +53,11 @@ export default function BlogPost() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
-            <p className="mt-4 text-slate-400">Loading blog post...</p>
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-gold-500 border-r-transparent"></div>
+            <p className="mt-4 text-neutral-400">Loading blog post...</p>
           </div>
         </div>
       </div>
@@ -73,19 +73,19 @@ export default function BlogPost() {
   const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <nav className="text-sm text-slate-400 mb-8 flex items-center gap-2">
-          <Link to="/" className="hover:text-orange-400 transition-colors">Home</Link>
+        <nav className="text-sm text-neutral-400 mb-8 flex items-center gap-2">
+          <Link to="/" className="hover:text-gold-500 transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/blog" className="hover:text-orange-400 transition-colors">Blog</Link>
+          <Link to="/blog" className="hover:text-gold-500 transition-colors">Blog</Link>
           <span>/</span>
-          <span className="text-slate-300">{translation?.title}</span>
+          <span className="text-neutral-200">{translation?.title}</span>
         </nav>
 
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 bg-orange-500/20 text-orange-300 text-sm rounded-full border border-orange-500/30">
+            <span className="px-3 py-1 bg-gold-500/20 text-gold-400 text-sm rounded-full border border-gold-500/30">
               {post.category}
             </span>
           </div>
@@ -94,7 +94,7 @@ export default function BlogPost() {
             {translation?.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 text-slate-400 text-sm mb-8">
+          <div className="flex flex-wrap items-center gap-6 text-neutral-400 text-sm mb-8">
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -122,7 +122,7 @@ export default function BlogPost() {
           <img
             src={post.image}
             alt={post.image_alt}
-            className="w-full rounded-xl shadow-2xl border border-slate-700"
+            className="w-full rounded-xl shadow-2xl border border-neutral-700"
           />
         </header>
 
@@ -131,14 +131,14 @@ export default function BlogPost() {
             prose-headings:text-white prose-headings:font-bold
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
             prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-            prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-4
-            prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-300
+            prose-p:text-neutral-200 prose-p:leading-relaxed prose-p:mb-4
+            prose-a:text-gold-500 prose-a:no-underline hover:prose-a:text-gold-400
             prose-strong:text-white prose-strong:font-semibold
-            prose-ul:text-slate-300 prose-ul:my-6
+            prose-ul:text-neutral-200 prose-ul:my-6
             prose-li:my-2
-            prose-table:border-slate-700
-            prose-th:bg-slate-800 prose-th:text-white
-            prose-td:border-slate-700"
+            prose-table:border-neutral-700
+            prose-th:bg-neutral-800 prose-th:text-white
+            prose-td:border-neutral-700"
           dangerouslySetInnerHTML={{ __html: translation?.content || '' }}
         />
 
@@ -146,10 +146,10 @@ export default function BlogPost() {
           {prevPost && (
             <Link
               to={`/blog/${prevPost.slug}`}
-              className="p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 group"
+              className="p-8 bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 backdrop-blur rounded-2xl border border-neutral-700/50 hover:border-gold-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-gold-500/10 group"
             >
-              <div className="text-sm text-slate-400 mb-3 group-hover:text-slate-300 transition-colors">← Vorheriger Artikel</div>
-              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors text-lg">
+              <div className="text-sm text-neutral-400 mb-3 group-hover:text-neutral-200 transition-colors">← Vorheriger Artikel</div>
+              <div className="text-white font-semibold group-hover:text-gold-500 transition-colors text-lg">
                 {prevPost.translation?.title}
               </div>
             </Link>
@@ -158,10 +158,10 @@ export default function BlogPost() {
           {nextPost && (
             <Link
               to={`/blog/${nextPost.slug}`}
-              className="p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 group md:text-right"
+              className="p-8 bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 backdrop-blur rounded-2xl border border-neutral-700/50 hover:border-gold-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-gold-500/10 group md:text-right"
             >
-              <div className="text-sm text-slate-400 mb-3 group-hover:text-slate-300 transition-colors">Nächster Artikel →</div>
-              <div className="text-white font-semibold group-hover:text-orange-400 transition-colors text-lg">
+              <div className="text-sm text-neutral-400 mb-3 group-hover:text-neutral-200 transition-colors">Nächster Artikel →</div>
+              <div className="text-white font-semibold group-hover:text-gold-500 transition-colors text-lg">
                 {nextPost.translation?.title}
               </div>
             </Link>

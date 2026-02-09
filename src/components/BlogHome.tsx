@@ -90,11 +90,11 @@ export default function BlogHome() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-10">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 pt-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
-            <p className="mt-4 text-slate-400">Loading blog posts...</p>
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-gold-500 border-r-transparent"></div>
+            <p className="mt-4 text-neutral-400">Loading blog posts...</p>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function BlogHome() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center text-red-400">
             <p>Error loading blog posts. Please try again later.</p>
@@ -114,12 +114,12 @@ export default function BlogHome() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 mb-6">
-            <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-sm text-slate-300">{content.latestArticles}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-800/50 border border-neutral-700 mb-6">
+            <div className="w-3 h-3 rounded-full bg-gold-500 animate-pulse" />
+            <span className="text-sm text-neutral-200">{content.latestArticles}</span>
           </div>
           <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
             {language === 'ar' ? (
@@ -127,19 +127,19 @@ export default function BlogHome() {
             ) : (
               <>
                 {language === 'en' ? 'Insurance' : language === 'tr' ? 'Sigorta' : 'Versicherungs'}-<br />
-                <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+                <span className="text-gold-500">
                   {content.heading.includes('-') ? content.heading.split('-')[1].trim() : 'Expertise'}
                 </span>
               </>
             )}
           </h1>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
             {content.subheading}
           </p>
         </div>
 
         {posts.length === 0 ? (
-          <div className="text-center text-slate-400 py-16">
+          <div className="text-center text-neutral-400 py-16">
             <p className="text-lg">{content.noPostsMessage}</p>
           </div>
         ) : (
@@ -147,7 +147,7 @@ export default function BlogHome() {
             {posts.map((post, index) => (
             <article
               key={post.id}
-              className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur rounded-2xl overflow-hidden border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer animate-fade-in-up opacity-0"
+              className="group bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 backdrop-blur rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-gold-500/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-gold-500/20 cursor-pointer animate-fade-in-up opacity-0"
               style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
             >
               <Link to={`/blog/${post.slug}`} className="block overflow-hidden">
@@ -160,24 +160,24 @@ export default function BlogHome() {
 
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 bg-orange-500/20 text-orange-300 text-sm rounded-full border border-orange-500/30 group-hover:bg-orange-500/30 group-hover:border-orange-500/50 transition-all duration-300 group-hover:scale-105">
+                  <span className="px-3 py-1 bg-gold-500/20 text-gold-400 text-sm rounded-full border border-gold-500/30 group-hover:bg-gold-500/30 group-hover:border-gold-500/50 transition-all duration-300 group-hover:scale-105">
                     {post.category}
                   </span>
-                  <span className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors">{post.read_time}</span>
+                  <span className="text-neutral-400 text-sm group-hover:text-neutral-200 transition-colors">{post.read_time}</span>
                 </div>
 
-                <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors duration-300">
+                <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-500 transition-colors duration-300">
                   <Link to={`/blog/${post.slug}`}>
                     {post.translation?.title || 'Untitled'}
                   </Link>
                 </h2>
 
-                <p className="text-slate-300 mb-6 line-clamp-3 group-hover:text-slate-200 transition-colors duration-300">
+                <p className="text-neutral-200 mb-6 line-clamp-3 group-hover:text-neutral-200 transition-colors duration-300">
                   {post.translation?.seo_description || ''}
                 </p>
 
-                <div className="flex items-center justify-between pt-6 border-t border-slate-700/50 group-hover:border-orange-500/20 transition-colors duration-300">
-                  <div className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
+                <div className="flex items-center justify-between pt-6 border-t border-neutral-700/50 group-hover:border-gold-500/20 transition-colors duration-300">
+                  <div className="text-sm text-neutral-400 group-hover:text-neutral-200 transition-colors">
                     {new Date(post.published_date).toLocaleDateString('de-DE', {
                       year: 'numeric',
                       month: 'short',
@@ -187,7 +187,7 @@ export default function BlogHome() {
 
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="text-orange-400 hover:text-orange-300 font-medium flex items-center gap-2 transition-all group/link"
+                    className="text-gold-500 hover:text-gold-400 font-medium flex items-center gap-2 transition-all group/link"
                   >
                     {content.readMore}
                     <svg className="w-5 h-5 group-hover/link:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,29 +202,29 @@ export default function BlogHome() {
         )}
 
         <div className="mt-16 flex justify-center">
-          <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-2xl p-10 max-w-lg w-full hover:border-orange-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/20 group backdrop-blur-xl">
-            <h3 className="text-3xl font-bold text-orange-400 mb-3 group-hover:text-orange-300 transition-colors duration-300">
+          <div className="bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-2xl p-10 max-w-lg w-full hover:border-gold-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-gold-500/20 group backdrop-blur-xl">
+            <h3 className="text-3xl font-bold text-gold-500 mb-3 group-hover:text-gold-400 transition-colors duration-300">
               {content.cta}
             </h3>
-            <p className="text-slate-400 mb-6 text-base leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+            <p className="text-neutral-400 mb-6 text-base leading-relaxed group-hover:text-neutral-200 transition-colors duration-300">
               {content.ctaSubtitle}
             </p>
 
             <ul className="space-y-3 mb-8">
-              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-neutral-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+                <span className="text-gold-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{content.ctaList1}</span>
               </li>
-              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
-                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-neutral-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+                <span className="text-gold-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{content.ctaList2}</span>
               </li>
-              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-neutral-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
+                <span className="text-gold-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{content.ctaList3}</span>
               </li>
-              <li className="flex items-center gap-3 text-slate-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
-                <span className="text-orange-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
+              <li className="flex items-center gap-3 text-neutral-100 opacity-0 animate-fade-in-right" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
+                <span className="text-gold-500 font-bold text-xl group-hover:scale-125 transition-transform duration-300">✓</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{content.ctaList4}</span>
               </li>
             </ul>
@@ -235,7 +235,7 @@ export default function BlogHome() {
                 pixelEvents.initiateCheckout();
                 pixelEvents.viewContent('Consultation Form', 'page');
               }}
-              className="block w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 px-7 rounded-lg transition-all hover:shadow-xl hover:shadow-orange-500/50 hover:-translate-y-0.5 active:translate-y-0 text-center group/btn"
+              className="block w-full bg-gold-500 hover:bg-gold-600 text-black font-semibold py-3 px-7 rounded-lg transition-all hover:shadow-xl hover:shadow-gold-500/50 hover:-translate-y-0.5 active:translate-y-0 text-center group/btn"
             >
               <span className="flex items-center justify-center gap-2">
                 {content.ctaButton}

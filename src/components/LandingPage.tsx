@@ -62,12 +62,12 @@ export default function LandingPage() {
   return (
     <>
       {/* Emergency Contact Banner */}
-      <div className="fixed top-0 w-full z-50 bg-gradient-to-r from-orange-600 to-orange-500">
+      <div className="fixed top-0 w-full z-50 bg-gradient-to-r from-gold-400 to-gold-500">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <a
             href="tel:+4915755588142"
             onClick={() => handleContactClick('phone')}
-            className="flex items-center justify-center gap-2 text-white hover:text-orange-100 transition group flex-wrap"
+            className="flex items-center justify-center gap-2 text-black hover:text-black/70 transition group flex-wrap"
           >
             <Phone size={18} className="animate-pulse flex-shrink-0" />
             <span className="text-xs sm:text-sm font-semibold whitespace-normal">
@@ -78,7 +78,7 @@ export default function LandingPage() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-10 w-full z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-700/50">
+      <nav className="fixed top-10 w-full z-50 backdrop-blur-md bg-neutral-900/80 border-b border-neutral-700/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between min-h-16 py-2">
             <div className="flex items-center gap-3 flex-shrink-0">
@@ -96,31 +96,31 @@ export default function LandingPage() {
               </div>
               <div className="min-w-0">
                 <div className="text-lg font-bold text-white leading-tight">{t.common.companyName}</div>
-                <div className="text-xs text-slate-400 leading-tight">{t.common.companyRole}</div>
+                <div className="text-xs text-neutral-400 leading-tight">{t.common.companyRole}</div>
               </div>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-6 px-4">
-              <button onClick={() => scrollToSection('about')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <button onClick={() => scrollToSection('about')} className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.about}
               </button>
-              <button onClick={() => scrollToSection('vorteile')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <button onClick={() => scrollToSection('vorteile')} className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.benefits}
               </button>
-              <button onClick={() => scrollToSection('produkte')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <button onClick={() => scrollToSection('produkte')} className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.products}
               </button>
-              <Link to="/blog" className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <Link to="/blog" className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.blog}
               </Link>
-              <button onClick={() => scrollToSection('testimonials')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <button onClick={() => scrollToSection('testimonials')} className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.testimonials}
               </button>
-              <button onClick={() => scrollToSection('ablauf')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <button onClick={() => scrollToSection('ablauf')} className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.process}
               </button>
-              <button onClick={() => scrollToSection('standort')} className="text-slate-300 hover:text-white transition text-sm whitespace-nowrap">
+              <button onClick={() => scrollToSection('standort')} className="text-neutral-200 hover:text-gold-500 transition text-sm whitespace-nowrap">
                 {t.nav.location}
               </button>
             </div>
@@ -129,7 +129,7 @@ export default function LandingPage() {
               <LanguageSelector />
               <button
                 onClick={() => scrollToSection('form')}
-                className="px-5 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold text-sm transition transform hover:scale-105 whitespace-nowrap"
+                className="px-5 py-2 bg-gold-500 hover:bg-gold-400 text-black rounded-lg font-semibold text-sm transition transform hover:scale-105 whitespace-nowrap"
               >
                 {t.nav.cta}
               </button>
@@ -154,50 +154,50 @@ export default function LandingPage() {
             <div className="lg:hidden pb-4 space-y-3">
               <button
                 onClick={() => scrollToSection('about')}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
               >
                 {t.nav.about}
               </button>
               <button
                 onClick={() => scrollToSection('vorteile')}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
               >
                 {t.nav.benefits}
               </button>
               <button
                 onClick={() => scrollToSection('testimonials')}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
               >
                 {t.nav.testimonials}
               </button>
               <button
                 onClick={() => scrollToSection('produkte')}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
               >
                 {t.nav.products}
               </button>
               <Link
                 to="/blog"
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.blog}
               </Link>
               <button
                 onClick={() => scrollToSection('ablauf')}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
               >
                 {t.nav.process}
               </button>
               <button
                 onClick={() => scrollToSection('standort')}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white transition"
+                className="block w-full text-left px-4 py-2 text-neutral-200 hover:text-gold-500 transition"
               >
                 {t.nav.location}
               </button>
               <button
                 onClick={() => scrollToSection('form')}
-                className="w-full mt-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-semibold"
+                className="w-full mt-2 px-4 py-2 bg-gold-500 text-black rounded-lg font-semibold"
               >
                 {t.nav.cta}
               </button>
@@ -207,40 +207,40 @@ export default function LandingPage() {
       </nav>
 
       {/* Main Content */}
-      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <main className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
         {/* Hero Section */}
         <section id="hero" className="pt-40 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column */}
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 mb-6 animate-fade-in-down">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-slate-300">{t.hero.badge}</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-800/50 border border-neutral-700 mb-6 animate-fade-in-down">
+                <div className="w-3 h-3 rounded-full bg-gold-500 animate-pulse" />
+                <span className="text-sm text-neutral-200">{t.hero.badge}</span>
               </div>
 
               <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in-up opacity-0 delay-100">
                 {t.hero.title}<br />
-                <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent animate-gradient-shift">
+                <span className="text-gold-500">
                   {t.hero.titleHighlight}
                 </span>
               </h1>
 
-              <p className="text-lg text-slate-400 mb-8 max-w-lg animate-fade-in-up opacity-0 delay-200">
+              <p className="text-lg text-neutral-400 mb-8 max-w-lg animate-fade-in-up opacity-0 delay-200">
                 {t.hero.description}
               </p>
 
               <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8 animate-fade-in-up opacity-0 delay-300">
                 <button
                   onClick={() => scrollToSection('form')}
-                  className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold flex items-center gap-2 transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-glow"
+                  className="px-8 py-3 bg-gold-500 hover:bg-gold-400 text-black rounded-lg font-semibold flex items-center gap-2 transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-gold-500/30 animate-pulse-glow"
                 >
                   {t.hero.startButton}
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
                   onClick={() => scrollToSection('ablauf')}
-                  className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-semibold border border-slate-600 transition-all duration-300 hover:border-orange-500 hover:shadow-lg"
+                  className="px-8 py-3 bg-transparent hover:bg-gold-500 text-gold-500 hover:text-black border-2 border-gold-500 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
                 >
                   {t.hero.learnMore}
                 </button>
@@ -248,16 +248,16 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm animate-fade-in-up opacity-0 delay-400">
                 <div className="flex items-center gap-3 group">
-                  <CheckCircle2 className="text-green-500 flex-shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                  <span className="text-slate-300">{t.hero.features.free}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                  <span className="text-neutral-200">{t.hero.features.free}</span>
                 </div>
                 <div className="flex items-center gap-3 group">
-                  <CheckCircle2 className="text-green-500 flex-shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                  <span className="text-slate-300">{t.hero.features.personal}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                  <span className="text-neutral-200">{t.hero.features.personal}</span>
                 </div>
                 <div className="flex items-center gap-3 group">
-                  <CheckCircle2 className="text-green-500 flex-shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                  <span className="text-slate-300">{t.hero.features.multilingual}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                  <span className="text-neutral-200">{t.hero.features.multilingual}</span>
                 </div>
               </div>
             </div>
@@ -265,38 +265,38 @@ export default function LandingPage() {
             {/* Right Column - Stats Card */}
             <div className="hidden lg:block">
               <div className="relative animate-fade-in-right opacity-0 delay-200">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl animate-pulse" />
-                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-8 backdrop-blur-xl hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-gold-500/20 to-gold-400/20 rounded-3xl blur-2xl animate-pulse" />
+                <div className="relative bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700 rounded-3xl p-8 backdrop-blur-xl hover:border-gold-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
                   <div className="space-y-6">
                     <div className="flex items-start justify-between">
                       <div>
-                        <div className="text-4xl font-bold text-white mb-2 hover:text-orange-400 transition-colors">9.2/10</div>
-                        <p className="text-slate-400 text-sm">{t.hero.stats.rating}</p>
+                        <div className="text-4xl font-bold text-white mb-2 hover:text-gold-500 transition-colors">9.2/10</div>
+                        <p className="text-neutral-400 text-sm">{t.hero.stats.rating}</p>
                       </div>
                       <div className="text-3xl animate-bounce-slow">⭐⭐⭐⭐⭐</div>
                     </div>
 
-                    <div className="pt-6 border-t border-slate-700 space-y-4">
+                    <div className="pt-6 border-t border-neutral-700 space-y-4">
                       <div className="flex justify-between items-center">
-                        <span className="text-slate-400">{t.hero.stats.successRate}</span>
+                        <span className="text-neutral-400">{t.hero.stats.successRate}</span>
                         <span className="text-white font-semibold">98%</span>
                       </div>
-                      <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                        <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full transition-all duration-1000" style={{ width: '98%' }} />
+                      <div className="w-full bg-neutral-700/50 rounded-full h-2 overflow-hidden">
+                        <div className="bg-gold-500 h-2 rounded-full transition-all duration-1000" style={{ width: '98%' }} />
                       </div>
 
                       <div className="flex justify-between items-center pt-4">
-                        <span className="text-slate-400">{t.hero.stats.satisfaction}</span>
+                        <span className="text-neutral-400">{t.hero.stats.satisfaction}</span>
                         <span className="text-white font-semibold">95%</span>
                       </div>
-                      <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                        <div className="bg-gradient-to-r from-orange-500 to-orange-400 h-2 rounded-full transition-all duration-1000" style={{ width: '95%' }} />
+                      <div className="w-full bg-neutral-700/50 rounded-full h-2 overflow-hidden">
+                        <div className="bg-gold-500 h-2 rounded-full transition-all duration-1000" style={{ width: '95%' }} />
                       </div>
                     </div>
 
-                    <div className="pt-6 border-t border-slate-700">
-                      <p className="text-slate-400 text-sm">
-                        <span className="text-green-400 font-semibold hover:text-green-300 transition-colors">500+</span> {t.hero.stats.customers}
+                    <div className="pt-6 border-t border-neutral-700">
+                      <p className="text-neutral-400 text-sm">
+                        <span className="text-gold-400 font-semibold hover:text-gold-300 transition-colors">500+</span> {t.hero.stats.customers}
                       </p>
                     </div>
                   </div>
@@ -314,8 +314,8 @@ export default function LandingPage() {
             {/* Image Column */}
             <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
               <div className="relative w-full max-w-sm group">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl" />
-                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-orange-500/50 transition-all duration-500 hover:shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-gold-500/20 to-gold-400/20 rounded-3xl blur-2xl" />
+                <div className="relative bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700 rounded-3xl p-2 backdrop-blur-xl overflow-hidden hover:border-gold-500/50 transition-all duration-500 hover:shadow-2xl">
                   <OptimizedImage
                     src="/tower-sm.webp"
                     alt={t.about.name}
@@ -334,44 +334,44 @@ export default function LandingPage() {
                 {t.about.title}
               </h2>
               <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-orange-400 mb-1">
+                <h3 className="text-2xl font-semibold text-gold-500 mb-1">
                   {t.about.name}
                 </h3>
-                <p className="text-slate-400">
+                <p className="text-neutral-400">
                   {t.about.role}
                 </p>
               </div>
-              <p className="text-lg text-slate-300 mb-4 leading-relaxed">
+              <p className="text-lg text-neutral-200 mb-4 leading-relaxed">
                 {t.about.description}
               </p>
 
-              <p className="text-base text-slate-400 mb-6 leading-relaxed">
+              <p className="text-base text-neutral-400 mb-6 leading-relaxed">
                 {t.about.expertise}
               </p>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-orange-500 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-300 text-sm">{t.about.qualities.item1}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-neutral-200 text-sm">{t.about.qualities.item1}</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-orange-500 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-300 text-sm">{t.about.qualities.item2}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-neutral-200 text-sm">{t.about.qualities.item2}</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-orange-500 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-300 text-sm">{t.about.qualities.item3}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-neutral-200 text-sm">{t.about.qualities.item3}</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-orange-500 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-300 text-sm">{t.about.qualities.item4}</span>
+                  <CheckCircle2 className="text-gold-500 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-neutral-200 text-sm">{t.about.qualities.item4}</span>
                 </div>
               </div>
 
               <div className="mt-8">
                 <button
                   onClick={() => scrollToSection('form')}
-                  className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 hover:shadow-xl hover:shadow-orange-500/50 group"
+                  className="px-8 py-3 bg-gold-500 hover:bg-gold-400 text-black rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 hover:shadow-xl hover:shadow-gold-500/30 group"
                 >
                   {t.hero.startButton}
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -383,13 +383,13 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section id="vorteile" className="py-5 px-4 sm:px-6 lg:px-8 bg-slate-800/30 overflow-hidden">
+      <section id="vorteile" className="py-5 px-4 sm:px-6 lg:px-8 bg-neutral-800/30 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4 animate-fade-in-up opacity-0">
               {t.benefits.title}
             </h2>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto animate-fade-in-up opacity-0 delay-100">
+            <p className="text-lg text-neutral-400 max-w-2xl mx-auto animate-fade-in-up opacity-0 delay-100">
               {t.benefits.subtitle}
             </p>
           </div>
@@ -405,15 +405,15 @@ export default function LandingPage() {
             ].map((benefit, index) => (
               <div
                 key={index}
-                className={`group p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl hover:border-orange-500/50 transition-all duration-500 hover:bg-gradient-to-br hover:from-slate-800/80 hover:to-slate-900/80 cursor-pointer animate-scale-in opacity-0 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 delay-${index * 100}`}
+                className={`group p-8 bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-gold-500/50 transition-all duration-500 hover:bg-gradient-to-br hover:from-neutral-800/80 hover:to-neutral-900/80 cursor-pointer animate-scale-in opacity-0 hover:scale-105 hover:shadow-2xl hover:shadow-gold-500/20 delay-${index * 100}`}
               >
                 <div className="text-4xl mb-4 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 animate-float">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-gold-500 transition-colors duration-300">
                   {t.benefits.items[benefit.key as keyof typeof t.benefits.items].title}
                 </h3>
-                <p className="text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
+                <p className="text-neutral-400 group-hover:text-neutral-200 transition-colors duration-300">
                   {t.benefits.items[benefit.key as keyof typeof t.benefits.items].description}
                 </p>
               </div>
@@ -429,26 +429,26 @@ export default function LandingPage() {
             <h2 className="text-3xl font-bold text-white mb-4">
               {t.products.title}
             </h2>
-            <p className="text-lg text-slate-400">
+            <p className="text-lg text-neutral-400">
               {t.products.subtitle}
             </p>
           </div>
 
           <div className="space-y-4">
             {/* Rechtsschutz Category */}
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-gold-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/10">
               <button
                 onClick={() => togglePanel('rechtsschutz')}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-800/40 transition-all duration-300 group"
+                className="w-full p-6 flex items-center justify-between hover:bg-neutral-800/40 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-4">
-                  <Shield className="text-orange-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
-                  <h3 className="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <Shield className="text-gold-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
+                  <h3 className="text-2xl font-bold text-white group-hover:text-gold-500 transition-colors">
                     {t.products.categories.legal}
                   </h3>
                 </div>
                 <ChevronDown
-                  className={`text-slate-400 group-hover:text-orange-500 transition-all duration-300 ${
+                  className={`text-neutral-400 group-hover:text-gold-500 transition-all duration-300 ${
                     openPanels.includes('rechtsschutz') ? 'rotate-180' : ''
                   }`}
                   size={24}
@@ -485,12 +485,12 @@ export default function LandingPage() {
                     ].map((product, idx) => (
                       <div
                         key={idx}
-                        className="p-4 bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-xl hover:border-orange-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20"
+                        className="p-4 bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-xl hover:border-gold-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-gold-500/20"
                       >
-                        <h4 className="font-semibold text-white group-hover:text-orange-400 transition-colors mb-2">
+                        <h4 className="font-semibold text-white group-hover:text-gold-500 transition-colors mb-2">
                           {product.name}
                         </h4>
-                        <span className="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded group-hover:bg-orange-500/20 group-hover:text-orange-300 transition-all">
+                        <span className="text-xs text-neutral-400 bg-neutral-700/50 px-2 py-1 rounded group-hover:bg-gold-500/20 group-hover:text-gold-400 transition-all">
                           {product.type}
                         </span>
                       </div>
@@ -501,19 +501,19 @@ export default function LandingPage() {
             </div>
 
             {/* Wohnschutz Category */}
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-gold-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/10">
               <button
                 onClick={() => togglePanel('wohnschutz')}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-800/40 transition-all duration-300 group"
+                className="w-full p-6 flex items-center justify-between hover:bg-neutral-800/40 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-4">
-                  <Home className="text-orange-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
-                  <h3 className="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <Home className="text-gold-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
+                  <h3 className="text-2xl font-bold text-white group-hover:text-gold-500 transition-colors">
                     {t.products.categories.home}
                   </h3>
                 </div>
                 <ChevronDown
-                  className={`text-slate-400 group-hover:text-orange-500 transition-all duration-300 ${
+                  className={`text-neutral-400 group-hover:text-gold-500 transition-all duration-300 ${
                     openPanels.includes('wohnschutz') ? 'rotate-180' : ''
                   }`}
                   size={24}
@@ -538,12 +538,12 @@ export default function LandingPage() {
                     ].map((product, idx) => (
                       <div
                         key={idx}
-                        className="p-4 bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-xl hover:border-orange-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20"
+                        className="p-4 bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-xl hover:border-gold-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-gold-500/20"
                       >
-                        <h4 className="font-semibold text-white group-hover:text-orange-400 transition-colors mb-2">
+                        <h4 className="font-semibold text-white group-hover:text-gold-500 transition-colors mb-2">
                           {product.name}
                         </h4>
-                        <span className="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded group-hover:bg-orange-500/20 group-hover:text-orange-300 transition-all">
+                        <span className="text-xs text-neutral-400 bg-neutral-700/50 px-2 py-1 rounded group-hover:bg-gold-500/20 group-hover:text-gold-400 transition-all">
                           {product.type}
                         </span>
                       </div>
@@ -554,19 +554,19 @@ export default function LandingPage() {
             </div>
 
             {/* Fahrzeug Category */}
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-gold-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/10">
               <button
                 onClick={() => togglePanel('fahrzeug')}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-800/40 transition-all duration-300 group"
+                className="w-full p-6 flex items-center justify-between hover:bg-neutral-800/40 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-4">
-                  <Car className="text-orange-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
-                  <h3 className="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <Car className="text-gold-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
+                  <h3 className="text-2xl font-bold text-white group-hover:text-gold-500 transition-colors">
                     {t.products.categories.vehicle}
                   </h3>
                 </div>
                 <ChevronDown
-                  className={`text-slate-400 group-hover:text-orange-500 transition-all duration-300 ${
+                  className={`text-neutral-400 group-hover:text-gold-500 transition-all duration-300 ${
                     openPanels.includes('fahrzeug') ? 'rotate-180' : ''
                   }`}
                   size={24}
@@ -589,12 +589,12 @@ export default function LandingPage() {
                     ].map((product, idx) => (
                       <div
                         key={idx}
-                        className="p-4 bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-xl hover:border-orange-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20"
+                        className="p-4 bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-xl hover:border-gold-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-gold-500/20"
                       >
-                        <h4 className="font-semibold text-white group-hover:text-orange-400 transition-colors mb-2">
+                        <h4 className="font-semibold text-white group-hover:text-gold-500 transition-colors mb-2">
                           {product.name}
                         </h4>
-                        <span className="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded group-hover:bg-orange-500/20 group-hover:text-orange-300 transition-all">
+                        <span className="text-xs text-neutral-400 bg-neutral-700/50 px-2 py-1 rounded group-hover:bg-gold-500/20 group-hover:text-gold-400 transition-all">
                           {product.type}
                         </span>
                       </div>
@@ -605,19 +605,19 @@ export default function LandingPage() {
             </div>
 
             {/* Geschäft & Gewerbe Category */}
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-gold-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/10">
               <button
                 onClick={() => togglePanel('gewerbe')}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-800/40 transition-all duration-300 group"
+                className="w-full p-6 flex items-center justify-between hover:bg-neutral-800/40 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-4">
-                  <Building2 className="text-orange-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
-                  <h3 className="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <Building2 className="text-gold-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
+                  <h3 className="text-2xl font-bold text-white group-hover:text-gold-500 transition-colors">
                     {t.products.categories.business}
                   </h3>
                 </div>
                 <ChevronDown
-                  className={`text-slate-400 group-hover:text-orange-500 transition-all duration-300 ${
+                  className={`text-neutral-400 group-hover:text-gold-500 transition-all duration-300 ${
                     openPanels.includes('gewerbe') ? 'rotate-180' : ''
                   }`}
                   size={24}
@@ -639,12 +639,12 @@ export default function LandingPage() {
                     ].map((product, idx) => (
                       <div
                         key={idx}
-                        className="p-4 bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-xl hover:border-orange-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20"
+                        className="p-4 bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-xl hover:border-gold-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-gold-500/20"
                       >
-                        <h4 className="font-semibold text-white group-hover:text-orange-400 transition-colors mb-2">
+                        <h4 className="font-semibold text-white group-hover:text-gold-500 transition-colors mb-2">
                           {product.name}
                         </h4>
-                        <span className="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded group-hover:bg-orange-500/20 group-hover:text-orange-300 transition-all">
+                        <span className="text-xs text-neutral-400 bg-neutral-700/50 px-2 py-1 rounded group-hover:bg-gold-500/20 group-hover:text-gold-400 transition-all">
                           {product.type}
                         </span>
                       </div>
@@ -655,19 +655,19 @@ export default function LandingPage() {
             </div>
 
             {/* Gesundheit & Versicherungen Category */}
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-gold-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/10">
               <button
                 onClick={() => togglePanel('gesundheit')}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-800/40 transition-all duration-300 group"
+                className="w-full p-6 flex items-center justify-between hover:bg-neutral-800/40 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-4">
-                  <Heart className="text-orange-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
-                  <h3 className="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <Heart className="text-gold-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" size={28} />
+                  <h3 className="text-2xl font-bold text-white group-hover:text-gold-500 transition-colors">
                     {t.products.categories.health}
                   </h3>
                 </div>
                 <ChevronDown
-                  className={`text-slate-400 group-hover:text-orange-500 transition-all duration-300 ${
+                  className={`text-neutral-400 group-hover:text-gold-500 transition-all duration-300 ${
                     openPanels.includes('gesundheit') ? 'rotate-180' : ''
                   }`}
                   size={24}
@@ -690,12 +690,12 @@ export default function LandingPage() {
                     ].map((product, idx) => (
                       <div
                         key={idx}
-                        className="p-4 bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-xl hover:border-orange-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20"
+                        className="p-4 bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-700/50 rounded-xl hover:border-gold-500/50 transition-all duration-300 cursor-pointer group hover:scale-105 hover:shadow-lg hover:shadow-gold-500/20"
                       >
-                        <h4 className="font-semibold text-white group-hover:text-orange-400 transition-colors mb-2">
+                        <h4 className="font-semibold text-white group-hover:text-gold-500 transition-colors mb-2">
                           {product.name}
                         </h4>
-                        <span className="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded group-hover:bg-orange-500/20 group-hover:text-orange-300 transition-all">
+                        <span className="text-xs text-neutral-400 bg-neutral-700/50 px-2 py-1 rounded group-hover:bg-gold-500/20 group-hover:text-gold-400 transition-all">
                           {product.type}
                         </span>
                       </div>
@@ -709,13 +709,13 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-5 px-4 sm:px-6 lg:px-8 bg-slate-800/30 overflow-hidden">
+      <section id="testimonials" className="py-5 px-4 sm:px-6 lg:px-8 bg-neutral-800/30 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4 animate-fade-in-up opacity-0">
               {t.testimonials.title}
             </h2>
-            <p className="text-lg text-slate-400 animate-fade-in-up opacity-0 delay-100">
+            <p className="text-lg text-neutral-400 animate-fade-in-up opacity-0 delay-100">
               {t.testimonials.subtitle}
             </p>
           </div>
@@ -724,17 +724,17 @@ export default function LandingPage() {
             {t.testimonials.items.map((testimonial, index) => (
               <div
                 key={index}
-                className={`group p-8 bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl hover:border-orange-500/50 transition-all duration-500 cursor-pointer hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20 animate-fade-in-up opacity-0 delay-${(index + 1) * 100}`}
+                className={`group p-8 bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-gold-500/50 transition-all duration-500 cursor-pointer hover:scale-105 hover:shadow-xl hover:shadow-gold-500/20 animate-fade-in-up opacity-0 delay-${(index + 1) * 100}`}
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <span key={i} className="text-yellow-400 group-hover:scale-125 transition-transform duration-300 inline-block" style={{ transitionDelay: `${i * 50}ms` }}>★</span>
                   ))}
                 </div>
-                <p className="text-slate-300 mb-6 italic group-hover:text-white transition-colors">"{testimonial.text}"</p>
+                <p className="text-neutral-200 mb-6 italic group-hover:text-white transition-colors">"{testimonial.text}"</p>
                 <div>
-                  <p className="font-semibold text-white group-hover:text-orange-400 transition-colors">{testimonial.name}</p>
-                  <p className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors">{testimonial.role}</p>
+                  <p className="font-semibold text-white group-hover:text-gold-500 transition-colors">{testimonial.name}</p>
+                  <p className="text-neutral-400 text-sm group-hover:text-neutral-200 transition-colors">{testimonial.role}</p>
                 </div>
               </div>
             ))}
@@ -743,13 +743,13 @@ export default function LandingPage() {
       </section>
 
       {/* Process Section */}
-      <section id="ablauf" className="py-5 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+      <section id="ablauf" className="py-5 px-4 sm:px-6 lg:px-8 bg-neutral-800/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">
               {t.process.title}
             </h2>
-            <p className="text-lg text-slate-400">
+            <p className="text-lg text-neutral-400">
               {t.process.subtitle}
             </p>
           </div>
@@ -758,18 +758,18 @@ export default function LandingPage() {
             {t.process.steps.map((step, index) => (
               <div key={index} className="text-center md:text-start">
                 <div className="mb-4 flex items-center justify-center md:justify-start gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 flex items-center justify-center text-black font-bold text-lg">
                     {index + 1}
                   </div>
                   {index < 3 && (
                     <ChevronRight 
-                      className="text-slate-600 hidden md:block rtl:rotate-180" 
+                      className="text-neutral-600 hidden md:block rtl:rotate-180" 
                       size={24} 
                     />
                   )}
                 </div>
                 <h3 className="font-semibold text-white mb-2">{step.title}</h3>
-                <p className="text-slate-400 text-sm">{step.description}</p>
+                <p className="text-neutral-400 text-sm">{step.description}</p>
               </div>
             ))}
           </div>
@@ -783,40 +783,40 @@ export default function LandingPage() {
             <h2 className="text-4xl font-bold text-white mb-4">
               {t.location.title}
             </h2>
-            <p className="text-lg text-slate-400">
+            <p className="text-lg text-neutral-400">
               {t.location.subtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {/* Address Info */}
-            <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-2xl p-8">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="text-white" size={24} />
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-gold-500 to-gold-400 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="text-black" size={24} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">{t.location.office}</h3>
-                  <p className="text-slate-400">{t.location.officeSubtitle}</p>
+                  <p className="text-neutral-400">{t.location.officeSubtitle}</p>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="border-t border-slate-700 pt-6">
-                  <h4 className="text-sm font-semibold text-slate-400 mb-2">{t.location.address}</h4>
+                <div className="border-t border-neutral-700 pt-6">
+                  <h4 className="text-sm font-semibold text-neutral-400 mb-2">{t.location.address}</h4>
                   <p className="text-white text-lg">
                     Schöllerstraße 33<br />
                     52351 Düren
                   </p>
                 </div>
 
-                <div className="border-t border-slate-700 pt-6">
-                  <h4 className="text-sm font-semibold text-slate-400 mb-2">{t.location.contact}</h4>
+                <div className="border-t border-neutral-700 pt-6">
+                  <h4 className="text-sm font-semibold text-neutral-400 mb-2">{t.location.contact}</h4>
                   <div className="space-y-2">
                     <a
                       href="tel:+4915755588142"
                       onClick={() => handleContactClick('phone')}
-                      className="text-white hover:text-orange-400 transition flex items-center gap-2"
+                      className="text-white hover:text-gold-500 transition flex items-center gap-2"
                     >
                       <Phone size={18} />
                       <span dir="ltr">{t.emergency.phone}</span>
@@ -824,15 +824,15 @@ export default function LandingPage() {
                     <a
                       href="mailto:jabri.versicherung@gmail.com"
                       onClick={() => handleContactClick('email')}
-                      className="text-white hover:text-orange-400 transition block"
+                      className="text-white hover:text-gold-500 transition block"
                     >
                       jabri.versicherung@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="border-t border-slate-700 pt-6">
-                  <h4 className="text-sm font-semibold text-slate-400 mb-2">{t.location.hours}</h4>
+                <div className="border-t border-neutral-700 pt-6">
+                  <h4 className="text-sm font-semibold text-neutral-400 mb-2">{t.location.hours}</h4>
                   <div className="text-white space-y-1">
                     <p>{t.location.hoursText.weekdays}</p>
                     <p>{t.location.hoursText.sunday}</p>
@@ -842,7 +842,7 @@ export default function LandingPage() {
                 <div className="pt-4">
                   <button
                     onClick={() => scrollToSection('form')}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-orange-500/50 group flex items-center justify-center gap-2"
+                    className="w-full px-6 py-3 bg-gold-500 hover:bg-gold-400 text-black rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-gold-500/30 group flex items-center justify-center gap-2"
                   >
                     {t.location.appointmentButton}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -852,7 +852,7 @@ export default function LandingPage() {
             </div>
 
             {/* Map */}
-            <div className="hidden lg:block bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group min-h-0">
+            <div className="hidden lg:block bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl group min-h-0">
               <OptimizedImage
                 src="/map.webp"
                 alt="Standort Versicherung Düren-Aachen Brhan Jabri"
@@ -868,16 +868,16 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-5 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+      <section id="faq" className="py-5 px-4 sm:px-6 lg:px-8 bg-neutral-800/30">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl mb-4">
-              <HelpCircle className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-gold-500 to-gold-400 rounded-2xl mb-4">
+              <HelpCircle className="w-8 h-8 text-black" />
             </div>
             <h2 className="text-4xl font-bold text-white mb-4">
               {language === 'de' ? 'Häufig gestellte Fragen' : language === 'en' ? 'Frequently Asked Questions' : language === 'ar' ? 'الأسئلة المتكررة' : 'Sık Sorulan Sorular'}
             </h2>
-            <p className="text-lg text-slate-400">
+            <p className="text-lg text-neutral-400">
               {language === 'de' ? 'Die wichtigsten Antworten auf einen Blick' : language === 'en' ? 'The most important answers at a glance' : language === 'ar' ? 'أهم الإجابات في لمحة' : 'En önemli cevaplar bir bakışta'}
             </p>
           </div>
@@ -914,17 +914,17 @@ export default function LandingPage() {
               return (
                 <div
                   key={faq.id}
-                  className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300"
+                  className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-gold-500/30 transition-all duration-300"
                 >
                   <button
                     onClick={() => toggleFaq(faq.id)}
-                    className="w-full text-left p-6 flex items-start justify-between gap-4 hover:bg-slate-800/40 transition-colors"
+                    className="w-full text-left p-6 flex items-start justify-between gap-4 hover:bg-neutral-800/40 transition-colors"
                   >
                     <span className="text-lg font-semibold text-white leading-relaxed pr-2">
                       {faq.question}
                     </span>
                     <ChevronDown
-                      className={`w-6 h-6 text-orange-500 flex-shrink-0 transition-transform duration-300 mt-1 ${
+                      className={`w-6 h-6 text-gold-500 flex-shrink-0 transition-transform duration-300 mt-1 ${
                         isOpen ? 'rotate-180' : ''
                       }`}
                     />
@@ -936,7 +936,7 @@ export default function LandingPage() {
                     }`}
                   >
                     <div className="px-6 pb-6 pt-0">
-                      <div className="text-base text-slate-300 leading-relaxed border-t border-slate-700/50 pt-4">
+                      <div className="text-base text-neutral-200 leading-relaxed border-t border-neutral-700/50 pt-4">
                         {faq.answer}
                       </div>
                     </div>
@@ -949,7 +949,7 @@ export default function LandingPage() {
           <div className="text-center">
             <Link
               to="/faq"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-slate-600 hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/30 group"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-transparent hover:bg-gold-500 text-gold-500 hover:text-black border-2 border-gold-500 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-gold-500/30 group"
             >
               <HelpCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               <span>
@@ -962,18 +962,18 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-orange-500/10 to-orange-600/10 border-y border-slate-700 overflow-hidden">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gold-500/10 to-gold-400/10 border-y border-neutral-700 overflow-hidden">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4 animate-fade-in-up opacity-0">
             {t.cta.title}
           </h2>
-          <p className="text-lg text-slate-300 mb-8 animate-fade-in-up opacity-0 delay-100">
+          <p className="text-lg text-neutral-200 mb-8 animate-fade-in-up opacity-0 delay-100">
             {t.cta.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up opacity-0 delay-200">
             <button
               onClick={() => scrollToSection('form')}
-              className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/50 animate-pulse-glow group"
+              className="px-8 py-3 bg-gold-500 hover:bg-gold-400 text-black rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:shadow-gold-500/30 animate-pulse-glow group"
             >
               <span className="flex items-center gap-2">
                 {t.cta.requestButton}
@@ -982,7 +982,7 @@ export default function LandingPage() {
             </button>
             <a
               href="tel:+4915755588142"
-              className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-semibold border border-slate-600 transition-all duration-300 hover:border-orange-500 hover:scale-105 hover:shadow-lg group flex items-center gap-2"
+              className="px-8 py-3 bg-transparent hover:bg-gold-500 text-gold-500 hover:text-black border-2 border-gold-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg group flex items-center gap-2"
               dir="ltr"
             >
               <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" />
@@ -995,12 +995,12 @@ export default function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-700 py-12 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
+      <footer className="border-t border-neutral-800 py-12 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg overflow-hidden bg-slate-800 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg overflow-hidden bg-neutral-800 flex items-center justify-center">
                   <img
                     src="/jabri-versicherung-_logo.png"
                     alt="Jabri Versicherung Logo"
@@ -1015,43 +1015,43 @@ export default function LandingPage() {
                 </div>
                 <span className="font-bold text-white">{t.common.companyName}</span>
               </div>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-neutral-400">
                 {t.footer.description}
               </p>
             </div>
 
             <div>
-              <h3 className="font-semibold text-white mb-4">{t.footer.navigation}</h3>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition">{t.nav.about}</button></li>
-                <li><button onClick={() => scrollToSection('vorteile')} className="hover:text-white transition">{t.nav.benefits}</button></li>
-                <li><button onClick={() => scrollToSection('testimonials')} className="hover:text-white transition">{t.nav.testimonials}</button></li>
-                <li><button onClick={() => scrollToSection('ablauf')} className="hover:text-white transition">{t.nav.process}</button></li>
-                <li><button onClick={() => scrollToSection('standort')} className="hover:text-white transition">{t.nav.location}</button></li>
+              <h3 className="font-semibold text-gold-500 mb-4">{t.footer.navigation}</h3>
+              <ul className="space-y-2 text-sm text-neutral-400">
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-gold-500 transition">{t.nav.about}</button></li>
+                <li><button onClick={() => scrollToSection('vorteile')} className="hover:text-gold-500 transition">{t.nav.benefits}</button></li>
+                <li><button onClick={() => scrollToSection('testimonials')} className="hover:text-gold-500 transition">{t.nav.testimonials}</button></li>
+                <li><button onClick={() => scrollToSection('ablauf')} className="hover:text-gold-500 transition">{t.nav.process}</button></li>
+                <li><button onClick={() => scrollToSection('standort')} className="hover:text-gold-500 transition">{t.nav.location}</button></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold text-white mb-4">{t.footer.legal}</h3>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li><Link to="/impressum" className="hover:text-white transition">{t.footer.links.imprint}</Link></li>
-                <li><Link to="/datenschutz" className="hover:text-white transition">{t.footer.links.privacy}</Link></li>
-                <li><Link to="/agb" className="hover:text-white transition">{t.footer.links.terms}</Link></li>
-                <li><Link to="/sitemap" className="hover:text-white transition">{language === 'de' ? 'Sitemap' : language === 'en' ? 'Sitemap' : language === 'ar' ? 'خريطة الموقع' : 'Site Haritası'}</Link></li>
+              <h3 className="font-semibold text-gold-500 mb-4">{t.footer.legal}</h3>
+              <ul className="space-y-2 text-sm text-neutral-400">
+                <li><Link to="/impressum" className="hover:text-gold-500 transition">{t.footer.links.imprint}</Link></li>
+                <li><Link to="/datenschutz" className="hover:text-gold-500 transition">{t.footer.links.privacy}</Link></li>
+                <li><Link to="/agb" className="hover:text-gold-500 transition">{t.footer.links.terms}</Link></li>
+                <li><Link to="/sitemap" className="hover:text-gold-500 transition">{language === 'de' ? 'Sitemap' : language === 'en' ? 'Sitemap' : language === 'ar' ? 'خريطة الموقع' : 'Site Haritası'}</Link></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold text-white mb-4">{t.footer.contact}</h3>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li><a href="tel:+4915755588142" onClick={() => handleContactClick('phone')} className="hover:text-white transition" dir="ltr">{t.emergency.phone}</a></li>
-                <li><a href="mailto:jabri.versicherung@gmail.com" onClick={() => handleContactClick('email')} className="hover:text-white transition">jabri.versicherung@gmail.com</a></li>
+              <h3 className="font-semibold text-gold-500 mb-4">{t.footer.contact}</h3>
+              <ul className="space-y-2 text-sm text-neutral-400">
+                <li><a href="tel:+4915755588142" onClick={() => handleContactClick('phone')} className="hover:text-gold-500 transition" dir="ltr">{t.emergency.phone}</a></li>
+                <li><a href="mailto:jabri.versicherung@gmail.com" onClick={() => handleContactClick('email')} className="hover:text-gold-500 transition">jabri.versicherung@gmail.com</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-slate-700 pt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+          <div className="border-t border-neutral-800 pt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-neutral-400">
               <p>{t.footer.copyright}</p>
               <p>{t.footer.gdpr}</p>
             </div>

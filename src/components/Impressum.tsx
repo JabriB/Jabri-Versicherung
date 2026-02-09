@@ -16,7 +16,7 @@ export default function Impressum() {
 
   return (
     <LegalLayout title="Impressum">
-      <div className="text-slate-300 space-y-6">
+      <div className="text-neutral-200 space-y-6">
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">Kontakt</h2>
           <p>
@@ -36,7 +36,7 @@ export default function Impressum() {
           <p>
             Diese gesetzlichen Regelungen können Sie über die vom Bundesministerium der Justiz und von der juris GmbH
             betriebenen Homepage{' '}
-            <a href="https://www.gesetze-im-internet.de" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 underline">
+            <a href="https://www.gesetze-im-internet.de" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 underline">
               www.gesetze-im-internet.de
             </a>{' '}
             einsehen und abrufen.
@@ -58,7 +58,7 @@ export default function Impressum() {
             <strong className="text-white">Rückfragen bei Deutsche Industrie- und Handelskammertag (DIHK) e.V.</strong><br />
             Breite Straße 29<br />
             10178 Berlin<br />
-            <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 underline">
+            <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 underline">
               www.vermittlerregister.info
             </a>
           </p>
@@ -70,7 +70,7 @@ export default function Impressum() {
             <strong className="text-white">Versicherungsombudsmann e.V.</strong><br />
             Postfach 08 06 32<br />
             10006 Berlin<br />
-            <a href="https://www.versicherungsombudsmann.de" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 underline">
+            <a href="https://www.versicherungsombudsmann.de" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 underline">
               www.versicherungsombudsmann.de
             </a>
           </p>
@@ -80,7 +80,7 @@ export default function Impressum() {
           <h2 className="text-2xl font-bold text-white mb-4">Verbraucherinformation</h2>
           <p>
             Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br />
-            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 underline">
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 underline">
               https://ec.europa.eu/consumers/odr
             </a>
           </p>
@@ -93,34 +93,34 @@ export default function Impressum() {
           </p>
         </section>
 
-        <section className="mt-8 bg-slate-700/30 border border-slate-600/30 rounded-xl p-6">
+        <section className="mt-8 bg-neutral-700/30 border border-neutral-600/30 rounded-xl p-6">
           <h3 className="text-lg font-bold text-white mb-4 text-center">
             Weitere Seiten
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Link
               to="/"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Startseite</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Startseite</span>
             </Link>
             <Link
               to="/faq"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">FAQ</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">FAQ</span>
             </Link>
             <Link
               to="/datenschutz"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Datenschutz</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Datenschutz</span>
             </Link>
             <Link
               to="/agb"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">AGB</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">AGB</span>
             </Link>
           </div>
         </section>

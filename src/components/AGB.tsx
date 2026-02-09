@@ -16,7 +16,7 @@ export default function AGB() {
 
   return (
     <LegalLayout title="Allgemeine Geschäftsbedingungen (AGB)">
-      <div className="text-slate-300 space-y-6">
+      <div className="text-neutral-200 space-y-6">
         <section>
           <h2 className="text-2xl font-bold text-white mb-4">§ 1 Geltungsbereich</h2>
           <p>
@@ -125,34 +125,34 @@ export default function AGB() {
           </p>
         </section>
 
-        <section className="mt-8 bg-slate-700/30 border border-slate-600/30 rounded-xl p-6">
+        <section className="mt-8 bg-neutral-700/30 border border-neutral-600/30 rounded-xl p-6">
           <h3 className="text-lg font-bold text-white mb-4 text-center">
             Weitere Seiten
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Link
               to="/"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Startseite</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Startseite</span>
             </Link>
             <Link
               to="/faq"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">FAQ</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">FAQ</span>
             </Link>
             <Link
               to="/impressum"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Impressum</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Impressum</span>
             </Link>
             <Link
               to="/datenschutz"
-              className="text-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/30 transition-all"
+              className="text-center p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-600/30 hover:border-gold-500/30 transition-all"
             >
-              <span className="text-sm text-slate-300 hover:text-orange-400">Datenschutz</span>
+              <span className="text-sm text-neutral-200 hover:text-gold-500">Datenschutz</span>
             </Link>
           </div>
         </section>

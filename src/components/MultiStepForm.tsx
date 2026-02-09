@@ -342,16 +342,16 @@ export default function MultiStepForm() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-slate-800/90 border border-slate-700 rounded-3xl p-8 text-center animate-scale-in">
-          <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-in">
-            <CheckCircle2 className="w-10 h-10 text-green-400" />
+      <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-neutral-800/90 border border-neutral-700 rounded-3xl p-8 text-center animate-scale-in">
+          <div className="w-16 h-16 bg-gold-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-in">
+            <CheckCircle2 className="w-10 h-10 text-gold-400" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-3 animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>{t.form.success.title}</h2>
-          <p className="text-slate-300 mb-2 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
+          <p className="text-neutral-200 mb-2 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
             {t.form.success.message}
           </p>
-          <p className="text-slate-400 text-sm animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
+          <p className="text-neutral-400 text-sm animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
             {t.form.success.redirect}
           </p>
         </div>
@@ -360,36 +360,36 @@ export default function MultiStepForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8 animate-fade-in">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Clock className="w-4 h-4 text-orange-400" />
-            <span className="text-slate-300 text-sm font-medium">{t.form.progressMicrocopy} <span className="text-orange-400 font-semibold">({t.form.timeEstimate})</span></span>
+            <Clock className="w-4 h-4 text-gold-500" />
+            <span className="text-neutral-200 text-sm font-medium">{t.form.progressMicrocopy} <span className="text-gold-500 font-semibold">({t.form.timeEstimate})</span></span>
           </div>
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm font-medium">{t.form.stepIndicator} {currentStep} {t.form.ofSteps} {totalSteps}</span>
-            <span className="text-slate-400 text-sm font-bold">{Math.round(progress)}%</span>
+            <span className="text-neutral-400 text-sm font-medium">{t.form.stepIndicator} {currentStep} {t.form.ofSteps} {totalSteps}</span>
+            <span className="text-neutral-400 text-sm font-bold">{Math.round(progress)}%</span>
           </div>
-          <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+          <div className="h-2 bg-neutral-700/50 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-500 ease-out shadow-lg shadow-orange-500/50"
+              className="h-full bg-gold-500 transition-all duration-500 ease-out shadow-lg shadow-gold-500/50"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
-        <div className="bg-slate-800/90 border border-slate-700 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-neutral-800/90 border border-neutral-700 rounded-3xl p-8 shadow-2xl">
           {currentStep === 1 && (
             <div className="space-y-6 animate-slide-up">
               <div className="animate-fade-in">
                 <h2 className="text-3xl font-bold text-white mb-2">{t.form.step2.title}</h2>
-                <p className="text-slate-400">{t.form.step2.description}</p>
+                <p className="text-neutral-400">{t.form.step2.description}</p>
               </div>
 
               {interestCategories.map((category, catIndex) => (
                 <div key={category.name} className="animate-slide-up" style={{ animationDelay: `${catIndex * 0.08}s`, animationFillMode: 'backwards' }}>
-                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">{category.name}</h3>
+                  <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">{category.name}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                     {category.items.map((interest, itemIndex) => {
                       const isSelected = formData.interests.includes(interest);
@@ -400,18 +400,18 @@ export default function MultiStepForm() {
                           onClick={() => toggleInterest(interest)}
                           className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border-2 transition-all text-center transform hover:scale-[1.03] active:scale-[0.98] animate-slide-up ${
                             isSelected
-                              ? 'bg-orange-500/15 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                              : 'bg-slate-900/50 border-slate-600/80 text-slate-300 hover:border-orange-500/50 hover:bg-slate-800/70'
+                              ? 'bg-gold-500/15 border-gold-500 text-white shadow-lg shadow-gold-500/20'
+                              : 'bg-neutral-900/50 border-neutral-600/80 text-neutral-200 hover:border-gold-500/50 hover:bg-neutral-800/70'
                           }`}
                           style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
                         >
-                          <div className={`transition-colors ${isSelected ? 'text-orange-400' : 'text-slate-400'}`}>
+                          <div className={`transition-colors ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}>
                             {interestIcons[interest] || <Shield className="w-5 h-5" />}
                           </div>
                           <span className="text-xs font-medium leading-tight">{interest}</span>
                           {isSelected && (
                             <div className="absolute top-1.5 right-1.5">
-                              <CheckCircle2 className="w-4 h-4 text-orange-400 animate-bounce-in" />
+                              <CheckCircle2 className="w-4 h-4 text-gold-500 animate-bounce-in" />
                             </div>
                           )}
                         </button>
@@ -427,14 +427,14 @@ export default function MultiStepForm() {
             <div className="space-y-6 animate-slide-up">
               <div className="animate-fade-in">
                 <h2 className="text-3xl font-bold text-white mb-2">{t.form.step1.title}</h2>
-                <p className="text-slate-400">{t.form.step1.description}</p>
+                <p className="text-neutral-400">{t.form.step1.description}</p>
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3 animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
                   <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step1.firstName} <span className="text-orange-400">*</span>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-neutral-200 mb-2">
+                      {t.form.step1.firstName} <span className="text-gold-500">*</span>
                     </label>
                     <input
                       id="firstName"
@@ -445,12 +445,12 @@ export default function MultiStepForm() {
                       value={formData.firstName}
                       onChange={(e) => updateField('firstName', e.target.value)}
                       placeholder={t.form.step1.firstNamePlaceholder}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50"
+                      className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-600 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all hover:border-gold-500/50"
                     />
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-2">
-                      {t.form.step1.lastName} <span className="text-orange-400">*</span>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-neutral-200 mb-2">
+                      {t.form.step1.lastName} <span className="text-gold-500">*</span>
                     </label>
                     <input
                       id="lastName"
@@ -461,14 +461,14 @@ export default function MultiStepForm() {
                       value={formData.lastName}
                       onChange={(e) => updateField('lastName', e.target.value)}
                       placeholder={t.form.step1.lastNamePlaceholder}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50"
+                      className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-600 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all hover:border-gold-500/50"
                     />
                   </div>
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.email} <span className="text-orange-400">*</span>
+                  <label htmlFor="email" className="block text-sm font-medium text-neutral-200 mb-2">
+                    {t.form.step3.email} <span className="text-gold-500">*</span>
                   </label>
                   <input
                     id="email"
@@ -479,8 +479,8 @@ export default function MultiStepForm() {
                     value={formData.email}
                     onChange={(e) => updateField('email', e.target.value)}
                     placeholder={t.form.step3.emailPlaceholder}
-                    className={`w-full px-4 py-3 bg-slate-900/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 ${
-                      validationErrors.email ? 'border-red-500' : 'border-slate-600'
+                    className={`w-full px-4 py-3 bg-neutral-900/50 border rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all hover:border-gold-500/50 ${
+                      validationErrors.email ? 'border-red-500' : 'border-neutral-600'
                     }`}
                   />
                   {validationErrors.email && (
@@ -489,8 +489,8 @@ export default function MultiStepForm() {
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-3">
-                    {t.form.step3.phone} <span className="text-orange-400">*</span>
+                  <label htmlFor="phone" className="block text-sm font-medium text-neutral-200 mb-3">
+                    {t.form.step3.phone} <span className="text-gold-500">*</span>
                   </label>
                   <input
                     id="phone"
@@ -501,8 +501,8 @@ export default function MultiStepForm() {
                     value={formData.phone}
                     onChange={(e) => updateField('phone', e.target.value)}
                     placeholder={t.form.step3.phonePlaceholder}
-                    className={`w-full px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-orange-500/50 ${
-                      validationErrors.phone ? 'border-red-500' : 'border-slate-600'
+                    className={`w-full px-4 py-3 bg-neutral-800/50 border rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all hover:border-gold-500/50 ${
+                      validationErrors.phone ? 'border-red-500' : 'border-neutral-600'
                     }`}
                   />
                   {validationErrors.phone && (
@@ -513,8 +513,8 @@ export default function MultiStepForm() {
                 </div>
 
                 <div className="animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-                  <label htmlFor="birthDate" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.birthDate} <span className="text-orange-400">*</span>
+                  <label htmlFor="birthDate" className="block text-sm font-medium text-neutral-200 mb-2">
+                    {t.form.step3.birthDate} <span className="text-gold-500">*</span>
                   </label>
                   <DatePicker
                     id="birthDate"
@@ -535,13 +535,13 @@ export default function MultiStepForm() {
             <div className="space-y-6 animate-slide-up">
               <div className="animate-fade-in">
                 <h2 className="text-3xl font-bold text-white mb-2">{t.form.step5.title}</h2>
-                <p className="text-slate-400">Complete optional details for better service</p>
+                <p className="text-neutral-400">Complete optional details for better service</p>
               </div>
 
               <div className="space-y-4">
                 <div className="animate-slide-up">
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.availability} <span className="text-slate-500 text-xs">(optional)</span>
+                  <label className="block text-sm font-medium text-neutral-200 mb-2">
+                    {t.form.step3.availability} <span className="text-neutral-500 text-xs">(optional)</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     {availabilityOptions.map((time) => (
@@ -551,8 +551,8 @@ export default function MultiStepForm() {
                         onClick={() => toggleAvailability(time)}
                         className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                           formData.availability.includes(time)
-                            ? 'bg-orange-500/20 border-orange-500 text-white'
-                            : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
+                            ? 'bg-gold-500/20 border-gold-500 text-white'
+                            : 'bg-neutral-900/50 border-neutral-600 text-neutral-200 hover:border-gold-500/50'
                         }`}
                       >
                         {time}
@@ -562,8 +562,8 @@ export default function MultiStepForm() {
                 </div>
 
                 <div className="animate-slide-up">
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step3.maritalStatus} <span className="text-slate-500 text-xs">(optional)</span>
+                  <label className="block text-sm font-medium text-neutral-200 mb-2">
+                    {t.form.step3.maritalStatus} <span className="text-neutral-500 text-xs">(optional)</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     {maritalStatusOptions.map((status) => (
@@ -573,8 +573,8 @@ export default function MultiStepForm() {
                         onClick={() => updateField('maritalStatus', formData.maritalStatus === status ? '' : status)}
                         className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                           formData.maritalStatus === status
-                            ? 'bg-orange-500/20 border-orange-500 text-white'
-                            : 'bg-slate-900/50 border-slate-600 text-slate-300 hover:border-orange-500/50'
+                            ? 'bg-gold-500/20 border-gold-500 text-white'
+                            : 'bg-neutral-900/50 border-neutral-600 text-neutral-200 hover:border-gold-500/50'
                         }`}
                       >
                         {status}
@@ -583,8 +583,8 @@ export default function MultiStepForm() {
                   </div>
                 </div>
 
-                <div className="space-y-3 p-4 bg-slate-900/30 rounded-xl border border-slate-700/50">
-                  <h4 className="text-white font-medium text-sm">Address <span className="text-slate-500 text-xs">(optional)</span></h4>
+                <div className="space-y-3 p-4 bg-neutral-900/30 rounded-xl border border-neutral-700/50">
+                  <h4 className="text-white font-medium text-sm">Address <span className="text-neutral-500 text-xs">(optional)</span></h4>
                   <div className="grid grid-cols-3 gap-2">
                     <div className="col-span-2">
                       <input
@@ -595,7 +595,7 @@ export default function MultiStepForm() {
                         value={formData.street}
                         onChange={(e) => updateField('street', e.target.value)}
                         placeholder={t.form.step4.streetPlaceholder}
-                        className="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full px-3 py-2 text-sm bg-neutral-900/50 border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500"
                       />
                     </div>
                     <div>
@@ -607,7 +607,7 @@ export default function MultiStepForm() {
                         value={formData.houseNumber}
                         onChange={(e) => updateField('houseNumber', e.target.value)}
                         placeholder={t.form.step4.houseNumberPlaceholder}
-                        className="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full px-3 py-2 text-sm bg-neutral-900/50 border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500"
                       />
                     </div>
                   </div>
@@ -621,8 +621,8 @@ export default function MultiStepForm() {
                         value={formData.postalCode}
                         onChange={(e) => updateField('postalCode', e.target.value)}
                         placeholder={t.form.step4.postalCodePlaceholder}
-                        className={`w-full px-3 py-2 text-sm bg-slate-900/50 border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-                          validationErrors.postalCode ? 'border-red-500' : 'border-slate-600'
+                        className={`w-full px-3 py-2 text-sm bg-neutral-900/50 border rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 ${
+                          validationErrors.postalCode ? 'border-red-500' : 'border-neutral-600'
                         }`}
                       />
                       {validationErrors.postalCode && (
@@ -638,15 +638,15 @@ export default function MultiStepForm() {
                         value={formData.city}
                         onChange={(e) => updateField('city', e.target.value)}
                         placeholder={t.form.step4.cityPlaceholder}
-                        className="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full px-3 py-2 text-sm bg-neutral-900/50 border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div className="animate-slide-up">
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
-                    {t.form.step5.message} <span className="text-slate-500 text-xs">(optional)</span>
+                  <label htmlFor="message" className="block text-sm font-medium text-neutral-200 mb-2">
+                    {t.form.step5.message} <span className="text-neutral-500 text-xs">(optional)</span>
                   </label>
                   <textarea
                     id="message"
@@ -654,35 +654,35 @@ export default function MultiStepForm() {
                     onChange={(e) => updateField('message', e.target.value)}
                     placeholder={t.form.step5.messagePlaceholder}
                     rows={3}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
+                    className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-600 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-gold-500 resize-none"
                   />
                 </div>
               </div>
 
-              <div className="bg-slate-900/50 border border-slate-600 rounded-xl p-4 mt-4">
+              <div className="bg-neutral-900/50 border border-neutral-600 rounded-xl p-4 mt-4">
                 <h3 className="text-white font-semibold mb-3">{t.form.step5.yourDetails}</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t.form.step5.name}</span>
+                    <span className="text-neutral-400">{t.form.step5.name}</span>
                     <span className="text-white font-medium">{formData.firstName} {formData.lastName}</span>
                   </div>
                   {formData.email && (
                     <div className="flex justify-between">
-                      <span className="text-slate-400">{t.form.step3.email}</span>
+                      <span className="text-neutral-400">{t.form.step3.email}</span>
                       <span className="text-white font-medium">{formData.email}</span>
                     </div>
                   )}
                   {formData.phone && (
                     <div className="flex justify-between">
-                      <span className="text-slate-400">{t.form.step3.phone}</span>
+                      <span className="text-neutral-400">{t.form.step3.phone}</span>
                       <span className="text-white font-medium">{formData.phone}</span>
                     </div>
                   )}
-                  <div className="pt-2 border-t border-slate-700">
-                    <span className="text-slate-400">{t.form.step5.interests}</span>
+                  <div className="pt-2 border-t border-neutral-700">
+                    <span className="text-neutral-400">{t.form.step5.interests}</span>
                     <div className="flex flex-wrap gap-2 mt-2">
                       {formData.interests.map((interest) => (
-                        <span key={interest} className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded-lg text-xs">
+                        <span key={interest} className="px-2 py-1 bg-gold-500/20 text-gold-400 rounded-lg text-xs">
                           {interest}
                         </span>
                       ))}
@@ -698,7 +698,7 @@ export default function MultiStepForm() {
               <button
                 type="button"
                 onClick={prevStep}
-                className="px-5 py-3.5 bg-slate-700/50 hover:bg-slate-700 text-white rounded-xl transition-all flex items-center gap-2 transform hover:scale-105"
+                className="px-5 py-3.5 bg-neutral-700/50 hover:bg-neutral-700 text-white rounded-xl transition-all flex items-center gap-2 transform hover:scale-105"
               >
                 <ChevronLeft className="w-5 h-5" />
                 {t.form.buttons.back}
@@ -710,7 +710,7 @@ export default function MultiStepForm() {
                 type="button"
                 onClick={nextStep}
                 disabled={!isStepValid()}
-                className="flex-1 px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-lg font-bold rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-[1.03] hover:shadow-xl hover:shadow-orange-500/40 active:scale-[0.98]"
+                className="flex-1 px-6 py-4 bg-gold-500 hover:bg-gold-400 text-black text-lg font-bold rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-[1.03] hover:shadow-xl hover:shadow-gold-500/40 active:scale-[0.98]"
               >
                 {t.form.buttons.next}
                 <ChevronRight className="w-6 h-6" />
@@ -720,7 +720,7 @@ export default function MultiStepForm() {
                 type="button"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="flex-1 px-6 py-4 bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white text-lg font-bold rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-[1.03] hover:shadow-xl hover:shadow-green-500/40 active:scale-[0.98]"
+                className="flex-1 px-6 py-4 bg-gold-500 hover:bg-gold-400 text-black text-lg font-bold rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-[1.03] hover:shadow-xl hover:shadow-gold-500/40 active:scale-[0.98]"
               >
                 {isSubmitting ? t.form.step5.submitting : t.form.buttons.submit}
                 {!isSubmitting && <CheckCircle2 className="w-6 h-6" />}
@@ -729,7 +729,7 @@ export default function MultiStepForm() {
           </div>
         </div>
 
-        <p className="text-center text-slate-500 text-sm mt-6 animate-fade-in">
+        <p className="text-center text-neutral-500 text-sm mt-6 animate-fade-in">
           {t.form.privacy}
         </p>
       </div>

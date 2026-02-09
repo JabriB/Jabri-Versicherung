@@ -3,6 +3,14 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        gold: {
+          300: '#F4C542',
+          400: '#FDB931',
+          500: '#FFD700',
+          600: '#E6A800',
+        },
+      },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',
@@ -36,8 +44,8 @@ export default {
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
         glow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(249, 115, 22, 0.3)' },
-          '50%': { boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(255, 215, 0, 0.3)' },
+          '50%': { boxShadow: '0 0 30px rgba(255, 215, 0, 0.6)' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
