@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronRight, ChevronLeft, Scale, Briefcase, Building2, Dog, HeartPulse, Home, ShieldAlert, Sofa, Shield, Clock, ChevronDown } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft, Scale, Briefcase, Building2, Dog, HeartPulse, Home, ShieldAlert, Sofa, Shield, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -62,7 +62,6 @@ export default function MultiStepForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
-  const [expandedAccordions, setExpandedAccordions] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useHead({
@@ -250,14 +249,6 @@ export default function MultiStepForm() {
     }));
   };
 
-  const toggleAccordion = (interest: string) => {
-    setExpandedAccordions(prev =>
-      prev.includes(interest)
-        ? prev.filter(i => i !== interest)
-        : [...prev, interest]
-    );
-  };
-
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
@@ -399,107 +390,34 @@ export default function MultiStepForm() {
               {interestCategories.map((category, catIndex) => (
                 <div key={category.name} className="animate-slide-up" style={{ animationDelay: `${catIndex * 0.08}s`, animationFillMode: 'backwards' }}>
                   <h3 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">{category.name}</h3>
-
-                  {catIndex === 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                      {category.items.map((interest, itemIndex) => {
-                        const isSelected = formData.interests.includes(interest);
-                        return (
-                          <button
-                            key={interest}
-                            type="button"
-                            onClick={() => toggleInterest(interest)}
-                            className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border-2 transition-all text-center transform hover:scale-[1.03] active:scale-[0.98] animate-slide-up ${
-                              isSelected
-                                ? 'bg-gold-500/15 border-gold-500 text-white shadow-lg shadow-gold-500/20'
-                                : 'bg-neutral-900/50 border-neutral-600/80 text-neutral-200 hover:border-gold-500/50 hover:bg-neutral-800/70'
-                            }`}
-                            style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
-                          >
-                            <div className={`transition-colors ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}>
-                              {interestIcons[interest] || <Shield className="w-5 h-5" />}
-                            </div>
-                            <span className="text-xs font-medium leading-tight">{interest}</span>
-                            {isSelected && (
-                              <div className="absolute top-1.5 right-1.5">
-                                <CheckCircle2 className="w-4 h-4 text-gold-500 animate-bounce-in" />
-                              </div>
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      {category.items.map((interest, itemIndex) => {
-                        const isSelected = formData.interests.includes(interest);
-                        const isExpanded = expandedAccordions.includes(interest);
-                        return (
-                          <div
-                            key={interest}
-                            className="animate-slide-up"
-                            style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
-                          >
-                            <button
-                              type="button"
-                              onClick={() => toggleAccordion(interest)}
-                              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 transition-all ${
-                                isSelected
-                                  ? 'bg-gold-500/15 border-gold-500 shadow-lg shadow-gold-500/20'
-                                  : 'bg-neutral-900/50 border-neutral-600/80 hover:border-gold-500/50 hover:bg-neutral-800/70'
-                              }`}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className={`transition-colors ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}>
-                                  {interestIcons[interest] || <Shield className="w-5 h-5" />}
-                                </div>
-                                <span className={`text-sm font-medium ${isSelected ? 'text-white' : 'text-neutral-200'}`}>
-                                  {interest}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                {isSelected && (
-                                  <CheckCircle2 className="w-4 h-4 text-gold-500" />
-                                )}
-                                <ChevronDown
-                                  className={`w-5 h-5 transition-transform ${
-                                    isExpanded ? 'rotate-180' : ''
-                                  } ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}
-                                />
-                              </div>
-                            </button>
-
-                            {isExpanded && (
-                              <div className="mt-2 p-4 bg-neutral-900/30 border border-neutral-700/50 rounded-xl animate-slide-up">
-                                <p className="text-neutral-300 text-sm mb-3">
-                                  {interest === t.form.step2.interests.item4 && 'Schützen Sie Ihren vierbeinigen Freund mit einer umfassenden Hunde-OP-Versicherung.'}
-                                  {interest === t.form.step2.interests.item5 && 'Sichern Sie sich und Ihre Familie mit einer privaten Krankenversicherung ab.'}
-                                  {interest === t.form.step2.interests.item6 && 'Schützen Sie Ihr Gebäude vor unvorhergesehenen Schäden.'}
-                                  {interest === t.form.step2.interests.item7 && 'Versichern Sie sich gegen die finanziellen Folgen von Unfällen.'}
-                                  {interest === t.form.step2.interests.item8 && 'Schützen Sie Ihren Hausrat vor Diebstahl, Brand und anderen Schäden.'}
-                                  {interest === t.form.step2.interests.item9 && 'Sichern Sie sich gegen Haftpflichtansprüche Dritter ab.'}
-                                </p>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    toggleInterest(interest);
-                                    toggleAccordion(interest);
-                                  }}
-                                  className={`w-full px-4 py-2 rounded-lg font-medium transition-all ${
-                                    isSelected
-                                      ? 'bg-neutral-700 text-white hover:bg-neutral-600'
-                                      : 'bg-gold-500 text-black hover:bg-gold-400'
-                                  }`}
-                                >
-                                  {isSelected ? 'Entfernen' : 'Auswählen'}
-                                </button>
-                              </div>
-                            )}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    {category.items.map((interest, itemIndex) => {
+                      const isSelected = formData.interests.includes(interest);
+                      return (
+                        <button
+                          key={interest}
+                          type="button"
+                          onClick={() => toggleInterest(interest)}
+                          className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border-2 transition-all text-center transform hover:scale-[1.03] active:scale-[0.98] animate-slide-up ${
+                            isSelected
+                              ? 'bg-gold-500/15 border-gold-500 text-white shadow-lg shadow-gold-500/20'
+                              : 'bg-neutral-900/50 border-neutral-600/80 text-neutral-200 hover:border-gold-500/50 hover:bg-neutral-800/70'
+                          }`}
+                          style={{ animationDelay: `${(catIndex * 3 + itemIndex) * 0.04}s`, animationFillMode: 'backwards' }}
+                        >
+                          <div className={`transition-colors ${isSelected ? 'text-gold-500' : 'text-neutral-400'}`}>
+                            {interestIcons[interest] || <Shield className="w-5 h-5" />}
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                          <span className="text-xs font-medium leading-tight">{interest}</span>
+                          {isSelected && (
+                            <div className="absolute top-1.5 right-1.5">
+                              <CheckCircle2 className="w-4 h-4 text-gold-500 animate-bounce-in" />
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               ))}
             </div>
