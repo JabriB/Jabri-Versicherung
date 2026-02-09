@@ -115,6 +115,12 @@ export default function MultiStepForm() {
   ];
 
   useEffect(() => {
+    if (interestCategories.length > 0 && Object.keys(expandedCategories).length === 0) {
+      setExpandedCategories({ [interestCategories[0].name]: true });
+    }
+  }, []);
+
+  useEffect(() => {
     if (isSubmitted) {
       const timer = setTimeout(() => {
         navigate('/');
