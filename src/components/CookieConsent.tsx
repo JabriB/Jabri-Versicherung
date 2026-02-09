@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Cookie, X, Settings } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface CookiePreferences {
   necessary: boolean;
@@ -14,6 +14,7 @@ interface CookiePreferences {
 export default function CookieConsent() {
   const { language } = useLanguage();
   const t = getTranslation(language);
+  const location = useLocation();
   const [isVisible, setIsVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -29,6 +30,10 @@ export default function CookieConsent() {
       setTimeout(() => setIsVisible(true), 1000);
     }
   }, []);
+
+  if (location.pathname === '/formular') {
+    return null;
+  }
 
   const handleAccept = (type: 'all' | 'necessary') => {
     const prefs: CookiePreferences = {
