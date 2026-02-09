@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import LandingPage from './components/LandingPage';
+import CookieConsent from './components/CookieConsent';
 
 const MultiStepForm = lazy(() => import('./components/MultiStepForm'));
 const Impressum = lazy(() => import('./components/Impressum'));
@@ -27,6 +28,7 @@ function App() {
           <Route path="/sitemap" element={<Suspense fallback={null}><Sitemap /></Suspense>} />
           <Route path="/faq" element={<Suspense fallback={null}><FAQ /></Suspense>} />
         </Routes>
+        <CookieConsent />
       </Router>
     </LanguageProvider>
   );
